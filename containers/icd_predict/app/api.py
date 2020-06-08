@@ -29,7 +29,7 @@ icd_predict.icd = None
 
 app = Flask(__name__)
 
-@app.route('/api/icd', methods = ['POST'])
+@app.route('/api/icd', methods = ['GET', 'POST'])
 def api_icd_predict():
 
     print(f'{EOL}{SKY}{TXT}  HANDLER > api_icd_predict [{time()}] {PAD}{RST}')
@@ -38,16 +38,19 @@ def api_icd_predict():
     text     = request.args.get('text')
     top_k    = request.args.get('top_k')
 
+    if top_k is None:
+        top_k = 1
+    else:
+        top_k = int(top_k)
+
     try:
-        
-        response = {}
 
         print(f'{PUR}{TXT} Text > {text} {PAD}')
         print(f'{PUR}{TXT} Top_K > {top_k} {PAD}')
 
         response = icd_predict(app).predict(text, top_k)
 
-        return response
+        return f'{response}'
 
     except:
         print(f'{RED}{TXT}   STATUS > Invalid Request {PAD}{RST}{EOL}')
