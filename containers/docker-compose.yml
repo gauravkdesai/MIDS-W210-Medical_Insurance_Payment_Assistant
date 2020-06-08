@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+    icd_predict:
+      container_name: icd_predict
+      networks:
+        - hostnet
+      ports:
+        - 5001:5000
+      build: 
+        context: ./icd_predict/
+    
+networks:
+    hostnet:
+      driver: bridge
