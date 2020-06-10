@@ -27,6 +27,8 @@ RUN pip install simpletransformers
 
 RUN pip install flask
 
+RUN pip install flask-cors
+
 RUN mkdir -p /final
 
 WORKDIR /final/app/model

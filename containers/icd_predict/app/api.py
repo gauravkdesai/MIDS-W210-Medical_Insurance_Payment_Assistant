@@ -8,6 +8,7 @@ from    time import time
 from io  import BytesIO
 
 from flask import Flask, Response, jsonify, request
+from flask_cors import CORS, cross_origin
 
 PAD='\x1B[K'
 SKY='\x1B[48;5;39m'
@@ -29,6 +30,8 @@ def icd_predict(app):
 icd_predict.icd = None
 
 app = Flask(__name__)
+
+CORS(app)
 
 @app.route('/api/icd', methods = ['GET', 'POST'])
 def api_icd_predict():
