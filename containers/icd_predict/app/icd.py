@@ -36,9 +36,9 @@ class ICD:
         self.text = text
         keys = raw_outputs[0].argsort()[-top_k:][::-1]
 
-        self.output = {key: 
+        self.output = {str(key): 
                             {'ICD_CODE':self.icd_dictionary['ICD_CODE'][key], 
-                            'PROB':raw_outputs[0][key], 
+                            'PROB':str(raw_outputs[0][key]), 
                             'SHORT_TITLE':self.icd_dictionary['SHORT_TITLE'][key],
                             'LONG_TITLE':self.icd_dictionary['LONG_TITLE'][key] }
                         for key in keys}

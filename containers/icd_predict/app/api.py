@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import click as     cli
+import json
 from  icd import ICD
 from    time import time
 
@@ -50,7 +51,7 @@ def api_icd_predict():
 
         response = icd_predict(app).predict(text, top_k)
 
-        return f'{response}'
+        return f'{json.dumps(response)}'
 
     except:
         print(f'{RED}{TXT}   STATUS > Invalid Request {PAD}{RST}{EOL}')
@@ -76,7 +77,7 @@ def sample_text():
 
     print(f'            : {pred}')
 
-    return f'{pred}'
+    return f'{json.dumps(pred)}'
 
 @cli.command()
 def main():

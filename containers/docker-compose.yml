@@ -1,12 +1,30 @@
 version: "3.3"
 
 services:
+    web_app:
+      container_name: web_app
+      networks:
+        - hostnet
+      expose:
+        - "80"
+        - "8080"
+        - "3000"
+      ports:
+        - 80:3000
+        - 8080:3000
+        - 3000:3000
+      build:
+        context: ./front_end/
+      command: npm run dev
+
     icd_predict:
       container_name: icd_predict
       networks:
         - hostnet
       ports:
-        - 5001:5000
+        - 5000:5000
+      expose:
+        - "5000"
       build: 
         context: ./icd_predict/
     

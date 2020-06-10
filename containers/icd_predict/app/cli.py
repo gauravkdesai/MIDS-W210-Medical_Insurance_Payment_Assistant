@@ -3,6 +3,7 @@
 import click as     cli
 from    icd import ICD
 from    time import time
+import json
 
 @cli.command()
 @cli.option('--text',  default = "")
@@ -24,7 +25,10 @@ def main(text, top_k):
 
     for key in output :
 
-        print(f"            : {key:10} | {output[key]['ICD_CODE']:10} | {output[key]['PROB']:11.3%} | {output[key]['LONG_TITLE']} ")
+        print(f"            : {key:10} | {output[key]['ICD_CODE']:10} | {output[key]['PROB']:11} | {output[key]['LONG_TITLE']} ")
+    
+    print(f'Raw Output : ')
+    print(json.dumps(output))
 
 if  __name__ == '__main__':
     

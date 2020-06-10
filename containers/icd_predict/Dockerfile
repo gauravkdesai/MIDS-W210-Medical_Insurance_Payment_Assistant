@@ -43,6 +43,6 @@ WORKDIR /final/app/
 RUN python3 cli.py --text "THIS IS a test Note.  Let's see if this is able to produce an output." --top_k 10
 
 # Entry Point
-EXPOSE 5001
+EXPOSE 5000
 ENTRYPOINT ["python3"]
 CMD ["api.py"]
