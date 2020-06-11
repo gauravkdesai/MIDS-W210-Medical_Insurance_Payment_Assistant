@@ -463,7 +463,7 @@ ul.order li span.count span {
 }
 
 .note-edit {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 2px solid #000;
   overflow: hidden;
   display: -webkit-box;
@@ -475,8 +475,21 @@ ul.order li span.count span {
 .note-edit input,
 .note-edit textarea,
 .note-edit select {
-  width: 33.33%;
+  width: 100%;
   padding: 10px;
+  line-height: 1;
+  font-size: 1.2rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+}
+.note-edit input[type='checkbox'] {
+  
+  width: 10%;
+  height: 20px;
+  
   line-height: 1;
   font-size: 1.2rem;
   border: 0;
@@ -497,6 +510,7 @@ ul.order li span.count span {
 .note-edit textarea {
   width: 100%;
 }
+
 /* .note-edit input:last-of-type {
   width: 100%;
 } */

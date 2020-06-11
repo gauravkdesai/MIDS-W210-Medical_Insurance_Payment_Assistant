@@ -19,12 +19,43 @@ class AddNoteForm extends React.Component {
     // 1.  stop the form from submitting
     event.preventDefault();
     const note = {
-      box1: this.box1Ref.current.checked,
-      box2: this.box2Ref.current.checked,
-      box3: this.box3Ref.current.checked,
-      box4: this.box4Ref.current.checked,
-      box5: this.box5Ref.current.checked,
-      box6: this.box6Ref.current.checked,
+
+      // Initial or Followup
+      initial: this.initialRef.current.checked,
+
+      // Chief Complaint
+      chiefComplaint: this.chiefComplaintRef.current.value,
+
+      // HPI
+      HPI1: this.HPI1Ref.current.value,
+
+      // ROS
+      system1: this.system1Ref.current.value,
+      system2: this.system2Ref.current.value,
+      system3: this.system3Ref.current.value,
+      system4: this.system4Ref.current.value,
+      system5: this.system5Ref.current.value,
+      system6: this.system6Ref.current.value,
+      boxROS: this.boxROSRef.current.checked,
+
+      // PFSH
+      medical: this.medicalRef.current.value,
+      family:  this.familyRef.current.value,
+      social: this.socialRef.current.value,
+
+      // Exam
+      exam1: this.exam1Ref.current.value,
+
+      // Treatment Options
+      treatmentNotes: this.treatmentNotesRef.current.value,
+      treatment1: this.treatment1Ref.current.value,
+      treatment2: this.treatment1Ref.current.value,
+      treatment3: this.treatment1Ref.current.value,
+      treatment4: this.treatment1Ref.current.value,
+      treatment5: this.treatment1Ref.current.value,
+      treatment6: this.treatment1Ref.current.value,
+
+
       additionalNotes: this.additionalNotesRef.current.value,
       fullNote: this.fullNoteRef.current.value,
       patient: this.props.currentPatient
@@ -90,22 +121,55 @@ class AddNoteForm extends React.Component {
   render() {
     return (
       <form className="note-edit" onSubmit={this.getCodes}>
-        Feature 1 <input name="box1" ref={this.box1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        Feature 2 <input name="box2" ref={this.box2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        Feature 3 <input name="box3" ref={this.box3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        Feature 4 <input name="box4" ref={this.box4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        Feature 5 <input name="box5" ref={this.box5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        Feature 6 <input name="box6" ref={this.box6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>
+        Initial Intake:
+        <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
+        {/* Spacer */}
+        <input rows="0"/> 
 
-        <textarea name="additionalNotes" ref={this.additionalNotesRef} placeholder="Additional Notes" onChange={this.handleChange}/>
-
-        <textarea name="fullNote" ref={this.fullNoteRef}/>
+        Chief Complaint: 
+        <textarea rows="2" name="chiefComplaint" ref={this.chiefComplaintRef} placeholder="Chief Complaint" onChange={this.handleChange}/>
         
+        History of Present Illness:
+        <textarea rows="10" name="HPI1" ref={this.HPI1Ref} placeholder="HPI" onChange={this.handleChange}/>
+        
+        Review of Systems:
+        <input name="system1" ref={this.system1Ref} placeholder="System 1" onChange={this.handleChange}/>
+        <input name="system2" ref={this.system2Ref} placeholder="System 2" onChange={this.handleChange}/>
+        <input name="system3" ref={this.system3Ref} placeholder="System 3" onChange={this.handleChange}/>
+        <input name="system4" ref={this.system4Ref} placeholder="System 4" onChange={this.handleChange}/>
+        <input name="system5" ref={this.system5Ref} placeholder="System 5" onChange={this.handleChange}/>
+        <input name="system6" ref={this.system6Ref} placeholder="system 6" onChange={this.handleChange}/>
+        {/* Checkbox top offset is wrong */}
+        <input name="boxROS" ref={this.boxROSRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>All Others Negative 
+
+        {/* Spacer */}
+        <input rows="0"/> 
+
+        Past Medical Family and Social History (PFSH):
+        <textarea name="medical" rows="10" ref={this.medicalRef} placeholder="Medical History" onChange={this.handleChange}/>
+        <textarea name="family" rows="10" ref={this.familyRef} placeholder="Family History" onChange={this.handleChange}/>
+        <textarea name="social" rows="10" ref={this.socialRef} placeholder="Social History" onChange={this.handleChange}/>
+
+        Examination:
+        <textarea name="exam1" rows="20" ref={this.exam1Ref} placeholder="Examination" onChange={this.handleChange}/>
+
+        Treatment Options:
+        <textarea name="treatmentNotes" rows="3" ref={this.treatmentNotesRef} placeholder="Treatment Notes" onChange={this.handleChange}/>
+        <input name="treatment1" ref={this.treatment1Ref} placeholder="Treatment 1" onChange={this.handleChange}/>
+        <input name="treatment2" ref={this.treatment2Ref} placeholder="Treatment 2" onChange={this.handleChange}/>
+        <input name="treatment3" ref={this.treatment3Ref} placeholder="Treatment 3" onChange={this.handleChange}/>
+        <input name="treatment4" ref={this.treatment4Ref} placeholder="Treatment 4" onChange={this.handleChange}/>
+        <input name="treatment5" ref={this.treatment5Ref} placeholder="Treatment 5" onChange={this.handleChange}/>
+        <input name="treatment6" ref={this.treatment6Ref} placeholder="Treatment 6" onChange={this.handleChange}/>
+
+        Additional Notes:
+        <textarea name="additionalNotes" rows="20" ref={this.additionalNotesRef} placeholder="Additional Notes" onChange={this.handleChange}/>
+
+        Full Note:
+        <textarea name="fullNote" rows="100" ref={this.fullNoteRef}/>
+
         <button type="submit">Get ICD Codes</button>
       </form>
-
-
-
     );
   }
 }
