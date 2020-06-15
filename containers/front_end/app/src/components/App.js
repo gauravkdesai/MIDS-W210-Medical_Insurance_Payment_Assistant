@@ -16,6 +16,7 @@ class App extends React.Component {
     currentPatient: "",
     order: {},
     codes: Array(),
+    emcode: {},
   };
 
   static propTypes = {
@@ -61,6 +62,10 @@ class App extends React.Component {
     patients[`patient${Date.now()}`] = patient;
     // 3. Set the new fishes object to state
     this.setState({ patients });
+  };
+
+  setEMCodes = emcode => {
+    this.setState({ emcode });
   };
 
   setCodes = codes => {
@@ -144,9 +149,11 @@ class App extends React.Component {
 
         <NoteView
           setCodes={this.setCodes}
+          setEMCodes={this.setEMCodes}
           loadSamplePatients={this.loadSamplePatients}
           patients={this.state.patients}
           codes={this.state.codes}
+          emcode={this.state.emcode}
           storeId={this.props.match.params.storeId}
           currentPatient={this.state.currentPatient}
         />

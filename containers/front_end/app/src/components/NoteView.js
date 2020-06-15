@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import AddNoteForm from "./AddNoteForm";
 import ICDCode from "./ICDCode";
+import EMCode from "./EMCode";
 
 class NoteView extends React.Component {
   static propTypes = {
     notes: PropTypes.object,
     codes: PropTypes.array,
+    emcode: PropTypes.object,
     patients: PropTypes.object,
     updateNote: PropTypes.func,
     deleteNote: PropTypes.func,
@@ -33,14 +35,18 @@ class NoteView extends React.Component {
             </>
         : this.props.currentPatient
         }
-        <AddNoteForm currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} />
+        <AddNoteForm currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} setEMCodes={this.props.setEMCodes}/>
         
         <ul className="patients">
         {console.log(this.props.codes)}
             {this.props.codes
             ?
               <>
-              {/* <h1>{this.props.codes.toString()}</h1> */}
+              <h1>EM Code</h1>
+              <EMCode
+                details = {this.props.emcode}
+              />
+              <h1>ICD Codes</h1>
               {this.props.codes.map(item => (
                 <ICDCode
                   key={item[0].toString()}

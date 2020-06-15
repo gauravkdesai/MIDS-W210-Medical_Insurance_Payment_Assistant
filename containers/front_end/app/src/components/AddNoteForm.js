@@ -195,6 +195,7 @@ class AddNoteForm extends React.Component {
       fullNote: this.fullNoteRef.current.value,
       patient: this.props.currentPatient
     };
+
     this.props.addNote(note);
     // refresh the form
     event.currentTarget.reset();
@@ -216,7 +217,6 @@ class AddNoteForm extends React.Component {
 
     console.log(this.fullNoteRef.current.value);
     var submissionText = this.fullNoteRef.current.value;
-    // submissionText="poop";
     var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
     // var httpSubmission = 'http://54.202.117.250:5000/test'
     // Get Full Note for Submission to API
@@ -235,12 +235,82 @@ class AddNoteForm extends React.Component {
 
   handleChange = event => {
 
-    // Start with blank note
-    var fullNoteText = ""
+    // Counts of items for EM Code
+
+    var initialBool = false;
+    if (this.initialRef.current.checked) {
+      initialBool = true;
+    }
+
+    // CC Count
+    var ccCount = 0;
+    if (this.chiefComplaintRef.current.value) {
+      ccCount += 1;
+    };
+
+    // HPI Count
+    var hpiCount = 0;
+    if (this.HPI1Ref.current.value) {
+      hpiCount += 1;
+    };
+
+    // ROS Count
+    var rosCount = 0;
 
     // Find Checked Boxes
     var elems = document.querySelectorAll('[type=checkbox]:checked')
+
+    elems.forEach( item => {
+      if( item.name == "rosOthersNegative") {
+        rosCount = 53;
+      } else if(item.name.substring(0,3) == "ros") {
+        rosCount += 1;
+      }
+    }); 
+
+    // PFSH Count
+    var pfshCount = 0;
+    if (this.medicalRef.current.value) {
+      pfshCount += 1;
+    }
+    if (this.socialRef.current.value) {
+      pfshCount += 1;
+    }
+    if (this.familyRef.current.value) {
+      pfshCount += 1;
+    }
+
+    // Exam Count
+    var examCount = 0;
+    if (this.exam1Ref.current.value) {
+      examCount += 1;
+    };
+
+    // Medical Decision Making Count
+    var mdmCount = 0;
+    var treatments = Array(this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref);
+    treatments.forEach( item => {
+      if (item.current.value ) {
+        mdmCount += 1;
+      } 
+    });
+
+    // Counts of Codes
+    var emCodes = {"initial": initialBool,
+                  "cc": ccCount,
+                  "hpi": hpiCount,
+                  "ros": rosCount,
+                  "pfsh": pfshCount,
+                  "exam": examCount,
+                  "mdm": mdmCount}
+
+    this.props.setEMCodes(emCodes)
     
+    // console.log(emCodes)
+    console.log(this.state)
+    // Start with blank note
+    var fullNoteText = ""
+   
     // Add in Chief Complain
     fullNoteText += "\n " + "Chief Complaint: ";
     fullNoteText += this.chiefComplaintRef.current.value;
@@ -250,8 +320,16 @@ class AddNoteForm extends React.Component {
     fullNoteText += this.HPI1Ref.current.value;
 
     // Add in ROS
-    fullNoteText += "\n\n " + "Review of Systems: ";
-    fullNoteText += "\n Additional ROS Notes: ";
+    fullNoteText += "\n\n " + "Review of Systems: \n";
+
+    // Add text from each relevant checkbox
+    elems.forEach( item => {
+      if(item.name.substring(0,3) == "ros") {
+        fullNoteText += noteDictionary[item.name];
+      }
+    }); 
+
+    fullNoteText += "\n\n Additional ROS Notes: ";
     fullNoteText += "\n" + this.rosAdditionalRef.current.value;
 
     // Add in PFSH
@@ -273,9 +351,6 @@ class AddNoteForm extends React.Component {
     fullNoteText += "\n " + this.treatment4Ref.current.value;
     fullNoteText += "\n " + this.treatment5Ref.current.value;
     fullNoteText += "\n " + this.treatment6Ref.current.value;
-
-    // New Note is updated with checked values from note
-    elems.forEach( item => fullNoteText += noteDictionary[item.name]) 
     
     // Add in Additional Text
     fullNoteText += "\n\n " + "Additional Notes: ";

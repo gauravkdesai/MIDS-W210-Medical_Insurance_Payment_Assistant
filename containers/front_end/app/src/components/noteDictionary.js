@@ -57,7 +57,6 @@ const noteDictionary = {
     rosNeurological9: "Uncontrolled motions. ",
     rosNeurological10: "Episodes of visual loss. ",
     
-
     rosEndocrinologic1: "Intolerance to heat/cold. ",
     rosEndocrinologic2: "Menstraul irregularities. ",
     rosEndocrinologic3: "Frequent hunger/urination/thirst. ",
