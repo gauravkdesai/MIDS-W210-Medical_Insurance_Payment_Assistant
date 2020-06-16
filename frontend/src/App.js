@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Prediction } from './pages/Prediction';
 import { Methodology } from './pages/Methodology';
 import { FAQ } from './pages/FAQ';
+import { DemoApp } from './pages/DemoApp';
 import { AboutUs } from './pages/AboutUs';
 import { NoMatch } from './pages/NoMatch';
 import { Layout } from './components/Layout';
@@ -21,6 +22,7 @@ class App extends Component {
               <Route exact path="/" component={Prediction} />
               <Route path="/Methodology" component={Methodology} />
               <Route path="/FAQ" component={FAQ} />
+              <Route path="/DemoApp" component={DemoApp} />
               <Route path="/AboutUs" component={AboutUs} />
               <Route component={NoMatch} />
             </Switch>

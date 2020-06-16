@@ -137,3 +137,6 @@ dmypy.json
 *.gz
 
 tmp/**
+
+brentfrontend/**
+containers/front_end/app/node_modules/**

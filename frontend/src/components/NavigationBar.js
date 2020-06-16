@@ -4,6 +4,7 @@ import {Nav, Navbar} from 'react-bootstrap';
 import styled from 'styled-components';
 import NavbarToggle from 'react-bootstrap/NavbarToggle';
 import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
+import LogoURL from '../assets/Logo.png';
 
 const Styles = styled.div`
     .navbar {
@@ -22,7 +23,10 @@ const Styles = styled.div`
 export const NavigationBar = () => (
     <Styles>
         <Navbar expand="lg">
-            <Navbar.Brand href="/">Medical Assitant (logo?)</Navbar.Brand>
+            <Navbar.Brand href="/">
+                <img src={LogoURL} width="40" height="50" className="d-inline-block" alt="MBVA logo"/>{' '} 
+                Medical Billing Virtual Assitant                     
+            </Navbar.Brand>
             <NavbarToggle aria-controls="basic-navbar-nav"/>
             <NavbarCollapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
@@ -39,6 +43,11 @@ export const NavigationBar = () => (
                     <Nav.Item>
                         <Nav.Link>
                             <Link to="/FAQ">FAQ</Link>
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link>
+                            <Link to="/DemoApp">DemoApp</Link>
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
