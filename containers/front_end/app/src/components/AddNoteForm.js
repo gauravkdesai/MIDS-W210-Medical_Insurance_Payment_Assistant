@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
+import { sampleNote } from "./sampleNote";
 
 class AddNoteForm extends React.Component {
 
@@ -78,7 +79,21 @@ class AddNoteForm extends React.Component {
   familyRef = React.createRef();
   socialRef = React.createRef();
 
-  exam1Ref = React.createRef();
+  examGeneralRef = React.createRef();
+  examAppearanceRef = React.createRef();
+  examMoodRef = React.createRef();
+  examSpeechRef = React.createRef();
+  examThoughtContentRef = React.createRef();
+  examThoughtProcessRef = React.createRef();
+  examPerceptionRef = React.createRef();
+  examOrientationRef = React.createRef();
+  examAttentionRef = React.createRef();
+  examMemoryRef = React.createRef();
+  examLanguageRef = React.createRef();
+  examKnowledgeRef = React.createRef();
+  examInsightRef = React.createRef();
+  examGaitRef = React.createRef();
+  examStrengthRef = React.createRef();
 
   treatmentNotesRef = React.createRef();
   treatment1Ref = React.createRef();
@@ -180,7 +195,21 @@ class AddNoteForm extends React.Component {
       social: this.socialRef.current.value,
 
       // Exam
-      exam1: this.exam1Ref.current.value,
+      examGeneral: this.examGeneralRef.current.value,
+      examAppearance: this.examAppearanceRef.current.value,
+      examMood: this.examMoodRef.current.value,
+      examSpeech: this.examSpeechRef.current.value,
+      examThoughtContent: this.examThoughtContentRef.current.value,
+      examThoughtProcess: this.examThoughtProcessRef.current.value,
+      examPerception: this.examPerceptionRef.current.value,
+      examOrientation: this.examOrientationRef.current.value,
+      examAttention: this.examAttentionRef.current.value,
+      examMemory: this.examMemoryRef.current.value,
+      examLanguage: this.examLanguageRef.current.value,
+      examKnowledge: this.examKnowledgeRef.current.value,
+      examInsight: this.examInsightRef.current.value,
+      examGait: this.examGaitRef.current.value,
+      examStrength: this.examStrengthRef.current.value,
 
       // Treatment Options
       treatmentNotes: this.treatmentNotesRef.current.value,
@@ -201,6 +230,12 @@ class AddNoteForm extends React.Component {
     event.currentTarget.reset();
   };
 
+  loadSampleNote = event => {
+    for (var key of Object.keys(sampleNote)) {
+      this[key].current.value = sampleNote[key];
+    }
+  };
+
   getCodes = event => {
     // 1.  stop the form from submitting
     event.preventDefault();
@@ -215,7 +250,6 @@ class AddNoteForm extends React.Component {
     // console.log(codes);
     // this.props.setCodes(codes);
 
-    console.log(this.fullNoteRef.current.value);
     var submissionText = this.fullNoteRef.current.value;
     var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
     // var httpSubmission = 'http://54.202.117.250:5000/test'
@@ -223,7 +257,6 @@ class AddNoteForm extends React.Component {
     console.log(httpSubmission);
     var codePromise = fetch(httpSubmission, {method: 'GET'}).then( (resp) => resp.json()).then( data => {
       var codes = data;
-      console.log(codes)
 
       codes = Object.keys(codes).map(function(key) {
         return [Number(key), codes[key]];
@@ -261,9 +294,9 @@ class AddNoteForm extends React.Component {
     var elems = document.querySelectorAll('[type=checkbox]:checked')
 
     elems.forEach( item => {
-      if( item.name == "rosOthersNegative") {
+      if( item.name === "rosOthersNegative") {
         rosCount = 53;
-      } else if(item.name.substring(0,3) == "ros") {
+      } else if(item.name.substring(0,3) === "ros") {
         rosCount += 1;
       }
     }); 
@@ -282,13 +315,21 @@ class AddNoteForm extends React.Component {
 
     // Exam Count
     var examCount = 0;
-    if (this.exam1Ref.current.value) {
-      examCount += 1;
-    };
+
+    // Find All Items
+    var allItems = document.querySelectorAll('textarea');
+    
+    allItems.forEach( item => {
+      if(item.name.substring(0,4) === "exam") {
+        if(item.value) {
+          examCount += 1;
+        }
+      }
+    }); 
 
     // Medical Decision Making Count
     var mdmCount = 0;
-    var treatments = Array(this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref);
+    var treatments = [this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref];
     treatments.forEach( item => {
       if (item.current.value ) {
         mdmCount += 1;
@@ -305,45 +346,49 @@ class AddNoteForm extends React.Component {
                   "mdm": mdmCount}
 
     this.props.setEMCodes(emCodes)
-    
-    // console.log(emCodes)
-    console.log(this.state)
+
     // Start with blank note
     var fullNoteText = ""
    
     // Add in Chief Complain
-    fullNoteText += "\n " + "Chief Complaint: ";
+    fullNoteText += "\nChief Complaint: ";
     fullNoteText += this.chiefComplaintRef.current.value;
 
     // Add in HPI:
-    fullNoteText += "\n\n " + "History of Present Illness (HPI): ";
+    fullNoteText += "\n\nHistory of Present Illness (HPI): ";
     fullNoteText += this.HPI1Ref.current.value;
 
     // Add in ROS
-    fullNoteText += "\n\n " + "Review of Systems: \n";
+    fullNoteText += "\n\nReview of Systems: \n";
 
     // Add text from each relevant checkbox
     elems.forEach( item => {
-      if(item.name.substring(0,3) == "ros") {
+      if(item.name.substring(0,3) === "ros") {
         fullNoteText += noteDictionary[item.name];
       }
     }); 
 
-    fullNoteText += "\n\n Additional ROS Notes: ";
+    fullNoteText += "\n\nAdditional ROS Notes: ";
     fullNoteText += "\n" + this.rosAdditionalRef.current.value;
 
     // Add in PFSH
-    fullNoteText += "\n\n " + "Past Medical Family and Social History (PFSH): ";
+    fullNoteText += "\n\nPast Medical Family and Social History (PFSH): ";
     fullNoteText += "\n " + this.medicalRef.current.value;
     fullNoteText += "\n " + this.socialRef.current.value;
     fullNoteText += "\n " + this.familyRef.current.value;
 
     // Add in Exam
-    fullNoteText += "\n\n " + "Examination: ";
-    fullNoteText += "\n " + this.exam1Ref.current.value;
+    fullNoteText += "\n\nExamination: ";
+    allItems.forEach( item => {
+      if(item.name.substring(0,4) === "exam") {
+        if(item.value) {
+          fullNoteText += "\n " + item.name.substring(4) + ": "+ item.value;
+        }
+      }
+    }); 
 
     // Add in Treatment Options
-    fullNoteText += "\n\n " + "Treatment Options: ";
+    fullNoteText += "\n\nTreatment Options: ";
     fullNoteText += "\n " + this.treatmentNotesRef.current.value;
     fullNoteText += "\n " + this.treatment1Ref.current.value;
     fullNoteText += "\n " + this.treatment2Ref.current.value;
@@ -353,29 +398,33 @@ class AddNoteForm extends React.Component {
     fullNoteText += "\n " + this.treatment6Ref.current.value;
     
     // Add in Additional Text
-    fullNoteText += "\n\n " + "Additional Notes: ";
+    fullNoteText += "\n\nAdditional Notes: ";
     fullNoteText += "\n" + this.additionalNotesRef.current.value;
 
-    // console.log(fullNoteText)
     this.fullNoteRef.current.value = fullNoteText;
 
   };
 
   render() {
     return (
+      <>
+      <button onClick={this.loadSampleNote}>
+        Load Sample Note
+      </button>
+
       <form className="note-edit" onSubmit={this.getCodes}>
         Initial Intake:
         <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
         {/* Spacer */}
         <input rows="0"/> 
 
-        Chief Complaint: 
+        Chief Complaint: { this.props.emcode["cc"] ? "" : "Need Chief Complaint"}
         <textarea rows="2" name="chiefComplaint" ref={this.chiefComplaintRef} placeholder="Chief Complaint" onChange={this.handleChange}/>
         
-        History of Present Illness:
+        History of Present Illness: { this.props.emcode["hpi"] ? "" : "Need History of Present Illness [HPI]"}
         <textarea rows="10" name="HPI1" ref={this.HPI1Ref} placeholder="HPI" onChange={this.handleChange}/>
         
-        Review of Systems:
+        Review of Systems: { this.props.emcode["ros"] }
         {/* Spacer */}
         <input rows="0"/> 
 
@@ -490,15 +539,29 @@ class AddNoteForm extends React.Component {
         {/* Spacer */}
         <input rows="0"/> 
 
-        Past Medical Family and Social History (PFSH):
+        Past Medical Family and Social History (PFSH): { this.props.emcode["pfsh"]}
         <textarea name="medical" rows="10" ref={this.medicalRef} placeholder="Medical History" onChange={this.handleChange}/>
         <textarea name="family" rows="10" ref={this.familyRef} placeholder="Family History" onChange={this.handleChange}/>
         <textarea name="social" rows="10" ref={this.socialRef} placeholder="Social History" onChange={this.handleChange}/>
 
-        Examination:
-        <textarea name="exam1" rows="20" ref={this.exam1Ref} placeholder="Examination" onChange={this.handleChange}/>
-
-        Treatment Options:
+        Examination: { this.props.emcode["exam"]}
+        <textarea name="examGeneral" rows="2" ref={this.examGeneralRef} placeholder="General" onChange={this.handleChange}/>
+        <textarea name="examAppearance" rows="2" ref={this.examAppearanceRef} placeholder="Appearance and Behavior" onChange={this.handleChange}/>
+        <textarea name="examMood" rows="2" ref={this.examMoodRef} placeholder="Mood and Affect" onChange={this.handleChange}/>
+        <textarea name="examSpeech" rows="2" ref={this.examSpeechRef} placeholder="Speech" onChange={this.handleChange}/>
+        <textarea name="examThoughtContent" rows="2" ref={this.examThoughtContentRef} placeholder="Thought Content" onChange={this.handleChange}/>
+        <textarea name="examThoughtProcess" rows="2" ref={this.examThoughtProcessRef} placeholder="Thought Content" onChange={this.handleChange}/>
+        <textarea name="examPerception" rows="2" ref={this.examPerceptionRef} placeholder="Perception" onChange={this.handleChange}/>
+        <textarea name="examOrientation" rows="2" ref={this.examOrientationRef} placeholder="Orientation" onChange={this.handleChange}/>
+        <textarea name="examAttention" rows="2" ref={this.examAttentionRef} placeholder="Attention and Concentration" onChange={this.handleChange}/>
+        <textarea name="examMemory" rows="2" ref={this.examMemoryRef} placeholder="Recent and Remote Memory" onChange={this.handleChange}/>
+        <textarea name="examLanguage" rows="2" ref={this.examLanguageRef} placeholder="Language" onChange={this.handleChange}/>
+        <textarea name="examKnowledge" rows="2" ref={this.examKnowledgeRef} placeholder="Fund of Knowledge/Intelligence Estimate" onChange={this.handleChange}/>
+        <textarea name="examInsight" rows="2" ref={this.examInsightRef} placeholder="Insight/Judgment" onChange={this.handleChange}/>
+        <textarea name="examGait" rows="2" ref={this.examGaitRef} placeholder="Gait and Station" onChange={this.handleChange}/>
+        <textarea name="examStrength" rows="2" ref={this.examStrengthRef} placeholder="Muscle Strength and Tone" onChange={this.handleChange}/>
+   
+        Treatment Options: { this.props.emcode["mdm"]}
         <textarea name="treatmentNotes" rows="3" ref={this.treatmentNotesRef} placeholder="Treatment Notes" onChange={this.handleChange}/>
         <input name="treatment1" ref={this.treatment1Ref} placeholder="Treatment 1" onChange={this.handleChange}/>
         <input name="treatment2" ref={this.treatment2Ref} placeholder="Treatment 2" onChange={this.handleChange}/>
@@ -515,6 +578,7 @@ class AddNoteForm extends React.Component {
 
         <button type="submit">Get ICD Codes</button>
       </form>
+      </>
     );
   }
 }
