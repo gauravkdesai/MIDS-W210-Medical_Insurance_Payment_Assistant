@@ -12,7 +12,7 @@ class NoteView extends React.Component {
     patients: PropTypes.object,
     updateNote: PropTypes.func,
     deleteNote: PropTypes.func,
-    loadSamplePatients: PropTypes.func,
+    loadSampleNote: PropTypes.func,
     getICD: PropTypes.func,
     currentPatient: PropTypes.string
   };
@@ -35,10 +35,9 @@ class NoteView extends React.Component {
             </>
         : this.props.currentPatient
         }
-        <AddNoteForm currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} setEMCodes={this.props.setEMCodes}/>
+        <AddNoteForm emcode={this.props.emcode} currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} setEMCodes={this.props.setEMCodes}/>
         
         <ul className="patients">
-        {console.log(this.props.codes)}
             {this.props.codes
             ?
               <>

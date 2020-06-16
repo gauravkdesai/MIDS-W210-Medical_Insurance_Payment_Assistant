@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "./Header";
-import PatientView from "./PatientView";
 import NoteView from "./NoteView";
 import samplePatients from "../sample-patients";
 import Patient from "./Patient";
@@ -15,7 +14,7 @@ class App extends React.Component {
     patients: {},
     currentPatient: "",
     order: {},
-    codes: Array(),
+    codes: [],
     emcode: {},
   };
 
@@ -24,7 +23,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const { params } = this.props.match;
 
     // first reinstate our localStorage
     const localStorageRef = localStorage.getItem(firebaseID);
@@ -111,8 +109,6 @@ class App extends React.Component {
 
   selectPatient = key => {
     const currentPatient = key;
-    const codes = Array();
-    // this.setState({ currentPatient, codes });
     this.setState({ currentPatient });
   };
 
@@ -137,20 +133,9 @@ class App extends React.Component {
           </button>
         </div>
 
-        {/* <PatientView
-          addPatient={this.addPatient}
-          updatePatient={this.updatePatient}
-          deletePatient={this.deletePatient}
-          loadSamplePatients={this.loadSamplePatients}
-          patients={this.state.patients}
-          storeId={this.props.match.params.storeId}
-          currentPatient={this.state.currentPatient}
-        /> */}
-
         <NoteView
           setCodes={this.setCodes}
           setEMCodes={this.setEMCodes}
-          loadSamplePatients={this.loadSamplePatients}
           patients={this.state.patients}
           codes={this.state.codes}
           emcode={this.state.emcode}
