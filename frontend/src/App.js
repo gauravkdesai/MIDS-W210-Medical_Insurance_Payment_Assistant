@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Prediction } from './pages/Prediction';
 import { Methodology } from './pages/Methodology';
 import { FAQ } from './pages/FAQ';
-import { DemoApp } from './pages/DemoApp';
+import { DemoApp }  from './pages/DemoApp';
 import { AboutUs } from './pages/AboutUs';
 import { NoMatch } from './pages/NoMatch';
 import { Layout } from './components/Layout';
