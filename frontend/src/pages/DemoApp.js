@@ -5,6 +5,7 @@ import NoteView from "./demo/NoteView";
 import samplePatients from "./demo/sample-patients";
 import Patient from "./demo/Patient";
 import base from "./demo/base";
+import "../css/style.css";
 
 
 const firebaseID = "12345"
