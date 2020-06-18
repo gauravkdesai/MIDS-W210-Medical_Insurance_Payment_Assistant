@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+// import SelectSearch from "react-select-search";
 import Header from "./demo/Header";
 import NoteView from "./demo/NoteView";
 import samplePatients from "./demo/sample-patients";
 import Patient from "./demo/Patient";
 import base from "./demo/base";
 import "../css/style.css";
+import "../css/header.css";
+import "../css/patient.css";
 
 
 const firebaseID = "12345"
@@ -137,16 +140,6 @@ class DemoApp extends Component {
           </button>
         </div>
 
-        {/* <PatientView
-          addPatient={this.addPatient}
-          updatePatient={this.updatePatient}
-          deletePatient={this.deletePatient}
-          loadSamplePatients={this.loadSamplePatients}
-          patients={this.state.patients}
-          storeId={this.props.match.params.storeId}
-          currentPatient={this.state.currentPatient}
-        /> */}
-
         <NoteView
           setCodes={this.setCodes}
           setEMCodes={this.setEMCodes}
@@ -156,7 +149,7 @@ class DemoApp extends Component {
           emcode={this.state.emcode}
           storeId={this.props.match.params.storeId}
           currentPatient={this.state.currentPatient}
-        />
+        /> 
 
       </div>
     );
