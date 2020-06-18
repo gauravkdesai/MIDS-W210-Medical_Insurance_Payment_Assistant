@@ -14,7 +14,7 @@ class DemoApp extends Component {
     patients: {},
     currentPatient: "",
     order: {},
-    codes: Array(),
+    codes: [],
     emcode: {},
   };
 
@@ -23,7 +23,7 @@ class DemoApp extends Component {
   };
 
   componentDidMount() {
-    const { params } = this.props.match;
+    // const { params } = this.props.match;
 
     // first reinstate our localStorage
     const localStorageRef = localStorage.getItem(firebaseID);
@@ -110,7 +110,7 @@ class DemoApp extends Component {
 
   selectPatient = key => {
     const currentPatient = key;
-    const codes = Array();
+    // const codes = Array();
     // this.setState({ currentPatient, codes });
     this.setState({ currentPatient });
   };

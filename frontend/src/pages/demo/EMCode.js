@@ -22,9 +22,9 @@ class EMCode extends React.Component {
     // Initial Visit
     if (initial) {
       if ( (cc > 0) && (hpi > 0) && (exam > 0)) {
-        if ( (mdm >= 4) && (pfsh == 3) && (ros >= 11 ) ) {
+        if ( (mdm >= 4) && (pfsh === 3) && (ros >= 11 ) ) {
           calculatedCode = 99223;
-        } else if ( (mdm >= 3) && (pfsh == 3) && (ros >= 11 ) ) {
+        } else if ( (mdm >= 3) && (pfsh === 3) && (ros >= 11 ) ) {
           calculatedCode = 99222;
         } else if ( (mdm >= 1) && (pfsh >= 1) && (ros >= 3 ) ) {
           calculatedCode = 99221;

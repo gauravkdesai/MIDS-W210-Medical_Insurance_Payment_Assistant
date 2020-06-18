@@ -221,16 +221,16 @@ class AddNoteForm extends React.Component {
     // var httpSubmission = 'http://54.202.117.250:5000/test'
     // Get Full Note for Submission to API
     console.log(httpSubmission);
-    var codePromise = fetch(httpSubmission, {method: 'GET'}).then( (resp) => resp.json()).then( data => {
-      var codes = data;
-      console.log(codes)
+    // var codePromise = fetch(httpSubmission, {method: 'GET'}).then( (resp) => resp.json()).then( data => {
+    //   var codes = data;
+    //   console.log(codes)
 
-      codes = Object.keys(codes).map(function(key) {
-        return [Number(key), codes[key]];
-      });
-      console.log(codes)
-      this.props.setCodes(codes)
-    });
+    //   codes = Object.keys(codes).map(function(key) {
+    //     return [Number(key), codes[key]];
+    //   });
+    //   console.log(codes)
+    //   this.props.setCodes(codes)
+    // });
   };
 
   handleChange = event => {
@@ -261,9 +261,9 @@ class AddNoteForm extends React.Component {
     var elems = document.querySelectorAll('[type=checkbox]:checked')
 
     elems.forEach( item => {
-      if( item.name == "rosOthersNegative") {
+      if( item.name === "rosOthersNegative") {
         rosCount = 53;
-      } else if(item.name.substring(0,3) == "ros") {
+      } else if(item.name.substring(0,3) === "ros") {
         rosCount += 1;
       }
     }); 
@@ -288,7 +288,7 @@ class AddNoteForm extends React.Component {
 
     // Medical Decision Making Count
     var mdmCount = 0;
-    var treatments = Array(this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref);
+    var treatments = [this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref];
     treatments.forEach( item => {
       if (item.current.value ) {
         mdmCount += 1;
@@ -312,19 +312,19 @@ class AddNoteForm extends React.Component {
     var fullNoteText = ""
    
     // Add in Chief Complain
-    fullNoteText += "\n " + "Chief Complaint: ";
+    fullNoteText += "\n Chief Complaint: ";
     fullNoteText += this.chiefComplaintRef.current.value;
 
     // Add in HPI:
-    fullNoteText += "\n\n " + "History of Present Illness (HPI): ";
+    fullNoteText += "\n\n History of Present Illness (HPI): ";
     fullNoteText += this.HPI1Ref.current.value;
 
     // Add in ROS
-    fullNoteText += "\n\n " + "Review of Systems: \n";
+    fullNoteText += "\n\n Review of Systems: \n";
 
     // Add text from each relevant checkbox
     elems.forEach( item => {
-      if(item.name.substring(0,3) == "ros") {
+      if(item.name.substring(0,3) === "ros") {
         fullNoteText += noteDictionary[item.name];
       }
     }); 
@@ -333,17 +333,17 @@ class AddNoteForm extends React.Component {
     fullNoteText += "\n" + this.rosAdditionalRef.current.value;
 
     // Add in PFSH
-    fullNoteText += "\n\n " + "Past Medical Family and Social History (PFSH): ";
+    fullNoteText += "\n\n Past Medical Family and Social History (PFSH): ";
     fullNoteText += "\n " + this.medicalRef.current.value;
     fullNoteText += "\n " + this.socialRef.current.value;
     fullNoteText += "\n " + this.familyRef.current.value;
 
     // Add in Exam
-    fullNoteText += "\n\n " + "Examination: ";
+    fullNoteText += "\n\n Examination: ";
     fullNoteText += "\n " + this.exam1Ref.current.value;
 
     // Add in Treatment Options
-    fullNoteText += "\n\n " + "Treatment Options: ";
+    fullNoteText += "\n\n Treatment Options: ";
     fullNoteText += "\n " + this.treatmentNotesRef.current.value;
     fullNoteText += "\n " + this.treatment1Ref.current.value;
     fullNoteText += "\n " + this.treatment2Ref.current.value;
@@ -353,7 +353,7 @@ class AddNoteForm extends React.Component {
     fullNoteText += "\n " + this.treatment6Ref.current.value;
     
     // Add in Additional Text
-    fullNoteText += "\n\n " + "Additional Notes: ";
+    fullNoteText += "\n\n Additional Notes: ";
     fullNoteText += "\n" + this.additionalNotesRef.current.value;
 
     // console.log(fullNoteText)
