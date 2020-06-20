@@ -230,8 +230,9 @@ class AddNoteForm extends React.Component {
     // Get Full Note for Submission to API
     // console.log(httpSubmission);
 
-    const apiName = 'MBVAModelAPI';
-    const path = '/api/icd'; 
+    //const apiName = 'MBVAModelAPI';
+    const apiName = 'MBVAModelAPIProxy';
+    const path = '/test/api/icd'; 
     const myInit = { // OPTIONAL
         headers: {'Content-Type': 'application/json'}, // OPTIONAL
         response: false, // OPTIONAL (return the entire Axios response object instead of only response.data)
