@@ -1,19 +1,27 @@
 {
-  "name": "cotd",
-  "version": "0.0.3",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "concurrently": "4.1.0",
     "react-scripts": "^2.1.1"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.5.0",
+    "firebase": "^7.15.1",
+    "re-base": "^4.0.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-select-search": "^2.0.3",
+    "styled-components": "^5.1.1",
     "autoprefixer-stylus": "0.14.0",
-    "firebase": "^5.7.0",
     "prop-types": "^15.6.0",
-    "re-base": "4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "serve": "^10.1.1",
     "stylus": "0.54.5"
@@ -27,6 +35,9 @@
     "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
     "now-build": "npm run build && mv build dist",
     "styles:watch": "npm run styles -- -w"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

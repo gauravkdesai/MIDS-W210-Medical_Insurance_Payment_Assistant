@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { formatPrice } from "../helpers";
 
 class Note extends React.Component {
   static propTypes = {

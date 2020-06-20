@@ -3,6 +3,7 @@ version: "3.3"
 services:
     web_app:
       container_name: web_app
+      stdin_open: true
       networks:
         - hostnet
       expose:
@@ -15,7 +16,7 @@ services:
         - 3000:3000
       build:
         context: ./front_end/
-      command: npm run dev
+      command: npm run start
 
     icd_predict:
       container_name: icd_predict
