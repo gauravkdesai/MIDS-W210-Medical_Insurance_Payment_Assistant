@@ -215,22 +215,45 @@ class AddNoteForm extends React.Component {
     // console.log(codes);
     // this.props.setCodes(codes);
 
-    console.log(this.fullNoteRef.current.value);
+
     var submissionText = this.fullNoteRef.current.value;
-    var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
+    console.log('Text to be submitted to model:' + submissionText);
+    // var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
     // var httpSubmission = 'http://54.202.117.250:5000/test'
     // Get Full Note for Submission to API
-    console.log(httpSubmission);
-    // var codePromise = fetch(httpSubmission, {method: 'GET'}).then( (resp) => resp.json()).then( data => {
-    //   var codes = data;
-    //   console.log(codes)
+    // console.log(httpSubmission);
 
-    //   codes = Object.keys(codes).map(function(key) {
-    //     return [Number(key), codes[key]];
-    //   });
-    //   console.log(codes)
-    //   this.props.setCodes(codes)
-    // });
+    const httpPOSTURL = 'http://54.202.117.250:5000/api/icd';
+    const httpGETTURL = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
+    const httpPOSTRequestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body : 'text='+submissionText+'&top_k=10'
+    }
+    const httpGETRequestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    console.log('HTTP POST body:'+httpPOSTRequestOptions.body);
+
+    fetch(httpGETTURL, httpGETRequestOptions)
+      .then( (response) => response.json())
+      .then( data => 
+        {
+          var codes = data;
+          console.log("Codes returned by model:"+codes)
+
+          var codesInArray = Object.keys(codes).map(function(key) {
+            return [Number(key), codes[key]];
+          });
+          console.log("codesInArray:"+codesInArray)
+          this.props.setCodes(codesInArray)
+      });
   };
 
   handleChange = event => {
@@ -363,7 +386,7 @@ class AddNoteForm extends React.Component {
 
   render() {
     return (
-      <form className="note-edit" onSubmit={this.getCodes}>
+      <form className="note-edit" onSubmit={this.getCodes} method="post">
         Initial Intake:
         <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
         {/* Spacer */}
