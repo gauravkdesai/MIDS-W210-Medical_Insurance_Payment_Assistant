@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
+import API, { graphqlOperation } from '@aws-amplify/api';
+import Amplify from 'aws-amplify';
+import awsAPIconfig from './AmplifyConfig';
+
+Amplify.configure(awsAPIconfig);
+
+API.configure();
 
 class AddNoteForm extends React.Component {
 
@@ -223,6 +230,35 @@ class AddNoteForm extends React.Component {
     // Get Full Note for Submission to API
     // console.log(httpSubmission);
 
+    const apiName = 'MBVAModelAPI';
+    const path = '/api/icd'; 
+    const myInit = { // OPTIONAL
+        headers: {'Content-Type': 'application/json'}, // OPTIONAL
+        response: false, // OPTIONAL (return the entire Axios response object instead of only response.data)
+        queryStringParameters: {  // OPTIONAL
+            'text': submissionText,
+            'top_k': 10
+        },
+    };
+
+    API
+      .get(apiName, path, myInit)
+      .then( data => 
+        {
+          var codes = data;
+          console.log("Codes returned by model via Amplify:"+codes)
+
+          var codesInArray = Object.keys(codes).map(function(key) {
+            return [Number(key), codes[key]];
+          });
+          console.log("Amplify codesInArray:"+codesInArray)
+          this.props.setCodes(codesInArray)
+      })
+      .catch(error => {
+        console.log(error );
+    });
+    //http://54.202.117.250:5000/api/icd?text=Chief Complaint: History of Present Illness (HPI): Review of Systems: Additional ROS Notes: Past Medical Family and Social History (PFSH): Examination: Treatment Options: Additional Notes: test&top_k=10
+    //https://dd60l0ev60.execute-api.ap-south-1.amazonaws.com/prod?text="kidney"&top_k=10
     const httpPOSTURL = 'http://54.202.117.250:5000/api/icd';
     const httpGETTURL = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
     const httpPOSTRequestOptions = {
@@ -239,21 +275,21 @@ class AddNoteForm extends React.Component {
       }
     }
 
-    console.log('HTTP POST body:'+httpPOSTRequestOptions.body);
+    //console.log('HTTP POST body:'+httpPOSTRequestOptions.body);
 
-    fetch(httpGETTURL, httpGETRequestOptions)
-      .then( (response) => response.json())
-      .then( data => 
-        {
-          var codes = data;
-          console.log("Codes returned by model:"+codes)
+    // fetch(httpGETTURL, httpGETRequestOptions)
+    //   .then( (response) => response.json())
+    //   .then( data => 
+    //     {
+    //       var codes = data;
+    //       console.log("Codes returned by model:"+codes)
 
-          var codesInArray = Object.keys(codes).map(function(key) {
-            return [Number(key), codes[key]];
-          });
-          console.log("codesInArray:"+codesInArray)
-          this.props.setCodes(codesInArray)
-      });
+    //       var codesInArray = Object.keys(codes).map(function(key) {
+    //         return [Number(key), codes[key]];
+    //       });
+    //       console.log("codesInArray:"+codesInArray)
+    //       this.props.setCodes(codesInArray)
+    //   });
   };
 
   handleChange = event => {
