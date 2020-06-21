@@ -391,9 +391,9 @@ class AddNoteForm extends React.Component {
       <form className="note-edit" onSubmit={this.getCodes} method="post">
         
         <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        <h4>Initial Intake</h4>
+        <h3>Initial Intake</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
 
         <h4>Chief Complaint:</h4>
         <textarea rows="2" name="chiefComplaint" ref={this.chiefComplaintRef} placeholder="Chief Complaint" onChange={this.handleChange}/>
@@ -403,11 +403,11 @@ class AddNoteForm extends React.Component {
         
         <h2>Review of Systems:</h2>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
 
         <h3>General: </h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
         <div className="columnsClass">
         <h4><input name="rosGeneral1" ref={this.rosGeneral1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Lack of energy</h4>
         <h4><input name="rosGeneral2" ref={this.rosGeneral2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Unexplained weight gain/loss</h4>
@@ -419,10 +419,10 @@ class AddNoteForm extends React.Component {
         <h4><input name="rosGeneral8" ref={this.rosGeneral8Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Prior Cancer</h4>
         </div>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Respiratory:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
         <div className="columnsClass">
         <h4><input name="rosRespiratory1" ref={this.rosRespiratory1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Shortness of breath</h4>
         <h4><input name="rosRespiratory2" ref={this.rosRespiratory2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Prolonged cough</h4>
@@ -435,10 +435,10 @@ class AddNoteForm extends React.Component {
         <h4><input name="rosRespiratory9" ref={this.rosRespiratory9Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Abnormal chest x-ray</h4>
         </div>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Cardiovascular:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
 
         <input name="rosCardiovascular1" ref={this.rosCardiovascular1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Irregular heartbeat</h4>
         <input name="rosCardiovascular2" ref={this.rosCardiovascular2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Racing heart</h4>
@@ -447,10 +447,10 @@ class AddNoteForm extends React.Component {
         <input name="rosCardiovascular5" ref={this.rosCardiovascular5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Pain in legs when walking</h4>
 
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Muscularskeletal:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/>         
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>          */}
 
         <input name="rosMuscularskeletal1" ref={this.rosMuscularskeletal1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Joint pain</h4>
         <input name="rosMuscularskeletal2" ref={this.rosMuscularskeletal2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Aching muscles</h4>
@@ -460,10 +460,10 @@ class AddNoteForm extends React.Component {
         <input name="rosMuscularskeletal6" ref={this.rosMuscularskeletal6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Back pain</h4>
 
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Gastrointestinal:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
         <div className="columnsClass">
         <h4><input name="rosGastrointestinal1" ref={this.rosGastrointestinal1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Heartburn</h4>
         <h4><input name="rosGastrointestinal2" ref={this.rosGastrointestinal2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Constipation</h4>
@@ -478,10 +478,10 @@ class AddNoteForm extends React.Component {
         <h4><input name="rosGastrointestinal11" ref={this.rosGastrointestinal11Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Unexplained change in bowel habits</h4>
         </div>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Neurological:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
         <div className="columnsClass">
         <h4><input name="rosNeurological1" ref={this.rosNeurological1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Frequent headaches</h4>
         <h4><input name="rosNeurological2" ref={this.rosNeurological2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Double vision</h4>
@@ -495,10 +495,10 @@ class AddNoteForm extends React.Component {
         <h4><input name="rosNeurological10" ref={this.rosNeurological10Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Episodes of visual loss</h4>
         </div>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Endocrinologic:</h3>
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
 
         <input name="rosEndocrinologic1" ref={this.rosEndocrinologic1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Intolerance to heat/cold</h4>
         <input name="rosEndocrinologic2" ref={this.rosEndocrinologic2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Menstraul irregularities</h4>
@@ -506,7 +506,7 @@ class AddNoteForm extends React.Component {
         <input name="rosEndocrinologic4" ref={this.rosEndocrinologic4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/><h4>Changes in sex drive</h4>
 
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
         <h3>Additional ROS:</h3>
 
         <textarea rows="3" name="rosAdditional" ref={this.rosAdditionalRef} placeholder="Additional ROS" onChange={this.handleChange}/>
@@ -515,7 +515,7 @@ class AddNoteForm extends React.Component {
         <h4>All Others Negative </h4>
 
         {/* Spacer */}
-        <input  rows="0" disabled="true"/> 
+        <input  rows="0" disabled="true"  className="deadArea"/> 
 
         <h3>Past Medical Family and Social History (PFSH):</h3>
         <textarea name="medical" rows="10" ref={this.medicalRef} placeholder="Medical History" onChange={this.handleChange}/>
@@ -538,7 +538,7 @@ class AddNoteForm extends React.Component {
         <textarea name="additionalNotes" rows="20" ref={this.additionalNotesRef} placeholder="Additional Notes" onChange={this.handleChange}/>
 
         <h3>Full Note:</h3>
-        <textarea name="fullNote" rows="100" ref={this.fullNoteRef}/>
+        <textarea name="fullNote" rows="40" ref={this.fullNoteRef} readOnly/>
 
         <button type="submit">Get ICD Codes</button>
       </form>
