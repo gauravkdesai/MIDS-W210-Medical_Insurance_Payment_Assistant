@@ -26,15 +26,15 @@ class NoteView extends React.Component {
 
     return (
       <div className="inventory">
-        <h2>Note View</h2>
+        <h2>Medical Notes 
         
-        {this.props.currentPatient 
-        ? 
-            <>
-                <h3>{this.props.patients[this.props.currentPatient].name}</h3>
-            </>
-        : this.props.currentPatient
-        }
+          {this.props.currentPatient 
+          ? 
+              <span> for {this.props.patients[this.props.currentPatient].name}</span>
+              
+          : this.props.currentPatient
+          }
+        </h2>
         <AddNoteForm currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} setEMCodes={this.props.setEMCodes}/>
         
         <ul className="patients">

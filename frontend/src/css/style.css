@@ -165,7 +165,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
-  margin: 0;
+  margin: 4px;
 }
 button,
 input {
@@ -184,9 +184,7 @@ input[disabled] {
 }
 input[type=checkbox],
 input[type=radio] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 0;
+  align-self: auto;
 }
 input[type=search] {
   -webkit-appearance: textfield;
@@ -250,15 +248,15 @@ h5,
 h6 {
   font-weight: normal;
   font-family: sans-serif;
+  vertical-align: 30px;
+  margin: unset;
 }
 h2 {
   text-align: center;
   margin-top: 0;
   margin-bottom: 2rem;
 }
-h3 {
-  font-size: 3rem;
-}
+
 
 .luna-emhr {
   display: -webkit-box;
@@ -381,19 +379,17 @@ ul.order li span.count span {
   border-radius: 0;
   background: #fff;
 }
+
 .note-edit input[type='checkbox'] {
   
-  width: 10%;
-  height: 20px;
+  width: 2%;
+  height: 13px;
   
   line-height: 1;
   font-size: 1.2rem;
   border: 0;
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;
-  /* -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none; */
   border-radius: 0;
   background: #fff;
 }
@@ -413,6 +409,16 @@ ul.order li span.count span {
 .note-edit button {
   width: 100%;
   border: 0;
+}
+
+.columnsClass{
+  column-count: 3;
+  margin-left: 2px;
+  
+}
+
+.columnsClass input{
+  margin-right: 10px;
 }
 
 .list-of-fish {

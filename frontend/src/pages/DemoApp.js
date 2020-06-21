@@ -143,7 +143,7 @@ class DemoApp extends Component {
             search/>
           </div>
         </div>
-
+        <br/>
         <NoteView
           setCodes={this.setCodes}
           setEMCodes={this.setEMCodes}
