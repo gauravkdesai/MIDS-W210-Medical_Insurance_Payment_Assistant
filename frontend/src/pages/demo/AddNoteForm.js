@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
-import API, { graphqlOperation } from '@aws-amplify/api';
+import API from '@aws-amplify/api';
 import Amplify from 'aws-amplify';
 import awsAPIconfig from './AmplifyConfig';
 
@@ -226,10 +226,7 @@ class AddNoteForm extends React.Component {
     var submissionText = this.fullNoteRef.current.value;
     console.log('Text to be submitted to model:' + submissionText);
     // var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
-    // var httpSubmission = 'http://54.202.117.250:5000/test'
-    // Get Full Note for Submission to API
-    // console.log(httpSubmission);
-
+    
     //const apiName = 'MBVAModelAPI';
     const apiName = 'MBVAModelAPIProxy';
     const path = '/test/api/icd'; 
@@ -258,39 +255,7 @@ class AddNoteForm extends React.Component {
       .catch(error => {
         console.log(error );
     });
-    //http://54.202.117.250:5000/api/icd?text=Chief Complaint: History of Present Illness (HPI): Review of Systems: Additional ROS Notes: Past Medical Family and Social History (PFSH): Examination: Treatment Options: Additional Notes: test&top_k=10
-    //https://dd60l0ev60.execute-api.ap-south-1.amazonaws.com/prod?text="kidney"&top_k=10
-    const httpPOSTURL = 'http://54.202.117.250:5000/api/icd';
-    const httpGETTURL = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
-    const httpPOSTRequestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body : 'text='+submissionText+'&top_k=10'
-    }
-    const httpGETRequestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    //console.log('HTTP POST body:'+httpPOSTRequestOptions.body);
-
-    // fetch(httpGETTURL, httpGETRequestOptions)
-    //   .then( (response) => response.json())
-    //   .then( data => 
-    //     {
-    //       var codes = data;
-    //       console.log("Codes returned by model:"+codes)
-
-    //       var codesInArray = Object.keys(codes).map(function(key) {
-    //         return [Number(key), codes[key]];
-    //       });
-    //       console.log("codesInArray:"+codesInArray)
-    //       this.props.setCodes(codesInArray)
-    //   });
+    
   };
 
   handleChange = event => {

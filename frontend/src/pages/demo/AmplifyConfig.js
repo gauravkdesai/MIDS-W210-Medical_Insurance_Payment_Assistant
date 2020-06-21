@@ -1,4 +1,4 @@
-import Amplify, { API } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 
 const awsAPIconfig= Amplify.configure({
     API: {

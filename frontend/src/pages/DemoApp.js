@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import SelectSearch from "react-select-search";
 import PropTypes from "prop-types";
-// import SelectSearch from "react-select-search";
 import Header from "./demo/Header";
 import NoteView from "./demo/NoteView";
 import samplePatients from "./demo/sample-patients";
@@ -9,6 +9,7 @@ import base from "./demo/base";
 import "../css/style.css";
 import "../css/header.css";
 import "../css/patient.css";
+import "../css/select-search.css";
 
 
 const firebaseID = "12345"
@@ -113,31 +114,34 @@ class DemoApp extends Component {
   };
 
   selectPatient = key => {
+    console.log("On Change key="+key);
     const currentPatient = key;
-    // const codes = Array();
-    // this.setState({ currentPatient, codes });
     this.setState({ currentPatient });
   };
 
   render() {
+    this.loadSamplePatients();
+    this.patientOptions = [];
+    Object.keys(this.state.patients).map((key,i) =>(
+      this.patientOptions.push({
+        name: this.state.patients[key].name, 
+        value: key
+      })
+    ));
+
     return (
-      <div className="luna-emhr">
-        <div className="menu">
+      <div >
+        <div >
           <Header tagline="EMHR" />
-          <ul className="patients">
-            {Object.keys(this.state.patients).map(key => (
-              <Patient
-                key={key}
-                index={key}
-                details={this.state.patients[key]}
-                addToOrder={this.addToOrder}
-                selectPatient={this.selectPatient}
-              />
-            ))}
-          </ul>
-          <button onClick={this.loadSamplePatients}>
-          Load Sample Patients
-          </button>
+          <div>
+            Pick a demo patient: 
+            <SelectSearch 
+            name="demoPatient"
+            placeholder="Start typing patient name here" 
+            options={this.patientOptions} 
+            onChange={value => this.selectPatient(value)}
+            search/>
+          </div>
         </div>
 
         <NoteView
