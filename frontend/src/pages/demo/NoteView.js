@@ -37,28 +37,45 @@ class NoteView extends React.Component {
         </h2>
         <AddNoteForm currentPatient={this.props.currentPatient} setCodes={this.props.setCodes} setEMCodes={this.props.setEMCodes}/>
         
-        <ul className="patients">
-        {console.log(this.props.codes)}
+
+
             {this.props.codes
             ?
-              <>
-              <h1>EM Code</h1>
-              <EMCode
-                details = {this.props.emcode}
-              />
-              <h1>ICD Codes</h1>
-              {this.props.codes.map(item => (
+
+              <div>
+
+              {console.log(this.props.codes)}
+
+              <h2>EM Code</h2>
+              <EMCode details = {this.props.emcode}/>
+              <h2>ICD Codes</h2>
+              <div className="container">
+              <div className="table">
+                <div className="table-header">
+                  <div className="header__item text">ICD-9 Code</div>
+                  <div className="header__item text">Title</div>
+                  <div className="header__item number">Prediction Probability</div>
+                </div>
+                <div class="table-content">	
+              {this.props.codes
+              .sort((a, b) => a[1].PROB > b[1].PROB ? -1 : 1)
+              .map(item => (
                 <ICDCode
                   key={item[0].toString()}
                   index={item[0].toString()}
                   details={item[1]}
                 />
               ))}
-              </>
+              </div>
+              </div>
+              </div>
+              </div>
             : this.props.codes
+           
             }
-          </ul>
-      </div>
+          </div>
+   
+      
     );
   }
 }

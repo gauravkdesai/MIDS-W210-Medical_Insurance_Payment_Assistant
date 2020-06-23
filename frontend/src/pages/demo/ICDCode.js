@@ -12,13 +12,13 @@ class ICDCode extends React.Component {
     index: PropTypes.string
   };
   render() {
-    const { ICD_CODE, PROB, LONG_TITLE } = this.props.details;
+    const { ICD_CODE, PROB, SHORT_TITLE, LONG_TITLE } = this.props.details;
     return (
-      <li className="menu-code">
-        <h6 className="code-name">
-          Code: {ICD_CODE} Prob: {PROB} Description: {LONG_TITLE}
-        </h6>
-      </li>
+      <div class="table-row">	
+        <div class="table-data text">{ICD_CODE}</div>
+        <div class="table-data text">{SHORT_TITLE}</div>
+        <div class="table-data number">{PROB}</div>
+      </div>
     );
   }
 }

@@ -10,6 +10,7 @@ import "../css/style.css";
 import "../css/header.css";
 import "../css/patient.css";
 import "../css/select-search.css";
+import "../css/codes_table.css";
 
 
 const firebaseID = "12345"
