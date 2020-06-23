@@ -258,6 +258,7 @@ h2 {
 }
 
 
+
 .luna-emhr {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -382,8 +383,8 @@ ul.order li span.count span {
 
 .note-edit input[type='checkbox'] {
   
-  width: 2%;
-  height: 13px;
+  width: 16px;
+  height: 16px;
   
   line-height: 1;
   font-size: 1.2rem;
