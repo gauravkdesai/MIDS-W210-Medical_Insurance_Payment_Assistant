@@ -323,7 +323,7 @@ ul.order li {
       -ms-flex-align: center;
           align-items: center;
 }
-ul.order li:hover button {
+/* ul.order li:hover button {
   display: inline;
 }
 ul.order li button {
@@ -354,7 +354,7 @@ ul.order li span.count span {
 }
 .order-title {
   text-align: center;
-}
+} */
 
 
 .note-edit {
@@ -452,11 +452,11 @@ input[type=submit][disabled] {
   -webkit-transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
           transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
 }
-button[disabled]:hover,
+/* button[disabled]:hover,
 input[type=submit][disabled]:hover {
   color: #d12028;
   cursor: not-allowed;
-}
+} */
 button[disabled]:after,
 input[type=submit][disabled]:after {
   display: none;
@@ -475,7 +475,7 @@ input[type=submit]:after {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-button:hover,
+/* button:hover,
 input[type=submit]:hover,
 button:focus,
 input[type=submit]:focus {
@@ -487,7 +487,7 @@ input[type=submit]:hover:after,
 button:focus:after,
 input[type=submit]:focus:after {
   height: 100%;
-}
+} */
 button.warning:after,
 input[type=submit].warning:after {
   background: #d12028;

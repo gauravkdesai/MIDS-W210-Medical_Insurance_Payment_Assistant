@@ -43,7 +43,7 @@ class NoteView extends React.Component {
             ?
 
               <div>
-
+              <br/><br/>
               {console.log(this.props.codes)}
 
               <h2>EM Code</h2>

@@ -386,9 +386,15 @@ class AddNoteForm extends React.Component {
 
   };
 
+  submitForm = () => {
+    var x = document.getElementsByName("noteForm");
+    x[0].submit(); 
+  }
+
   render() {
     return (
-      <form className="note-edit" onSubmit={this.getCodes} method="post">
+      <>
+      <form className="note-edit" onSubmit={this.getCodes} method="get" name="noteForm">
         
         <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
         <h3>Initial Intake</h3>
@@ -540,8 +546,17 @@ class AddNoteForm extends React.Component {
         <h3>Full Note:</h3>
         <textarea name="fullNote" rows="40" ref={this.fullNoteRef} readOnly/>
 
-        <button type="submit">Get ICD Codes</button>
+
       </form>
+        <div id="container">
+        <button class="submit-button" onClick={this.getCodes}>
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <span class="button-text">Get ICD Codes</span>
+        </button>
+      </div>
+      </>
     );
   }
 }

@@ -17,7 +17,7 @@ class ICDCode extends React.Component {
       <div class="table-row">	
         <div class="table-data text">{ICD_CODE}</div>
         <div class="table-data text">{SHORT_TITLE}</div>
-        <div class="table-data number">{PROB}</div>
+        <div class="table-data number">{Math.round(PROB*1000)/1000}</div>
       </div>
     );
   }

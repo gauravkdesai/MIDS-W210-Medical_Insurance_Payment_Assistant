@@ -11,6 +11,7 @@ import "../css/header.css";
 import "../css/patient.css";
 import "../css/select-search.css";
 import "../css/codes_table.css";
+import "../css/get_code_button.scss";
 
 
 const firebaseID = "12345"
