@@ -44,7 +44,57 @@ The application architecture is shown in the image below:
 
 ![Model Architecture](../assets/W210_architecture.png)
 
+### Background
+
+Within the medical industry, there is a significant amount of waste (8).  Administrative costs in the US medical system amount of almost $500 billion annually!  Part of this problem is the complexity in the billing process.  Surprisingly, the use of electronic medical records (EMR) has resulted in physicians spending more time than ever on patient documentation!  
+
+![Waste in Medical Industry](../assets/costs_1.png])
+
+The US medical system has the most expensive administrative burden when compared to all other nations. It is estimated that lowering the administrative costs down to the level of Canada would result in $30 billion of annual savings.
+
+![USA Medical Industry has High Waste](../assets/costs_2.png])
+
+With this background in mind, our goal is to improve the consistency and transparency associated with the billing process.  From a survey of subject matter experts (SMEs), the following results were consistently at the top of their list of complaints:
+
+1. Billing is inefficient for physician time
+2. Inconsistent coding for identical clinical work
+3. Insurance rejection and audit risk creates additional documentation
+
 ### Use Cases
+
+There are 4 main segments of the medical industry that have widely overlapping interests:
+
+1. Patients
+  a. No transparency when receiving bill for medical services.  However, patients have right to access their EMRs (9).
+  b. No ability for patient to self-audit their medical bills.
+2. Physicians
+  a. Payout determined by documentation and coding
+  b. Desire for uniformity of billing
+3. Insurers
+  a. Desire to audit suspicious billing practices
+  b. Desire for uniformity of claims for identical clinical care
+4. Billers
+  a. Wish to reduce audit-risk and prevent resubmission of claims
+  b. Desire for uniformity of billing for identical clinical care
+
+![Use Cases](../assets/W210_use_cases.png)
+
+There is considerable overlap in the parts of the healthcare industry for more transparency and uniformity.  
+
+### Goal
+
+1. Automatically and accurately identifying billing code based on medical documentation
+2. AI writing assistant for physicians and medical workers
+
+Any user can query their own medical records to understand the predicted medical billing codes.
+
+### Benefits
+
+1. Improve accuracy in medical bills
+2. Decrease rejection rates by insurance companies, Medicare and Medicaid
+3. Increase productivity of billing team
+4. Reduce physician and nurse’s time on billing related activity
+5. Allow patients to self-audit their medical records for suspicious billing
 
 ### References
 
@@ -55,4 +105,5 @@ The application architecture is shown in the image below:
 5. MIMIC-III, a freely accessible critical care database. https://www.nature.com/articles/sdata201635
 6. Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. https://arxiv.org/abs/1810.04805.
 7. Emily Alsentzer, John Murphy, William Boag, Wei-Hung Weng, Di Jin, Tristan Naumann, and Matthew McDermott. 2019. Publicly available clinical BERT embeddings. In Proceedings of the 2nd Clinical Natural Language Processing Workshop, pages 72-78, Minneapolis, Minnesota, USA. Association for Computational Linguistics. https://github.com/EmilyAlsentzer/clinicalBERT. https://huggingface.co/emilyalsentzer/Bio_ClinicalBERT. 
-8. 
+8. Excess Administrative Costs Burden the U.S. Health Care System. https://www.americanprogress.org/issues/healthcare/reports/2019/04/08/468302/excess-administrative-costs-burden-u-s-health-care-system/.
+9. Individuals’ Right under HIPAA to Access their Health Information 45 CFR § 164.524. https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/access/index.html#:~:text=With%20limited%20exceptions%2C%20the%20HIPAA,care%20providers%20and%20health%20plans.
