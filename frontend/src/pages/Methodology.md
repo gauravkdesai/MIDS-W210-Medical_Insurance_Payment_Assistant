@@ -62,18 +62,18 @@ With this background in mind, our goal is to improve the consistency and transpa
 
 There are 4 main segments of the medical industry that have widely overlapping interests:
 
-1. Patients
-  a. No transparency when receiving bill for medical services.  However, patients have right to access their EMRs (9).
-  b. No ability for patient to self-audit their medical bills.
-2. Physicians
-  a. Payout determined by documentation and coding
-  b. Desire for uniformity of billing
-3. Insurers
-  a. Desire to audit suspicious billing practices
-  b. Desire for uniformity of claims for identical clinical care
-4. Billers
-  a. Wish to reduce audit-risk and prevent resubmission of claims
-  b. Desire for uniformity of billing for identical clinical care
+* Patients
+  * No transparency when receiving bill for medical services.  However, patients have right to access their EMRs (9).
+  * No ability for patient to self-audit their medical bills.
+* Physicians
+  * Payout determined by documentation and coding
+  * Desire for uniformity of billing
+* Insurers
+  * Desire to audit suspicious billing practices
+  * Desire for uniformity of claims for identical clinical care
+* Billers
+  * Wish to reduce audit-risk and prevent resubmission of claims
+  * Desire for uniformity of billing for identical clinical care
 
 ![Use Cases](/W210_use_cases.png)
 
