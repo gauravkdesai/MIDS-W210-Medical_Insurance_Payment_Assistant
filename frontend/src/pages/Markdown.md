@@ -48,11 +48,11 @@ The application architecture is shown in the image below:
 
 Within the medical industry, there is a significant amount of waste (8).  Administrative costs in the US medical system amount of almost $500 billion annually!  Part of this problem is the complexity in the billing process.  Surprisingly, the use of electronic medical records (EMR) has resulted in physicians spending more time than ever on patient documentation!  
 
-![Waste in Medical Industry](../assets/costs_1.png])
+![Waste in Medical Industry](../assets/costs_1.png)
 
 The US medical system has the most expensive administrative burden when compared to all other nations. It is estimated that lowering the administrative costs down to the level of Canada would result in $30 billion of annual savings.
 
-![USA Medical Industry has High Waste](../assets/costs_2.png])
+![USA Medical Industry has High Waste](../assets/costs_2.png)
 
 With this background in mind, our goal is to improve the consistency and transparency associated with the billing process.  From a survey of subject matter experts (SMEs), the following results were consistently at the top of their list of complaints:
 
