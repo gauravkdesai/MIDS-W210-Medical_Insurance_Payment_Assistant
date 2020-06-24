@@ -27,6 +27,23 @@ The overall concept of BERT is to mask a random selection of tokens within the t
 
 ### Application Architecture
 
+A brief summary of the model architecture:
+
+1. A Flask REST API queries the clinical BERT model and provides the top predicted ICD-9 codes for the given text.
+2. AWS Amplify hosts the JS + React front-end, and queries the business logic for the EM-code designations.
+
+We make use of the following tools and technologies:
+
+1. AWS
+2. Docker / Docker-compose
+3. AWS Amplify
+4. React
+5. Flask
+
+The application architecture is shown in the image below:
+
+![Model Architecture](../assets/W210_architecture.png)
+
 ### Use Cases
 
 ### References
