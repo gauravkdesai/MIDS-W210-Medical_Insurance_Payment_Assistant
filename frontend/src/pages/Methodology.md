@@ -6,7 +6,7 @@ The medical billing virtual assistant makes use of MIMIC-III dataset (1-4).  The
 
 The data is a series of related tables that have anonymized patient data.  Using these tables, ICD-9 codes can be related to clinical note text.  The methodology for the creation of hte database is shown in the figure below (5).
 
-![Image of MIMIC-III dataset](../assets/MIMIC-III.png)
+![Image of MIMIC-III dataset](/MIMIC-III.png)
 
 The dataset can be found at the following location
 https://physionet.org/content/mimiciii/1.4/
