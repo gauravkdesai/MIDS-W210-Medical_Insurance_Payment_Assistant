@@ -9,7 +9,7 @@ class Methodology extends Component{
         this.state = {markdown:''};
     }
 
-    componentWillMount(){
+    componentDidMount(){
         fetch(MethodologyMarkdown)
             .then(res => res.text())
             .then(text => {this.setState({markdown: text})});
