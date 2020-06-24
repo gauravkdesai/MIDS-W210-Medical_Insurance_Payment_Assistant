@@ -1,6 +1,4 @@
-# Project Overview
-
-### Dataset
+# Dataset
 
 The medical billing virtual assistant makes use of MIMIC-III dataset (1-4).  The description from physionet.org: "MIMIC-III is a large, freely-available database comprising deidentified health-related data associated with over forty thousand patients who stayed in critical care units of the Beth Israel Deaconess Medical Center between 2001 and 2012."
 
@@ -11,21 +9,21 @@ The data is a series of related tables that have anonymized patient data.  Using
 The dataset can be found at the following location
 https://physionet.org/content/mimiciii/1.4/
 
-### Model
+# Model
 
 Natural language processing (NLP) is a rapidly advancing field.  Recent developments led to the creation of the BERT model (6).  BERT model pre-trains bidirectional representations of text resulting in word embeddings.  Since BERT was created, it has ushered in many domain-specific variants that have been trained on various corpora.  
 
 Clinical BERT (7) was created by training both BERT and Bio-BERT on the MIMIC-III dataset, in order to create a language model more suitable for medical applications.  We rely upon the use of Clinical BERT for our model.  By using a fine-tuned model, trained on the ICD-9 codes, as well as relying upon the text embeddings from Clinical BERT, we are able to predict the incidence of ICD-9 codes from a given text.
 
-#### Understanding BERT
+## Understanding BERT
 
 A visual guide to BERT can be found at the following location: http://jalammar.github.io/illustrated-bert/.
 
 The overall concept of BERT is to mask a random selection of tokens within the training text, and then attempt to predict these tokens.  Through this methodology, BERT achieved state of the art accuracy.
 
-![Visualization of BERT](../assets/BERT-language-modeling-masked-lm.png)
+![Visualization of BERT](/BERT-language-modeling-masked-lm.png)
 
-### Application Architecture
+# Application Architecture
 
 A brief summary of the model architecture:
 
@@ -42,17 +40,17 @@ We make use of the following tools and technologies:
 
 The application architecture is shown in the image below:
 
-![Model Architecture](../assets/W210_architecture.png)
+![Model Architecture](/W210_architecture.png)
 
-### Background
+# Background
 
 Within the medical industry, there is a significant amount of waste (8).  Administrative costs in the US medical system amount of almost $500 billion annually!  Part of this problem is the complexity in the billing process.  Surprisingly, the use of electronic medical records (EMR) has resulted in physicians spending more time than ever on patient documentation!  
 
-![Waste in Medical Industry](../assets/costs_1.png)
+![Waste in Medical Industry](/costs_1.png)
 
 The US medical system has the most expensive administrative burden when compared to all other nations. It is estimated that lowering the administrative costs down to the level of Canada would result in $30 billion of annual savings.
 
-![USA Medical Industry has High Waste](../assets/costs_2.png)
+![USA Medical Industry has High Waste](/costs_2.png)
 
 With this background in mind, our goal is to improve the consistency and transparency associated with the billing process.  From a survey of subject matter experts (SMEs), the following results were consistently at the top of their list of complaints:
 
@@ -60,7 +58,7 @@ With this background in mind, our goal is to improve the consistency and transpa
 2. Inconsistent coding for identical clinical work
 3. Insurance rejection and audit risk creates additional documentation
 
-### Use Cases
+# Use Cases
 
 There are 4 main segments of the medical industry that have widely overlapping interests:
 
@@ -77,18 +75,18 @@ There are 4 main segments of the medical industry that have widely overlapping i
   a. Wish to reduce audit-risk and prevent resubmission of claims
   b. Desire for uniformity of billing for identical clinical care
 
-![Use Cases](../assets/W210_use_cases.png)
+![Use Cases](/W210_use_cases.png)
 
 There is considerable overlap in the parts of the healthcare industry for more transparency and uniformity.  
 
-### Goal
+# Goal
 
 1. Automatically and accurately identifying billing code based on medical documentation
 2. AI writing assistant for physicians and medical workers
 
 Any user can query their own medical records to understand the predicted medical billing codes.
 
-### Benefits
+# Benefits
 
 1. Improve accuracy in medical bills
 2. Decrease rejection rates by insurance companies, Medicare and Medicaid
@@ -96,7 +94,7 @@ Any user can query their own medical records to understand the predicted medical
 4. Reduce physician and nurse’s time on billing related activity
 5. Allow patients to self-audit their medical records for suspicious billing
 
-### References
+# References
 
 1. Charles, D., King, J., Patel, V. & Furukawa, M. Adoption of Electronic Health record Systems among U.S. Non-federal Acute Care Hospitals. ONC Data Brief No. 9, 1–9 (2013).
 2. Collins, F. S. & Tabak, L. A. NIH plans to enhance reproducibility. Nature 505, 612–613 (2014).
