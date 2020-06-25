@@ -20,6 +20,7 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route exact path="/" component={Prediction} />
+              <Route exact path="/index.html" component={Prediction} />
               <Route path="/Methodology" component={Methodology} />
               <Route path="/FAQ" component={FAQ} />
               <Route path="/DemoApp" component={DemoApp} />
