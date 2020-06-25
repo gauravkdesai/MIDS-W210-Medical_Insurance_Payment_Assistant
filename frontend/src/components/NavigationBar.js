@@ -12,7 +12,7 @@ const Styles = styled.div`
     }
 
     a, .navbar-brand, .navbar-nav .nav-link{
-        color: #bbb;
+        color: #efefef;
 
         $:hover{
             color: white
@@ -25,7 +25,7 @@ export const NavigationBar = () => (
         <Navbar expand="lg">
             <Navbar.Brand href="/">
                 <img src={LogoURL} width="40" height="50" className="d-inline-block" alt="MBVA logo"/>{' '} 
-                Medical Billing Virtual Assitant                     
+                MBVA                   
             </Navbar.Brand>
             <NavbarToggle aria-controls="basic-navbar-nav"/>
             <NavbarCollapse id="basic-navbar-nav">

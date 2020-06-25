@@ -17,7 +17,7 @@ const Styles = styled.div`
 
     .overlay{
         background-color: #000;
-        opacity: 0.6;
+        opacity: 0.7;
         position: absolute;
         top: 0;
         left: 0;
@@ -26,6 +26,11 @@ const Styles = styled.div`
         z-index: -1;
     }
 
+    p{
+        text-align: center;
+    }
+
+
 `;
 
 export const Jumbotron = () => (
@@ -33,8 +38,11 @@ export const Jumbotron = () => (
         <Jumbo fluid className="jumbo">
             <div className="overlay"/>
             <Container>
-                <h1>Welcome</h1>
-                <p>Medical Assistant</p>
+                    <div>
+                    <h1 >Medical Billing Virtual Assistant</h1>
+                    <br/>
+                    <p>We help you decipher medical notes</p>
+                    </div>
             </Container>
         </Jumbo>
     </Styles>

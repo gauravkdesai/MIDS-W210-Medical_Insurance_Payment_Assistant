@@ -14,10 +14,10 @@ class ICDCode extends React.Component {
   render() {
     const { ICD_CODE, PROB, SHORT_TITLE, LONG_TITLE } = this.props.details;
     return (
-      <div class="table-row">	
-        <div class="table-data text">{ICD_CODE}</div>
-        <div class="table-data text">{SHORT_TITLE}</div>
-        <div class="table-data number">{Math.round(PROB*1000)/1000}</div>
+      <div className="table-row">	
+        <div className="table-data text">{ICD_CODE}</div>
+        <div className="table-data text">{SHORT_TITLE}</div>
+        <div className="table-data number">{Math.round(PROB*1000)/1000}</div>
       </div>
     );
   }
