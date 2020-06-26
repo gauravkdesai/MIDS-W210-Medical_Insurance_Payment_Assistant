@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.1",
     "markdown-to-jsx": "^6.11.4",
+    "prettier": "^1.18.2",
     "re-base": "^4.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -27,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write '*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"

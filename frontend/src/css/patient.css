@@ -1,79 +1,79 @@
 .patient-edit {
-    margin-bottom: 20px;
-    border: 2px solid #000;
-    overflow: hidden;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
-  .patient-edit input,
-  .patient-edit textarea,
-  .patient-edit select {
-    width: 33.33%;
-    padding: 10px;
-    line-height: 1;
-    font-size: 1.2rem;
-    border: 0;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    border-radius: 0;
-    background: #fff;
-  }
-  .patient-edit input:focus,
-  .patient-edit textarea:focus,
-  .patient-edit select:focus {
-    outline: 0;
-    background: #fef2de;
-  }
-  .patient-edit textarea {
-    width: 100%;
-  }
-  .patient-edit input:last-of-type {
-    width: 100%;
-  }
-  .patient-edit button {
-    width: 100%;
-    border: 0;
-  }
+  margin-bottom: 20px;
+  border: 2px solid #000;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.patient-edit input,
+.patient-edit textarea,
+.patient-edit select {
+  width: 33.33%;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1.2rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+.patient-edit input:focus,
+.patient-edit textarea:focus,
+.patient-edit select:focus {
+  outline: 0;
+  background: #fef2de;
+}
+.patient-edit textarea {
+  width: 100%;
+}
+.patient-edit input:last-of-type {
+  width: 100%;
+}
+.patient-edit button {
+  width: 100%;
+  border: 0;
+}
 
-  .menu-patient {
-    border-bottom: 0px solid #000;
-    border-top: 0px solid #000;
-    padding-bottom: 0rem;
-    padding-top: 1rem;
-    margin-bottom: 0px;
-    clear: both;
-    overflow: hidden;
-  }
-  .menu-patient p {
-    margin: 0;
-    font-size: 1.8rem;
-  }
-  .menu-patient .patient-name {
-    margin: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .menu-patient .price {
-    font-size: 1.4rem;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-  }
-  .menu-patient img {
-    float: left;
-    width: 150px;
-    margin-right: 1rem;
-  }
+.menu-patient {
+  border-bottom: 0px solid #000;
+  border-top: 0px solid #000;
+  padding-bottom: 0rem;
+  padding-top: 1rem;
+  margin-bottom: 0px;
+  clear: both;
+  overflow: hidden;
+}
+.menu-patient p {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.menu-patient .patient-name {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.menu-patient .price {
+  font-size: 1.4rem;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+.menu-patient img {
+  float: left;
+  width: 150px;
+  margin-right: 1rem;
+}

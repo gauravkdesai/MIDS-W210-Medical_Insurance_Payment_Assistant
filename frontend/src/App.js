@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Prediction } from './pages/Prediction';
-import { Methodology } from './pages/Methodology';
-import { FAQ } from './pages/FAQ';
-import { DemoApp }  from './pages/DemoApp';
-import { AboutUs } from './pages/AboutUs';
-import { NoMatch } from './pages/NoMatch';
-import { Layout } from './components/Layout';
-import { NavigationBar } from './components/NavigationBar';
-import { Jumbotron } from './components/Jumbotron';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Prediction } from "./pages/Prediction";
+import { Methodology } from "./pages/Methodology";
+import { FAQ } from "./pages/FAQ";
+import { DemoApp } from "./pages/DemoApp";
+import { AboutUs } from "./pages/AboutUs";
+import { NoMatch } from "./pages/NoMatch";
+import { Layout } from "./components/Layout";
+import { NavigationBar } from "./components/NavigationBar";
+import { Jumbotron } from "./components/Jumbotron";
 
 class App extends Component {
   render() {
