@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Header from "./demo/Header";
 import NoteView from "./demo/NoteView";
 import samplePatients from "./demo/sample-patients";
-import Patient from "./demo/Patient";
 import base from "./demo/base";
 import "../css/style.css";
 import "../css/header.css";

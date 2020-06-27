@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "../css/prediction.css";
-import ICDCode from "./demo/ICDCode";
 import API from "@aws-amplify/api";
 import Amplify from "aws-amplify";
 import awsAPIconfig from "./demo/AmplifyConfig";
+import ICDCode from "./demo/ICDCode";
+import "../css/prediction.css";
 
 Amplify.configure(awsAPIconfig);
 
@@ -75,7 +74,7 @@ class Prediction extends Component {
               <div className="header__item text">Title</div>
               <div className="header__item number">Prediction Probability</div>
             </div>
-            <div class="table-content">
+            <div className="table-content">
               {console.log("Before rendering", this.state.codes)}
 
               {this.state.codes ? (
