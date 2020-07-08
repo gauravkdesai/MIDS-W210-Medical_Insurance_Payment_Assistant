@@ -2,32 +2,32 @@
 	box-sizing:border-box;
 } */
 
-body {
+/* body {
   padding: 24px;
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
-}
+} */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   margin: 0;
-}
+} */
 
-.container {
+/* .container {
   max-width: 1000px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* min-height:100vh; */
-}
+  /* min-height:100vh; 
+} */
 
-.table {
+.table-content {
   width: 100%;
   border: 1px solid #eeeeee;
 }
