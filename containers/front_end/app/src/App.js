@@ -24,6 +24,7 @@ class App extends Component {
               <Route path="/FAQ" component={FAQ} />
               <Route path="/DemoApp" component={DemoApp} />
               <Route path="/AboutUs" component={AboutUs} />
+              <Route path="/Test" component={D3JS2} />
               <Route component={NoMatch} />
             </Switch>
           </Layout>

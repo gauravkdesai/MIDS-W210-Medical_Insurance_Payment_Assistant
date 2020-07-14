@@ -56,7 +56,7 @@ class NoteView extends React.Component {
               </>
             : this.props.codes
             }
-          </ul>
+        </ul>
       </div>
     );
   }
