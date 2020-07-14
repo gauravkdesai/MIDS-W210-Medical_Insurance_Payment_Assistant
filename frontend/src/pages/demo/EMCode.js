@@ -43,9 +43,9 @@ class EMCode extends React.Component {
     }
 
     return (
-      <li className="menu-code">
-        <h6 className="code-name">EM Code: {calculatedCode}</h6>
-      </li>
+    
+        <h4 className="code-name">EM Code: {calculatedCode}</h4>
+      
     );
   }
 }

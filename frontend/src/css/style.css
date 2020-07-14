@@ -562,3 +562,7 @@ input[type="submit"].twitter:after {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+.code-name{
+  border-bottom: 1px dotted;
+}
