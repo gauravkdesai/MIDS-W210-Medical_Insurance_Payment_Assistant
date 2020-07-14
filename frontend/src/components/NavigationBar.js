@@ -63,6 +63,11 @@ export const NavigationBar = () => (
               <Link to="/AboutUs">About Us</Link>
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/Test">D3JS</Link>
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
       </NavbarCollapse>
     </Navbar>
