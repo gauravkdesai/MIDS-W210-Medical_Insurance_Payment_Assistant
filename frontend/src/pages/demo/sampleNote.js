@@ -24,6 +24,7 @@ const sampleNote = {
     examInsightRef: "poor",
     examGaitRef: "normal gait",
     examStrengthRef: "normal tone",
+    exam1Ref : "Default examination present for sample note",
 
     // Treatment Options
     treatmentNotesRef: " 10 yo with history of developmental delays, meets criteria for ADHD and ASD. He also has anger issues and anxiety, and may meet criteria for OCD. Strong family history of mood and ADHD. We will continue to discuss possible OCD diagnosis as we get to know him. At this time, mom thinks anxiety is a bigger issue than ADHD so we will first treat anxiety then re-evaluate ADHD. In addition, he has ASD and we will recommend wraparound services which family is interested in. Today, will make referrals for wraparound services. Start Zoloft at low dose and will continue to increase to help with anxiety/possible OCD. He was quiet, minimal social reciprocity.  Lethality concerns: no SI or HI. Supportive mom. Engaged in treatment. Appropriate for OP services. ",
