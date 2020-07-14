@@ -1,9 +1,11 @@
 import React from "react";
+import { Button } from 'reactstrap';
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
 import API from "@aws-amplify/api";
 import Amplify from "aws-amplify";
 import awsAPIconfig from "./AmplifyConfig";
+import { sampleNote } from "./sampleNote";
 
 Amplify.configure(awsAPIconfig);
 
@@ -206,6 +208,13 @@ class AddNoteForm extends React.Component {
     event.currentTarget.reset();
   };
 
+  loadSampleNote = event => {
+    for (var key of Object.keys(sampleNote)) {
+      if(this[key])
+        this[key].current.value = sampleNote[key];
+    }
+  };
+
   getCodes = (event) => {
     // 1.  stop the form from submitting
     event.preventDefault();
@@ -397,6 +406,10 @@ class AddNoteForm extends React.Component {
   render() {
     return (
       <>
+        <div id="container">
+          <Button class="sampleNote-button" variant="primary" onClick={this.loadSampleNote}>Load Sample Note</Button>
+        </div>
+
         <form
           className="note-edit"
           onSubmit={this.getCodes}
