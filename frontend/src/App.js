@@ -6,6 +6,7 @@ import { FAQ } from "./pages/FAQ";
 import { DemoApp } from "./pages/DemoApp";
 import { AboutUs } from "./pages/AboutUs";
 import { NoMatch } from "./pages/NoMatch";
+import D3JS2 from "./pages/D3JS2";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 import { Jumbotron } from "./components/Jumbotron";
@@ -25,6 +26,7 @@ class App extends Component {
               <Route path="/FAQ" component={FAQ} />
               <Route path="/DemoApp" component={DemoApp} />
               <Route path="/AboutUs" component={AboutUs} />
+              <Route path="/Test" component={D3JS2} />
               <Route component={NoMatch} />
             </Switch>
           </Layout>
