@@ -40,21 +40,14 @@ def api_icd_predict():
     request.get_data()
 
     text     = request.args.get('text')
-    top_k    = request.args.get('top_k')
-
-    if top_k is None:
-        top_k = 1
-    else:
-        top_k = int(top_k)
 
     try:
 
         print(f'{PUR}{TXT} Text > {text} {PAD}')
-        print(f'{PUR}{TXT} Top_K > {top_k} {PAD}')
 
-        response = icd_predict(app).predict(text, top_k)
+        response = icd_predict(app).predict(text)
 
-        return f'{json.dumps(response)}'
+        return f'{json.dumps(str(response))}'
 
     except:
         print(f'{RED}{TXT}   STATUS > Invalid Request {PAD}{RST}{EOL}')
@@ -72,7 +65,7 @@ def index():
 def sample_text():
 
     start          = time()
-    pred = icd_predict(app).predict(text='Test.', top_k=10)
+    pred = icd_predict(app).predict(text='Test.')
     end            = time()
 
     print(f'ICD Predict : End-2-End - Finished in {end-start:7.3f} Seconds')
@@ -80,7 +73,7 @@ def sample_text():
 
     print(f'            : {pred}')
 
-    return f'{json.dumps(pred)}'
+    return f'{json.dumps(str(pred))}'
 
 @cli.command()
 def main():

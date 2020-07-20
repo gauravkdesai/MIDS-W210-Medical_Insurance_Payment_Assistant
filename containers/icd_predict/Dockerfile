@@ -23,26 +23,34 @@ RUN apt update && \
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip
 
+RUN pip install keras
+
+RUN pip install tensorflow
+
 RUN pip install simpletransformers
 
 RUN pip install flask
 
 RUN pip install flask-cors
 
+RUN pip install tensorflow
+
+RUN pip install nltk
+
 RUN mkdir -p /final
 
-WORKDIR /final/app/model
+WORKDIR /final/app/models
 
 # Download the ICD Code Model
-RUN wget http://brent-w210-models.s3.amazonaws.com/model/model.zip
-RUN unzip model.zip
+RUN wget https://brent-w210-models.s3-us-west-2.amazonaws.com/models.zip
+RUN unzip models.zip
 
 WORKDIR /final
 ADD app /final/app
 WORKDIR /final/app/
 
 # Sanity check
-RUN python3 cli.py --text "THIS IS a test Note.  Let's see if this is able to produce an output." --top_k 10
+RUN python3 cli.py --text "THIS IS a test Note.  Let's see if this is able to produce an output."
 
 # Entry Point
 EXPOSE 5000
