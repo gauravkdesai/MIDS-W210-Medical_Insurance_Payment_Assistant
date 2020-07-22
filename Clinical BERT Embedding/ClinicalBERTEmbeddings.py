@@ -14,7 +14,7 @@ model = AutoModel.from_pretrained("emilyalsentzer/Bio_Discharge_Summary_BERT")
 
 # Set parameters for BERT Embedding
 max_token = 256
-max_sent = 20
+max_sentence = 20
 combined_sent_max_len = 150
 
 def combine_sent(x):
@@ -49,11 +49,12 @@ def combine_sent(x):
 
 def truncate_sent(x):
     maxlen = max_token-2
-    max_sent = max_sent
+    max_sent = max_sentence
     sent_list = []
     for embeddings in x[-max_sent:]:
         tmp = np.zeros(maxlen).astype(int)
         sent_list.append(np.append(np.append(101, np.append(tmp,embeddings)[-maxlen:]), 102))
+
     return sent_list
 
 	
@@ -105,4 +106,11 @@ def ClinicalBERTEmbeddings(x):
 	
 	# Let's translate BERT token index matrix to "768" vector representation
 	model.eval()
-	return np.array(model(tokens,attention_mask=atten_mask)[0].data)
+	embeddings = np.array(model(tokens,attention_mask=atten_mask)[0].data)
+	padding = max_sentence - len(embeddings)
+	if padding > 0:
+		padding_shape = (padding, 256, 768)
+		pad = np.zeros(padding*256*768).reshape(padding_shape)
+		return np.append(embeddings, pad, axis = 0).astype('float16')
+	else:
+		return embeddings
