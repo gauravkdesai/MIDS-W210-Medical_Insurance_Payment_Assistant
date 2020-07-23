@@ -101,7 +101,7 @@ class D3JS2 extends Component {
                     .attr("dy", "0.31em")
                     .attr("x", d => d._children ? -6 : 6)
                     .attr("text-anchor", d => d._children ? "end" : "start")
-                    .text(d => d.data.name + " " + d.data.value.ToString("0.00"))
+                    .text(d => d.data.name + " " + d.data.value.toFixed(2))
                   .clone(true).lower()
                     .attr("stroke-linejoin", "round")
                     .attr("stroke-width", 3)
