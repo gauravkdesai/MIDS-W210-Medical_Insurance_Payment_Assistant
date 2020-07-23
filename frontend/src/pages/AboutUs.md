@@ -1,6 +1,8 @@
 <img src="brent_biseda.jpg" width="200" height="200" align="left"/>  
 
-## Brent Biseda
+<div style="text-align: left"> 
+
+## **Brent Biseda** </div>
 
  <a href="https://www.linkedin.com/in/brentbiseda/" target="_blank"><img src="linkedin.png" width="20" align="left"/></a> &nbsp;**Senior Engineer, Development & Planning** 
 
@@ -8,7 +10,9 @@
 
 <img src="gaurav_desai.jpg" width="200" height="200" align="left"/>  
   
-## Gaurav Desai
+<div style="text-align: left"> 
+
+## **Gaurav Desai** </div>
 
 <a href="https://www.linkedin.com/in/gauravkdesai/" target="_blank"> <img src="linkedin.png" width="20" align="left"/></a> &nbsp;**Associate Director**
  
@@ -16,7 +20,10 @@
 
 <img src="anish_philip.jpg" width="200" height="200" align="left" />  
 
-## Anish Philip
+<div style="text-align: left"> 
+
+## **Anish Philip** </div>
+
 
 <a href="https://www.linkedin.com/in/anish1philip/" target="_blank"> <img src="linkedin.png" width="20" align="left"/></a> &nbsp; **Decision Analytics Consultant** 
 
@@ -25,8 +32,9 @@
 
 <img src="haifeng_lin.jpg" width="200" height="200" align="left"/>  
 
+<div style="text-align: left"> 
 
-## Haifeng Lin
+## **Haifeng Lin** </div>
 
 <a href="https://www.linkedin.com/in/haifeng-lin/" target="_blank"> <img src="linkedin.png" width="20" align="left"/></a> &nbsp;**Director, Financial Reporting and Analytics**
 
