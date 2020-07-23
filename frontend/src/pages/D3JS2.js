@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 var d3 = require("d3")
 
-const width = 200;
+const width = 600;
 const height = 100;
 const margin = {top: 10, right: 120, bottom: 10, left: 40};
 const dy = width / 6;
