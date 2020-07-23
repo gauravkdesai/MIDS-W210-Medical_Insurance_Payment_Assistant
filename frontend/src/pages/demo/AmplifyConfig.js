@@ -5,7 +5,7 @@ const awsAPIconfig = Amplify.configure({
     endpoints: [
       {
         name: "MBVAModelAPI",
-        endpoint: "http://54.202.117.250:5000",
+        endpoint: "http://34.215.114.239:5000",
       },
       {
         name: "MBVAModelAPIProxy",

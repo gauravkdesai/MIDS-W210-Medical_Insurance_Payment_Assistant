@@ -231,7 +231,7 @@ class AddNoteForm extends React.Component {
 
     var submissionText = this.fullNoteRef.current.value;
     console.log("Text to be submitted to model:" + submissionText);
-    // var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
+    // var httpSubmission = 'http://34.215.114.239:5000/api/icd?text="'+ submissionText +'"&top_k=10';
 
     //const apiName = 'MBVAModelAPI';
     const apiName = "MBVAModelAPIProxy";
