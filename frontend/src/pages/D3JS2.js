@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 var d3 = require("d3")
 
-const width = 300;
+const width = 500;
 const height = 100;
 const margin = {top: 10, right: 40, bottom: 10, left: 40};
-const dy = width / 6;
+const dy = 50;
 const dx = 10;
 
 const tree = d3.tree().nodeSize([dx, dy])
@@ -101,7 +101,7 @@ class D3JS2 extends Component {
                     .attr("dy", "0.31em")
                     .attr("x", d => d._children ? -6 : 6)
                     .attr("text-anchor", d => d._children ? "end" : "start")
-                    .text(d => d.data.name + d.data.value)
+                    .text(d => d.data.name + " " + d.data.value.ToString("0.00"))
                   .clone(true).lower()
                     .attr("stroke-linejoin", "round")
                     .attr("stroke-width", 3)
