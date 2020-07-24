@@ -1,7 +1,13 @@
 # Docker file for ICD Prediction Model API
 
 #FROM ubuntu:18.04
-FROM huggingface/transformers-pytorch-cpu
+# FROM pytorch/pytorch:1.1.0-cuda10.0-cudnn7.5-devel
+
+#FROM nvidia/cuda:10.2-cudnn7-devel
+
+#FROM nvidia/cuda:11.0-cudnn8-runtime-ubuntu18.04
+
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 # Install Utilities
   ENV LANG=C.UTF-8 \
@@ -23,11 +29,15 @@ RUN apt update && \
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip
 
+RUN pip install torch
+
 RUN pip install keras
 
 RUN pip install tensorflow
 
-RUN pip install simpletransformers
+RUN pip install transformers
+
+RUN pip install pandas
 
 RUN pip install flask
 
@@ -36,6 +46,7 @@ RUN pip install flask-cors
 RUN pip install tensorflow
 
 RUN pip install nltk
+
 
 RUN mkdir -p /final
 

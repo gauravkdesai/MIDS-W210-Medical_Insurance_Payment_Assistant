@@ -21,6 +21,7 @@ def main(text):
 
     print(f'ICD Predict : Getting Answers : End-2-End - Finished in {end-start:7.3f} Seconds')
     print(f'Raw Output : ')
+
     print(json.dumps(str(output)))
 
 if  __name__ == '__main__':
