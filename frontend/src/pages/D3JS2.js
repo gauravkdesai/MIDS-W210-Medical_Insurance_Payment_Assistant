@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
+
 var d3 = require("d3")
 
 const width = 500;
@@ -10,9 +12,13 @@ const dx = 10;
 const tree = d3.tree().nodeSize([dx, dy])
 const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x)
 
-const data = require("./flare-2.json");
+// var data = require("./flare-2.json");
         
 class D3JS2 extends Component {
+    static propTypes = {
+        codesHierarchyData: PropTypes.object,
+      };
+      
     constructor(props) {
         super(props)
         this.createD3JS2 = this.createD3JS2.bind(this)
@@ -30,7 +36,9 @@ class D3JS2 extends Component {
 
         const node = this.node;
         const svgElement = d3.select(node);
-
+        var data = this.props.codesHierarchyData
+        console.log('data type of data='+typeof(data))
+        console.log('data='+data);
         const root = d3.hierarchy(data);
 
         root.x0 = dy / 2;
@@ -153,7 +161,7 @@ class D3JS2 extends Component {
     render() {
         return (
             <div>
-                <h1>D3 JS Example 2</h1>
+                <h1>Chapter Prediction</h1>
                 <svg ref={node => this.node = node}>
                 </svg>
             </div>

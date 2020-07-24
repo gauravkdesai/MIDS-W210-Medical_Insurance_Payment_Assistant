@@ -6,10 +6,9 @@ import API from "@aws-amplify/api";
 import Amplify from "aws-amplify";
 import awsAPIconfig from "./AmplifyConfig";
 import { sampleNote } from "./sampleNote";
+import EMCode from "./EMCode";
+import {PredictionOutput} from "../PredictionOutput";
 
-Amplify.configure(awsAPIconfig);
-
-API.configure();
 
 class AddNoteForm extends React.Component {
   initialRef = React.createRef();
@@ -213,55 +212,13 @@ class AddNoteForm extends React.Component {
       if(this[key])
         this[key].current.value = sampleNote[key];
     }
+
+    this.handleChange(event);
   };
 
-  getCodes = (event) => {
-    // 1.  stop the form from submitting
-    event.preventDefault();
-
-    // Debugging Data
-    // var codes = '{"123": {"ICD_CODE": "OTHER", "PROB": "0.653662", "SHORT_TITLE": "No Description", "LONG_TITLE": "No Description"}, "131": {"ICD_CODE": "4019", "PROB": "0.23658513", "SHORT_TITLE": "Hypertension NOS", "LONG_TITLE": "Unspecified essential hypertension"}, "163": {"ICD_CODE": "4280", "PROB": "0.21231478", "SHORT_TITLE": "CHF NOS", "LONG_TITLE": "Congestive heart failure, unspecified"}, "142": {"ICD_CODE": "41401", "PROB": "0.16941674", "SHORT_TITLE": "Crnry athrscl natve vssl", "LONG_TITLE": "Coronary atherosclerosis of native coronary artery"}, "157": {"ICD_CODE": "42731", "PROB": "0.15675905", "SHORT_TITLE": "Atrial fibrillation", "LONG_TITLE": "Atrial fibrillation"}, "222": {"ICD_CODE": "51881", "PROB": "0.13163589", "SHORT_TITLE": "Acute respiratry failure", "LONG_TITLE": "Acute respiratory failure"}, "221": {"ICD_CODE": "5185", "PROB": "0.112723686", "SHORT_TITLE": "No Description", "LONG_TITLE": "No Description"}, "211": {"ICD_CODE": "5070", "PROB": "0.10160673", "SHORT_TITLE": "Food/vomit pneumonitis", "LONG_TITLE": "Pneumonitis due to inhalation of food or vomitus"}, "277": {"ICD_CODE": "5849", "PROB": "0.096198335", "SHORT_TITLE": "Acute kidney failure NOS", "LONG_TITLE": "Acute kidney failure, unspecified"}, "231": {"ICD_CODE": "53081", "PROB": "0.09122082", "SHORT_TITLE": "Esophageal reflux", "LONG_TITLE": "Esophageal reflux"}}';
-    // codes = JSON.parse(codes);
-
-    // codes = Object.keys(codes).map(function(key) {
-    //   return [Number(key), codes[key]];
-    // });
-    // console.log(codes);
-    // this.props.setCodes(codes);
-
-    var submissionText = this.fullNoteRef.current.value;
-    console.log("Text to be submitted to model:" + submissionText);
-    // var httpSubmission = 'http://34.215.114.239:5000/api/icd?text="'+ submissionText +'"&top_k=10';
-
-    //const apiName = 'MBVAModelAPI';
-    const apiName = "MBVAModelAPIProxy";
-    const path = "/test/api/icd";
-    const myInit = {
-      // OPTIONAL
-      headers: { "Content-Type": "application/json" }, // OPTIONAL
-      response: false, // OPTIONAL (return the entire Axios response object instead of only response.data)
-      queryStringParameters: {
-        // OPTIONAL
-        text: submissionText,
-        top_k: 10,
-      },
-    };
-
-    API.get(apiName, path, myInit)
-      .then((data) => {
-        var codes = data;
-        console.log("Codes returned by model via Amplify:" + codes);
-
-        var codesInArray = Object.keys(codes).map(function(key) {
-          return [Number(key), codes[key]];
-        });
-        console.log("Amplify codesInArray:" + codesInArray);
-        this.props.setCodes(codesInArray);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  getSubmissionText = () => {
+    return this.fullNoteRef.current.value;
+  }
 
   handleChange = (event) => {
     // Counts of items for EM Code
@@ -1109,14 +1066,21 @@ class AddNoteForm extends React.Component {
           <h3>Full Note:</h3>
           <textarea name="fullNote" rows="40" ref={this.fullNoteRef} readOnly />
         </form>
-        <div id="container">
-          <button class="submit-button" onClick={this.getCodes}>
-            <span class="circle" aria-hidden="true">
-              <span class="icon arrow"></span>
-            </span>
-            <span class="button-text">Get ICD Codes</span>
-          </button>
-        </div>
+
+        {this.props.codes ? (
+          <div>
+            <br />
+            <br />
+            {console.log(this.props.codes)}
+
+            <h2>EM Code</h2>
+            <EMCode details={this.props.emcode} />
+            
+          </div>
+        ) : (
+          this.props.codes
+        )}
+        <PredictionOutput getSubmissionText={this.getSubmissionText}/>
       </>
     );
   }
