@@ -10,16 +10,19 @@ from keras.models import model_from_json
 import glob
 import json
 from ClinicalBERTEmbeddings import ClinicalBERTEmbeddings
+import keras
+from heapq import nlargest
+from collections import defaultdict
 
 class ICD:
 
     def __init__(self):
+        keras.backend.set_learning_phase(0)
+        nltk.download('punkt')
 
         print(f'ICD Prediction : Initializing')
 
         start = time.time()
-        
-        nltk.download('punkt')
         
         PATH = './'
 
@@ -50,6 +53,7 @@ class ICD:
             json_file.close()
             self.model_dict[baseName] = model_from_json(loaded_model_json)
             self.model_dict[baseName].load_weights(file[:-5]+"_4_embeddings1.hdr")
+            self.model_dict[baseName].compile()
             labels = pd.read_csv(PATH + 'models/models/disease/chapter_labels/'+baseName).columns[1:]
             self.label_dict[baseName] = labels
 
@@ -66,10 +70,12 @@ class ICD:
         start = time.time()
         
         print(f'ICD Prediction : Predicting ICD Codes')
-        
+
         # Get Embeddings
         data = ClinicalBERTEmbeddings(text)
-        
+
+        print(f'Data Embeddings time : {time.time()-start}')
+
         # Prepare Embeddings for Model
         embeddings_padded = []
         for j in data:
@@ -81,23 +87,34 @@ class ICD:
         
         embeddings_padded = np.float16(embeddings_padded)
         embeddings_padded = np.array(embeddings_padded, dtype=np.float16)
-        
+
+        print(f'Data Embeddings padding : {time.time()-start}')
+
         # Chapter Predictions
         self.chapter_pred = self.chapter_model.predict(embeddings_padded)[0]
         self.chapter_dict = {key: value for (key, value) in zip(self.chapter_labels, self.chapter_pred)}
+        print(f'Chapter Pred: {time.time()-start}')
 
         # Adverse Predictions
         self.adverse_pred = self.adverse_model.predict(embeddings_padded)[0]
         self.adverse_dict = {key: value for (key, value) in zip(self.adverse_labels, self.adverse_pred)}
+        print(f'Adverse Pred: {time.time()-start}')
 
         # Disease Predictions
-        self.disease_dict = {}
-        self.disease_dict['680_709'] = {}
-        for model in self.model_dict:
-            model_pred = self.model_dict[model].predict(embeddings_padded)[0]
-            self.disease_dict[model[:-4]] = {key: value for (key,value) in zip(self.label_dict[model], model_pred)}
+        self.disease_dict = defaultdict(dict)
+
+        # Only predict top 5 Chapters:
+        selected_models = nlargest(5, self.chapter_dict, key = self.chapter_dict.get)
+        print("selected models:", selected_models)
+        print(self.model_dict)
+
+        #for model in self.model_dict:
+        for model in selected_models:
+           model_pred = self.model_dict[model+".csv"].predict(embeddings_padded)[0]
+           self.disease_dict[model] = {key: value for (key,value) in zip(self.label_dict[model+".csv"], model_pred)}
 
         self.text = text
+        print(f'All Other Models Pred: {time.time()-start}')
 
         self.output = {"name": "Root", "value": 1, "children": 
                         [{"name": "Adverse", "value": 1, "children": 
