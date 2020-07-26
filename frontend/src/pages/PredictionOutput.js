@@ -4,6 +4,7 @@ import Amplify from "aws-amplify";
 import awsAPIconfig from "./demo/AmplifyConfig";
 import ICDCode from "./demo/ICDCode";
 import D3JS2 from "./D3JS2";
+import CollapsibleTable from "./CollapsibleTable";
 import "../css/prediction.css";
 
 Amplify.configure(awsAPIconfig);
@@ -15,23 +16,84 @@ class PredictionOutput extends Component {
     this.state = {};
   }
 
+  convertProbability(prob){
+    return Math.round(100 * prob) /  100;
+  }
   sortAndFilterData(data){
     data = data.replace(/\'/g,"\"");
     data = JSON.parse(data);
     const probLowerLimit = 0.3;
-    console.log('After parsing to JSON',typeof(data))
+    console.log('After parsing to JSON',typeof(data));
+
+    // Adverse
+    var adverseData;
+    data["children"].forEach(row => {
+      if(row["name"] == "Adverse"){
+        var childArray = []
+        row["children"].forEach(childRow =>{
+          console.log('childRow=',childRow);
+          if(childRow["value"] > probLowerLimit ){
+            
+            var childMap = {"name":childRow["name"], "value":this.convertProbability(childRow["value"])};
+            childArray.push(childMap)
+          }
+        });
+        childArray.sort((a,b)=>b["value"]-a["value"])
+        console.log(childArray)
+        adverseData = {"name":row["name"], "value":row["value"], "children":childArray}
+      }
+    });    
+    console.log('adverseData=',adverseData);
+
+    // Chapters    
+    var chaptersDataArray=[];
+    data["children"].forEach(row => {
+      if(row["name"] == "Chapter"){
+        row["children"].forEach(chapterRow =>{
+          var chapterName = chapterRow["name"];
+          var chapterProb = this.convertProbability(chapterRow["value"]);
+          var childArray = []
+          // console.log('chapterName=',chapterName,"chapterProb=",chapterProb);
+          if(chapterProb > probLowerLimit){
+            chapterRow["children"].forEach(childRow =>{
+              //console.log('childRow=',childRow);
+              if(childRow["value"] > probLowerLimit ){
+                var childMap = {"name":childRow["name"], "value":this.convertProbability(childRow["value"])};
+                childArray.push(childMap)
+              }
+            });
+          }
+          if(childArray.length >0){
+            childArray.sort((a,b)=>b["value"]-a["value"])
+            // console.log(childArray)
+            var chapterData = {"name":chapterName, "value":chapterProb, "children":childArray}
+            // console.log('chapterData=',chapterData);
+            chaptersDataArray.push(chapterData);
+          }
+        });
+      }
+    });    
+    chaptersDataArray.sort((a,b) => b["value"]-a["value"])
+    console.log('chaptersDataArray=',chaptersDataArray);
+
+
+    var chapterRoot = {}
+    chapterRoot["name"] = "Chapter";
+    chapterRoot["value"] = 1;
+    chapterRoot["children"] = chaptersDataArray;
+
+    var rootChildren = []
+    rootChildren.push(adverseData)
+    rootChildren.push(chapterRoot)
 
     var newData = {}
-    for(var key of Object.keys(data)){
-      console.log('key='+key,' value='+data[key]);
+    newData["name"] = "Root";
+    newData["value"] = 1;
+    newData["children"] = rootChildren;
 
-      if(key == "name" && data[key] == "Root"){
-        newData[key] = data[key]
-        newData["value"] = data["value"]
-        newData["children"] = data["children"]
-      }
-    }
-    console.log('Tyope of newData='+typeof(newData))
+
+    console.log('Tyope of newData='+typeof(newData));
+    console.log("newData",newData);
     return newData;
   }
 
@@ -114,9 +176,20 @@ class PredictionOutput extends Component {
           <D3JS2
             codesHierarchyData={this.state.codesHierarchyData}
           />
+          
           : (
             <br />
           )}
+        {this.state.codesHierarchyData ? 
+          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/>
+          
+          : (
+            <br />
+          )}
+          
+          
+     
+          
       </div>
     );
   }
