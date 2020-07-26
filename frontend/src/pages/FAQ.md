@@ -1,5 +1,3 @@
-<p align="left">
-
 ## **What is MBVA?**
 Medical Billing Virtual Assistant or MBVA is a machine learning package that helps map medical notes to medical billing codes. This package is developed by four graduate students from the School of Information at the University of California, Berkeley, for their capstone project. MBVA uses a pretrained model, which is mainly based on Natural Language Processing (NLP) and MIMIC-III dataset, to analyze and examine medical notes. More details can be found under page **“Methodology”**.
 
@@ -36,4 +34,3 @@ The regulations under the Health Insurance Portability and Accountability Act of
 ## **What is Natural Language Processing?**
 Natural Language Processing (NLP) is a way for computers to analyze, understand, and derive meaning from textual information in a smart and useful way. By utilizing NLP, you can extract important phrases, sentiment, syntax, key entities such as brand, date, location, person, etc., and the language of the text.
 
-</p>
