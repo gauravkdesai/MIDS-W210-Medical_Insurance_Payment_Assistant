@@ -1,5 +1,3 @@
-<p align="left">
-
 ## **What is MBVA?**
 Medical Billing Virtual Assistant or MBVA is a machine learning package that helps map medical notes to medical billing codes. This package is developed by four graduate students from the School of Information at the University of California, Berkeley, for their capstone project. MBVA uses a pretrained model, which is mainly based on Natural Language Processing (NLP) and MIMIC-III dataset, to analyze and examine medical notes. More details can be found under page **“Methodology”**.
 
@@ -20,7 +18,7 @@ The machine learning models behind MBVA can have wide applications to the curren
 MBVA does not use text inputs processed by the service for any reason other than to provide and maintain the service. Content processed by the service is not used to develop or improve the quality of MBVA and will not be stored on our side. You always retain ownership of your content and we will only use your content with your consent.
 
 
-## What do the outputs from MBVA mean?
+## **What do the outputs from MBVA mean?**
 Once you submit medical notes and click on “Get ICDE Codes”, MBVA will display a list of Chapter, ICD-10 Code, Title, and Prediction Probability. The ICD code is a medical classification published by the World Health Organization and adopted by most countries. More details about ICD-10 code can be found <a href="http://apps.who.int/iris/bitstream/10665/246208/1/9789241549165-V1-eng.pdf" target="_blank"> here</a>.
 
 
@@ -36,4 +34,3 @@ The regulations under the Health Insurance Portability and Accountability Act of
 ## **What is Natural Language Processing?**
 Natural Language Processing (NLP) is a way for computers to analyze, understand, and derive meaning from textual information in a smart and useful way. By utilizing NLP, you can extract important phrases, sentiment, syntax, key entities such as brand, date, location, person, etc., and the language of the text.
 
-</p>
