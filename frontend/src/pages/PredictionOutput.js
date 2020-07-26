@@ -5,20 +5,32 @@ import awsAPIconfig from "./demo/AmplifyConfig";
 import ICDCode from "./demo/ICDCode";
 import D3JS2 from "./D3JS2";
 import CollapsibleTable from "./CollapsibleTable";
+import RingLoader from "react-spinners/RingLoader";
+import { css } from "@emotion/core";
 import "../css/prediction.css";
 
 Amplify.configure(awsAPIconfig);
 
 API.configure();
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: black;
+`;
+
 class PredictionOutput extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading:false
+    };
   }
 
   convertProbability(prob){
     return Math.round(100 * prob) /  100;
   }
+
   sortAndFilterData(data){
     data = data.replace(/\'/g,"\"");
     data = JSON.parse(data);
@@ -92,6 +104,8 @@ class PredictionOutput extends Component {
   }
 
   getCodes(event) {
+    this.setState({ loading: true });
+    console.log("After setting loading to true what we see loading=",this.state.loading);
     var submissionText = this.props.getSubmissionText();
     console.log("Text to be submitted to model:" + submissionText);
 
@@ -117,9 +131,13 @@ class PredictionOutput extends Component {
         this.setState({ codesHierarchyData: codesHierarchyData });
         this.setState({ codes: codesHierarchyData });
         console.log(this.state.codes);
+        this.setState({ loading: false });
+        console.log("After setting loading to false what we see loading=",this.state.loading);
       })
       .catch((error) => {
         console.log(error);
+        this.setState({ loading: false });
+        console.log("After setting loading to false what we see loading=",this.state.loading);
       });
       
   }
@@ -127,8 +145,11 @@ class PredictionOutput extends Component {
 
 
   render() {
+    console.log("loading=",this.state.loading);
     return (
       <div>
+        
+
 
         <div id="container">
           <button className="submit-button" onClick={this.getCodes.bind(this)}>
@@ -137,6 +158,14 @@ class PredictionOutput extends Component {
             </span>
             <span className="button-text">Go</span>
           </button>
+        </div>
+        <div className="sweet-loading">
+          <RingLoader
+            css={override}
+            size={50}
+            color={"black"}
+            loading={this.state.loading}
+          />
         </div>
 
         {/* {this.state.codesHierarchyData ? 
