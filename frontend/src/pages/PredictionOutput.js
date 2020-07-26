@@ -77,14 +77,8 @@ class PredictionOutput extends Component {
     console.log('chaptersDataArray=',chaptersDataArray);
 
 
-    var chapterRoot = {}
-    chapterRoot["name"] = "Chapter";
-    chapterRoot["value"] = 1;
-    chapterRoot["children"] = chaptersDataArray;
-
-    var rootChildren = []
-    rootChildren.push(adverseData)
-    rootChildren.push(chapterRoot)
+    var rootChildren = Array.from(chaptersDataArray);
+    rootChildren.unshift(adverseData);
 
     var newData = {}
     newData["name"] = "Root";
@@ -172,16 +166,19 @@ class PredictionOutput extends Component {
             </div>
           </div> */}
         </div>
-        {this.state.codesHierarchyData ? 
+
+        {/* {this.state.codesHierarchyData ? 
           <D3JS2
             codesHierarchyData={this.state.codesHierarchyData}
           />
           
           : (
             <br />
-          )}
+          )} */}
         {this.state.codesHierarchyData ? 
-          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/>
+        <div>
+          <h1>Chapter Prediction</h1>
+          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/></div>
           
           : (
             <br />

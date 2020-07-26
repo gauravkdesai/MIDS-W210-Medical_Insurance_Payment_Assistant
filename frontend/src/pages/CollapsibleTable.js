@@ -90,17 +90,17 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    diseases: PropTypes.arrayOf(
+    children: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        prob: PropTypes.number.isRequired,
+        value: PropTypes.number.isRequired,
         icd9: PropTypes.string,
         icd10: PropTypes.string,
       }),
     ).isRequired,
     name: PropTypes.string.isRequired,
-    prob: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    desc: PropTypes.string,
   }).isRequired,
 };
 
@@ -119,13 +119,7 @@ Row.propTypes = {
 
 export default function CollapsibleTable({codesHierarchyData}) {
     console.log("codesHierarchyData=",codesHierarchyData);
-    var adverse = codesHierarchyData["children"][0];
-    var chapters = codesHierarchyData["children"][1]["children"];
-    console.log("adverse=",adverse);
-    console.log("chapters=",chapters);
-    var rows = Array.from(chapters);
-    rows.unshift(adverse);
-    
+    const rows = codesHierarchyData["children"];    
     console.log("rows=",rows);
   return (
 
