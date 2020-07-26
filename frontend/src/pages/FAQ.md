@@ -20,7 +20,7 @@ The machine learning models behind MBVA can have wide applications to the curren
 MBVA does not use text inputs processed by the service for any reason other than to provide and maintain the service. Content processed by the service is not used to develop or improve the quality of MBVA and will not be stored on our side. You always retain ownership of your content and we will only use your content with your consent.
 
 
-## What do the outputs from MBVA mean?
+## **What do the outputs from MBVA mean?**
 Once you submit medical notes and click on “Get ICDE Codes”, MBVA will display a list of Chapter, ICD-10 Code, Title, and Prediction Probability. The ICD code is a medical classification published by the World Health Organization and adopted by most countries. More details about ICD-10 code can be found <a href="http://apps.who.int/iris/bitstream/10665/246208/1/9789241549165-V1-eng.pdf" target="_blank"> here</a>.
 
 
