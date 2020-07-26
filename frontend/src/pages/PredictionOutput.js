@@ -139,34 +139,6 @@ class PredictionOutput extends Component {
           </button>
         </div>
 
-        {/* <h2>ICD Codes</h2> */}
-        <div className="container">
-          {/* <div className="table">
-            <div className="table-header">
-              <div className="header__item text">ICD-9 Code</div>
-              <div className="header__item text">Title</div>
-              <div className="header__item number">Prediction Probability</div>
-            </div>
-            <div className="table-content">
-              {console.log("Before rendering", this.state.codes)}
-
-              {this.state.codes ? (
-                this.state.codes
-                  .sort((a, b) => (a[1].PROB > b[1].PROB ? -1 : 1))
-                  .map((item) => (
-                    <ICDCode
-                      key={item[0].toString()}
-                      index={item[0].toString()}
-                      details={item[1]}
-                    />
-                  ))
-              ) : (
-                <br />
-              )}
-            </div>
-          </div> */}
-        </div>
-
         {/* {this.state.codesHierarchyData ? 
           <D3JS2
             codesHierarchyData={this.state.codesHierarchyData}
@@ -178,7 +150,8 @@ class PredictionOutput extends Component {
         {this.state.codesHierarchyData ? 
         <div>
           <h1>Chapter Prediction</h1>
-          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/></div>
+          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/>
+        </div>
           
           : (
             <br />

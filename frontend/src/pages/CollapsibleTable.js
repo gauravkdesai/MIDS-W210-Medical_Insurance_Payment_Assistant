@@ -104,19 +104,6 @@ Row.propTypes = {
   }).isRequired,
 };
 
-// const rows = [
-//   createData('Adverse', 'Adverse', 1.0,  [
-//     {"name": "Constipation", "prob": 0.011777997}, 
-//     {"name": "Diarrhea", "prob": 0.010553241}, 
-//     {"name": "Edema", "prob": 0.017568767}, 
-//     {"name": "Hypercholesterolemia ", "prob": 0.29133314}, 
-//     {"name": "Hyperglycemia", "prob": 0.20892414}, 
-//     {"name": "Thrombocytopenia", "prob": 0.045878142}, 
-//     {"name": "Others", "prob": 0.021608412}, 
-//     {"name": "Any", "prob": 0.47839156}
-//   ]   )
-// ];
-
 export default function CollapsibleTable({codesHierarchyData}) {
     console.log("codesHierarchyData=",codesHierarchyData);
     const rows = codesHierarchyData["children"];    
