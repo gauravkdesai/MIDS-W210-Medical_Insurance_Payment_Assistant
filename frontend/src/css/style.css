@@ -310,11 +310,11 @@ ul.order li {
 
 .note-edit {
   margin-bottom: 10px;
-  border: 2px solid #000;
-  overflow: hidden;
+  border: 2px solid #008000;
+  overflow: hidden; 
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
@@ -326,8 +326,7 @@ ul.order li {
   line-height: 1;
   font-size: 1.2rem;
   border: 0;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
+  border-bottom: 1px solid #008000;
   border-radius: 0;
   background: #fff;
 }
@@ -339,8 +338,7 @@ ul.order li {
   line-height: 1;
   font-size: 1.2rem;
   border: 0;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
+  border-bottom: 1px solid #008000;
   border-radius: 0;
   background: #fff;
 }
