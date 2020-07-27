@@ -16,7 +16,7 @@ header.top h1 .ofThe {
   display: -ms-flexbox;
   display: flex;
   font-size: 3rem;
-  color: #f5a623;
+  color: #008000;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -35,7 +35,7 @@ header.top h1 .ofThe .of {
 header.top h3 {
   margin: 0;
   font-size: 2rem;
-  color: #f5a623;
+  color:  #008000;
   position: relative;
   display: inline-block;
 }
