@@ -153,14 +153,9 @@ class PredictionOutput extends Component {
 
         
         <div id="container">
-        <Button color="secondary" onClick={this.getCodes.bind(this)} size="lg" block>Go</Button>
-          {/* <button className="submit-button" onClick={this.getCodes.bind(this)}>
-            <span className="circle" aria-hidden="true">
-              <span className="icon arrow"></span>
-            </span>
-            <span className="button-text">Go</span>
-          </button> */}
+        <Button color="secondary" onClick={this.getCodes.bind(this)} size="lg" block>Get Codes</Button>
         </div>
+        {<br/>}
         <div className="sweet-loading">
           <RingLoader
             css={override}
@@ -169,15 +164,7 @@ class PredictionOutput extends Component {
             loading={this.state.loading}
           />
         </div>
-
-        {/* {this.state.codesHierarchyData ? 
-          <D3JS2
-            codesHierarchyData={this.state.codesHierarchyData}
-          />
-          
-          : (
-            <br />
-          )} */}
+        {<br/>}
         {this.state.codesHierarchyData ? 
         <div>
           <h1>Chapter Prediction</h1>
