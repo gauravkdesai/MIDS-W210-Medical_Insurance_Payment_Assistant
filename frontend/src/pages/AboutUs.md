@@ -11,7 +11,7 @@
 
 <img src="gaurav_desai.jpg" width="150" height="150" align="left"  style="overflow: hidden;border-radius: 50%;border:1px solid black;"/>  
 
-<a href="https://www.linkedin.com/in/gauravkdesai/" target="_blank"> <img src="linkedin.png" width="25" align="left"/></a> &nbsp;**Associate Director, Welth Management**
+<a href="https://www.linkedin.com/in/gauravkdesai/" target="_blank"> <img src="linkedin.png" width="25" align="left"/></a> &nbsp;**Associate Director, Solution Architect**
  
 &nbsp;*Gaurav is an Associate Director at UBS, which provides financial advice and solutions to worldwide clients. At UBS, he leads a team supporting regulatory stress calculations in Credit Risk and is responsible for IT architectural design and decisions.*<br><br><br><br><br>
 
