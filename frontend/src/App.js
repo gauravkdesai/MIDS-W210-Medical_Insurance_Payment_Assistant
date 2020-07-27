@@ -6,7 +6,6 @@ import { FAQ } from "./pages/FAQ";
 import { DemoApp } from "./pages/DemoApp";
 import { AboutUs } from "./pages/AboutUs";
 import { NoMatch } from "./pages/NoMatch";
-import D3JS2 from "./pages/D3JS2";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 import { Jumbotron } from "./components/Jumbotron";

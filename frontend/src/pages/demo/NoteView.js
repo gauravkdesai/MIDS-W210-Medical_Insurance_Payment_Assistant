@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AddNoteForm from "./AddNoteForm";
-import ICDCode from "./ICDCode";
-import EMCode from "./EMCode";
-import {PredictionOutput} from "../PredictionOutput";
+
 
 class NoteView extends React.Component {
   static propTypes = {

@@ -167,29 +167,7 @@ fieldset {
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  margin: 4px;
-}
-button,
-input {
-  line-height: normal;
-}
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-button[disabled],
-input[disabled] {
-  cursor: default;
-}
+
 input[type="checkbox"],
 input[type="radio"] {
   align-self: auto;
@@ -216,7 +194,6 @@ figure {
   margin: 0;
 }
 legend,
-button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
@@ -237,7 +214,7 @@ html {
   font-size: 62.5%;
 }
 body {
-  background: #d4d4d4;
+  background: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Open Sans", sans-serif;
@@ -329,38 +306,7 @@ ul.order li {
   -ms-flex-align: center;
   align-items: center;
 }
-/* ul.order li:hover button {
-  display: inline;
-}
-ul.order li button {
-  border: 0;
-  display: none;
-  line-height: 1;
-  padding: 0;
-}
-ul.order li.total {
-  font-weight: 600;
-  border-bottom: 3px solid #000;
-  border-top: 3px double #000;
-}
-ul.order li.unavailable {
-  text-decoration: line-through;
-  background: #f8d0d2;
-}
-ul.order li .price {
-  font-size: 1.2rem;
-}
-ul.order li span.count {
-  position: relative;
-  overflow: hidden;
-  float: left;
-}
-ul.order li span.count span {
-  display: inline-block;
-}
-.order-title {
-  text-align: center;
-} */
+
 
 .note-edit {
   margin-bottom: 10px;
@@ -433,109 +379,9 @@ ul.order li span.count span {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
+å
 
-button,
-input[type="submit"] {
-  text-transform: uppercase;
-  background: none;
-  border: 1px solid #000;
-  font-weight: 600;
-  font-size: 1.5rem;
-  font-family: "Open Sans";
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  position: relative;
-  z-index: 2;
-}
-button[disabled],
-input[type="submit"][disabled] {
-  color: #d12028;
-  background: #fff;
-  border-color: #d12028;
-  -webkit-transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
-  transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
-}
-/* button[disabled]:hover,
-input[type=submit][disabled]:hover {
-  color: #d12028;
-  cursor: not-allowed;
-} */
-button[disabled]:after,
-input[type="submit"][disabled]:after {
-  display: none;
-}
-button:after,
-input[type="submit"]:after {
-  content: "";
-  z-index: -1;
-  display: block;
-  background: #000;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  left: 0;
-  top: 0;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-}
-/* button:hover,
-input[type=submit]:hover,
-button:focus,
-input[type=submit]:focus {
-  color: #fff;
-  outline: 0;
-}
-button:hover:after,
-input[type=submit]:hover:after,
-button:focus:after,
-input[type=submit]:focus:after {
-  height: 100%;
-} */
-button.warning:after,
-input[type="submit"].warning:after {
-  background: #d12028;
-}
-button.success:after,
-input[type="submit"].success:after {
-  background: #2dc22d;
-}
-button.github,
-input[type="submit"].github,
-button.facebook,
-input[type="submit"].facebook,
-button.twitter,
-input[type="submit"].twitter {
-  border: 0;
-  display: block;
-  margin-bottom: 2rem;
-  width: 100%;
-  color: #fff;
-  padding: 2rem;
-}
-button.github,
-input[type="submit"].github {
-  background: #82d465;
-}
-button.github:after,
-input[type="submit"].github:after {
-  background: #5cc437;
-}
-button.facebook,
-input[type="submit"].facebook {
-  background: #3864a3;
-}
-button.facebook:after,
-input[type="submit"].facebook:after {
-  background: #2d5082;
-}
-button.twitter,
-input[type="submit"].twitter {
-  background: #5ea9dd;
-}
-button.twitter:after,
-input[type="submit"].twitter:after {
-  background: #2c8dd0;
-}
+
 .store-selector {
   background: #fff;
   max-width: 500px;
@@ -560,7 +406,12 @@ input[type="submit"].twitter:after {
 .sampleNote-button{
   width: auto;
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 1rem; 
+  font-size: 70%;
+  margin-bottom: 1px;
+  border-color: #008000;
+  background-color: rgb(246, 248, 244);
+  color: #008000;
 }
 
 .code-name{

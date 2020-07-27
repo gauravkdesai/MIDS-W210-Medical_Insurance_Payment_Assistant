@@ -17,7 +17,7 @@ API.configure();
 const override = css`
   display: block;
   margin: 0 auto;
-  border-color: black;
+  border-color: rgb(246, 248, 244);;
 `;
 
 class PredictionOutput extends Component {
@@ -152,15 +152,15 @@ class PredictionOutput extends Component {
         
 
         
-        <div id="container">
-        <Button color="secondary" onClick={this.getCodes.bind(this)} size="lg" block>Get Codes</Button>
+        <div id="container" className="text-center">
+        <Button outline color="success" onClick={this.getCodes.bind(this)} size="lg">Get Codes</Button>
         </div>
         {<br/>}
         <div className="sweet-loading">
           <RingLoader
             css={override}
             size={50}
-            color={"black"}
+            color={"green"}
             loading={this.state.loading}
           />
         </div>

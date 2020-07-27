@@ -2,9 +2,7 @@ import React from "react";
 import { Button } from 'reactstrap';
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
-import API from "@aws-amplify/api";
-import Amplify from "aws-amplify";
-import awsAPIconfig from "./AmplifyConfig";
+
 import { sampleNote } from "./sampleNote";
 import EMCode from "./EMCode";
 import {PredictionOutput} from "../PredictionOutput";
@@ -364,7 +362,7 @@ class AddNoteForm extends React.Component {
     return (
       <>
         <div id="container">
-          <Button class="sampleNote-button" variant="primary" onClick={this.loadSampleNote}>Load Sample Note</Button>
+          <Button className="sampleNote-button" variant="success" onClick={this.loadSampleNote}>Load Sample Note</Button>
         </div>
 
         <form

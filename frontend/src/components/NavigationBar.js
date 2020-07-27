@@ -8,16 +8,16 @@ import LogoURL from "../assets/Logo.png";
 
 const Styles = styled.div`
   .navbar {
-    background-color: #222;
+    background-color: white;
   }
 
   a,
   .navbar-brand,
   .navbar-nav .nav-link {
-    color: #efefef;
+    color: #556B2F;
 
     $:hover {
-      color: white;
+      color: black;
     }
   }
 `;
