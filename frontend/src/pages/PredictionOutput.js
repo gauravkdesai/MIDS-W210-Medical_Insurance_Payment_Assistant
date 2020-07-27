@@ -7,6 +7,7 @@ import D3JS2 from "./D3JS2";
 import CollapsibleTable from "./CollapsibleTable";
 import RingLoader from "react-spinners/RingLoader";
 import { css } from "@emotion/core";
+import { Button } from 'reactstrap';
 import "../css/prediction.css";
 
 Amplify.configure(awsAPIconfig);
@@ -150,14 +151,15 @@ class PredictionOutput extends Component {
       <div>
         
 
-
+        
         <div id="container">
-          <button className="submit-button" onClick={this.getCodes.bind(this)}>
+        <Button color="secondary" onClick={this.getCodes.bind(this)} size="lg" block>Go</Button>
+          {/* <button className="submit-button" onClick={this.getCodes.bind(this)}>
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>
             <span className="button-text">Go</span>
-          </button>
+          </button> */}
         </div>
         <div className="sweet-loading">
           <RingLoader
