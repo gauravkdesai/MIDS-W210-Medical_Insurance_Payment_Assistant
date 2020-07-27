@@ -31,7 +31,8 @@ class ICD:
         loaded_model_json = json_file.read()
         json_file.close()
         self.adverse_model = model_from_json(loaded_model_json)
-        self.adverse_model.load_weights(PATH + "models/models/adverse/adverse_model.hdr")    
+        self.adverse_model.load_weights(PATH + "models/models/adverse/adverse_model.hdr")
+        self.adverse_model.compile()    
         self.adverse_labels = pd.read_csv(PATH + 'models/models/adverse/adverse_effect_labels.csv').columns[1:]
 
         # Chapter Model
@@ -40,6 +41,7 @@ class ICD:
         json_file.close()
         self.chapter_model = model_from_json(loaded_model_json)
         self.chapter_model.load_weights(PATH + "models/models/chapter/chapter_model.hdr")
+        self.chapter_model.compile()
         self.chapter_labels = pd.read_csv(PATH + 'models/models/chapter/chapter_label.csv').columns[1:]
         
         # Disease Models
@@ -103,19 +105,19 @@ class ICD:
         # Disease Predictions
         self.disease_dict = defaultdict(dict)
 
-        # Only predict top 5 Chapters:
-        selected_models = nlargest(5, self.chapter_dict, key = self.chapter_dict.get)
+        # Only predict top 10 Chapters:
+        selected_models = nlargest(10, self.chapter_dict, key = self.chapter_dict.get)
         print("selected models:", selected_models)
-        print(self.model_dict)
+        self.disease_dict['680_709'] = {}
 
-        #for model in self.model_dict:
         for model in selected_models:
-           model_pred = self.model_dict[model+".csv"].predict(embeddings_padded)[0]
-           self.disease_dict[model] = {key: value for (key,value) in zip(self.label_dict[model+".csv"], model_pred)}
+            if model != "680_709":
+                model_pred = self.model_dict[model+".csv"].predict(embeddings_padded)[0]
+                self.disease_dict[model] = {key: value for (key,value) in zip(self.label_dict[model+".csv"], model_pred)}
 
         self.text = text
         print(f'All Other Models Pred: {time.time()-start}')
-
+        
         self.output = {"name": "Root", "value": 1, "children": 
                         [{"name": "Adverse", "value": 1, "children": 
                             [{"name": adv_key, "value": adv_value} for (adv_key, adv_value) in self.adverse_dict.items()]},
