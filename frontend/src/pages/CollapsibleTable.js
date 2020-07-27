@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 
 const useRowStyles = makeStyles({
   root: {
@@ -22,6 +23,13 @@ const useRowStyles = makeStyles({
     },
   },
 });
+
+const tableTheme = createMuiTheme({
+    typography: {
+      fontSize: 20,
+    },
+  });
+
 
 function createData(name, desc, prob, diseasesArray) {
   return {
@@ -108,24 +116,28 @@ export default function CollapsibleTable({codesHierarchyData}) {
     console.log("codesHierarchyData=",codesHierarchyData);
     const rows = codesHierarchyData["children"];    
     console.log("rows=",rows);
-  return (
 
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Chapter</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell align="right">Probability</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+  return (
+    <ThemeProvider theme={tableTheme}>
+        <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead >
+                    <TableRow>
+                    
+                        <TableCell />
+                        <TableCell><Typography variant="h6" gutterBottom >Chapter</Typography></TableCell>
+                        <TableCell><Typography variant="h6" gutterBottom>Description</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" gutterBottom>Probability</Typography></TableCell>
+                    
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {rows.map((row) => (
+                    <Row key={row.name} row={row} />
+                ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </ThemeProvider>
   );
 }
