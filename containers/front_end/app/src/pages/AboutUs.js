@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { Component } from "react";
+import Markdown from "markdown-to-jsx";
+import AboutUsMarkdown from "./AboutUs.md";
 
-export const AboutUs = () => (
-    <div>
-        <h2>About Page</h2>
-        <p>TODO some cool info about 4 of us and photos</p>
-    </div>
-)
+class AboutUs extends Component {
+  constructor() {
+    super();
+    this.state = { markdown: "" };
+  }
+
+  componentDidMount() {
+    fetch(AboutUsMarkdown)
+      .then((res) => res.text())
+      .then((text) => {
+        this.setState({ markdown: text });
+      });
+  }
+
+  render() {
+    const { markdown } = this.state;
+    return (
+      <div className="about_us_container">
+        <Markdown children={markdown} />
+      </div>
+    );
+  }
+}
+
+export { AboutUs };

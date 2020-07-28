@@ -1,16 +1,20 @@
 import React from "react";
+import { Button } from 'reactstrap';
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
+
 import { sampleNote } from "./sampleNote";
+import EMCode from "./EMCode";
+import {PredictionOutput} from "../PredictionOutput";
+
 
 class AddNoteForm extends React.Component {
-
   initialRef = React.createRef();
 
   chiefComplaintRef = React.createRef();
-  
+
   HPI1Ref = React.createRef();
-  
+
   rosGeneral1Ref = React.createRef();
   rosGeneral2Ref = React.createRef();
   rosGeneral3Ref = React.createRef();
@@ -79,21 +83,7 @@ class AddNoteForm extends React.Component {
   familyRef = React.createRef();
   socialRef = React.createRef();
 
-  examGeneralRef = React.createRef();
-  examAppearanceRef = React.createRef();
-  examMoodRef = React.createRef();
-  examSpeechRef = React.createRef();
-  examThoughtContentRef = React.createRef();
-  examThoughtProcessRef = React.createRef();
-  examPerceptionRef = React.createRef();
-  examOrientationRef = React.createRef();
-  examAttentionRef = React.createRef();
-  examMemoryRef = React.createRef();
-  examLanguageRef = React.createRef();
-  examKnowledgeRef = React.createRef();
-  examInsightRef = React.createRef();
-  examGaitRef = React.createRef();
-  examStrengthRef = React.createRef();
+  exam1Ref = React.createRef();
 
   treatmentNotesRef = React.createRef();
   treatment1Ref = React.createRef();
@@ -105,17 +95,16 @@ class AddNoteForm extends React.Component {
 
   additionalNotesRef = React.createRef();
 
-  fullNoteRef = React.createRef(); 
+  fullNoteRef = React.createRef();
 
   static propTypes = {
-    addNote: PropTypes.func
+    addNote: PropTypes.func,
   };
 
-  createNote = event => {
+  createNote = (event) => {
     // 1.  stop the form from submitting
     event.preventDefault();
     const note = {
-
       // Initial or Followup
       initial: this.initialRef.current.checked,
 
@@ -191,25 +180,11 @@ class AddNoteForm extends React.Component {
 
       // PFSH
       medical: this.medicalRef.current.value,
-      family:  this.familyRef.current.value,
+      family: this.familyRef.current.value,
       social: this.socialRef.current.value,
 
       // Exam
-      examGeneral: this.examGeneralRef.current.value,
-      examAppearance: this.examAppearanceRef.current.value,
-      examMood: this.examMoodRef.current.value,
-      examSpeech: this.examSpeechRef.current.value,
-      examThoughtContent: this.examThoughtContentRef.current.value,
-      examThoughtProcess: this.examThoughtProcessRef.current.value,
-      examPerception: this.examPerceptionRef.current.value,
-      examOrientation: this.examOrientationRef.current.value,
-      examAttention: this.examAttentionRef.current.value,
-      examMemory: this.examMemoryRef.current.value,
-      examLanguage: this.examLanguageRef.current.value,
-      examKnowledge: this.examKnowledgeRef.current.value,
-      examInsight: this.examInsightRef.current.value,
-      examGait: this.examGaitRef.current.value,
-      examStrength: this.examStrengthRef.current.value,
+      exam1: this.exam1Ref.current.value,
 
       // Treatment Options
       treatmentNotes: this.treatmentNotesRef.current.value,
@@ -222,7 +197,7 @@ class AddNoteForm extends React.Component {
 
       additionalNotes: this.additionalNotesRef.current.value,
       fullNote: this.fullNoteRef.current.value,
-      patient: this.props.currentPatient
+      patient: this.props.currentPatient,
     };
 
     this.props.addNote(note);
@@ -232,42 +207,18 @@ class AddNoteForm extends React.Component {
 
   loadSampleNote = event => {
     for (var key of Object.keys(sampleNote)) {
-      this[key].current.value = sampleNote[key];
+      if(this[key])
+        this[key].current.value = sampleNote[key];
     }
+
+    this.handleChange(event);
   };
 
-  getCodes = event => {
-    // 1.  stop the form from submitting
-    event.preventDefault();
+  getSubmissionText = () => {
+    return this.fullNoteRef.current.value;
+  }
 
-    // Debugging Data
-    // var codes = '{"123": {"ICD_CODE": "OTHER", "PROB": "0.653662", "SHORT_TITLE": "No Description", "LONG_TITLE": "No Description"}, "131": {"ICD_CODE": "4019", "PROB": "0.23658513", "SHORT_TITLE": "Hypertension NOS", "LONG_TITLE": "Unspecified essential hypertension"}, "163": {"ICD_CODE": "4280", "PROB": "0.21231478", "SHORT_TITLE": "CHF NOS", "LONG_TITLE": "Congestive heart failure, unspecified"}, "142": {"ICD_CODE": "41401", "PROB": "0.16941674", "SHORT_TITLE": "Crnry athrscl natve vssl", "LONG_TITLE": "Coronary atherosclerosis of native coronary artery"}, "157": {"ICD_CODE": "42731", "PROB": "0.15675905", "SHORT_TITLE": "Atrial fibrillation", "LONG_TITLE": "Atrial fibrillation"}, "222": {"ICD_CODE": "51881", "PROB": "0.13163589", "SHORT_TITLE": "Acute respiratry failure", "LONG_TITLE": "Acute respiratory failure"}, "221": {"ICD_CODE": "5185", "PROB": "0.112723686", "SHORT_TITLE": "No Description", "LONG_TITLE": "No Description"}, "211": {"ICD_CODE": "5070", "PROB": "0.10160673", "SHORT_TITLE": "Food/vomit pneumonitis", "LONG_TITLE": "Pneumonitis due to inhalation of food or vomitus"}, "277": {"ICD_CODE": "5849", "PROB": "0.096198335", "SHORT_TITLE": "Acute kidney failure NOS", "LONG_TITLE": "Acute kidney failure, unspecified"}, "231": {"ICD_CODE": "53081", "PROB": "0.09122082", "SHORT_TITLE": "Esophageal reflux", "LONG_TITLE": "Esophageal reflux"}}';
-    // codes = JSON.parse(codes);
-      
-    // codes = Object.keys(codes).map(function(key) {
-    //   return [Number(key), codes[key]];
-    // });
-    // console.log(codes);
-    // this.props.setCodes(codes);
-
-    var submissionText = this.fullNoteRef.current.value;
-    var httpSubmission = 'http://54.202.117.250:5000/api/icd?text="'+ submissionText +'"&top_k=10';
-    // var httpSubmission = 'http://54.202.117.250:5000/test'
-    // Get Full Note for Submission to API
-    console.log(httpSubmission);
-    var codePromise = fetch(httpSubmission, {method: 'GET'}).then( (resp) => resp.json()).then( data => {
-      var codes = data;
-
-      codes = Object.keys(codes).map(function(key) {
-        return [Number(key), codes[key]];
-      });
-      console.log(codes)
-      this.props.setCodes(codes)
-    });
-  };
-
-  handleChange = event => {
-
+  handleChange = (event) => {
     // Counts of items for EM Code
 
     var initialBool = false;
@@ -279,27 +230,27 @@ class AddNoteForm extends React.Component {
     var ccCount = 0;
     if (this.chiefComplaintRef.current.value) {
       ccCount += 1;
-    };
+    }
 
     // HPI Count
     var hpiCount = 0;
     if (this.HPI1Ref.current.value) {
       hpiCount += 1;
-    };
+    }
 
     // ROS Count
     var rosCount = 0;
 
     // Find Checked Boxes
-    var elems = document.querySelectorAll('[type=checkbox]:checked')
+    var elems = document.querySelectorAll("[type=checkbox]:checked");
 
-    elems.forEach( item => {
-      if( item.name === "rosOthersNegative") {
+    elems.forEach((item) => {
+      if (item.name === "rosOthersNegative") {
         rosCount = 53;
-      } else if(item.name.substring(0,3) === "ros") {
+      } else if (item.name.substring(0, 3) === "ros") {
         rosCount += 1;
       }
-    }); 
+    });
 
     // PFSH Count
     var pfshCount = 0;
@@ -315,80 +266,77 @@ class AddNoteForm extends React.Component {
 
     // Exam Count
     var examCount = 0;
-
-    // Find All Items
-    var allItems = document.querySelectorAll('textarea');
-    
-    allItems.forEach( item => {
-      if(item.name.substring(0,4) === "exam") {
-        if(item.value) {
-          examCount += 1;
-        }
-      }
-    }); 
+    if (this.exam1Ref.current.value) {
+      examCount += 1;
+    }
 
     // Medical Decision Making Count
     var mdmCount = 0;
-    var treatments = [this.treatment1Ref, this.treatment2Ref, this.treatment3Ref, this.treatment4Ref, this.treatment5Ref, this.treatment6Ref];
-    treatments.forEach( item => {
-      if (item.current.value ) {
+    var treatments = [
+      this.treatment1Ref,
+      this.treatment2Ref,
+      this.treatment3Ref,
+      this.treatment4Ref,
+      this.treatment5Ref,
+      this.treatment6Ref,
+    ];
+    treatments.forEach((item) => {
+      if (item.current.value) {
         mdmCount += 1;
-      } 
+      }
     });
 
     // Counts of Codes
-    var emCodes = {"initial": initialBool,
-                  "cc": ccCount,
-                  "hpi": hpiCount,
-                  "ros": rosCount,
-                  "pfsh": pfshCount,
-                  "exam": examCount,
-                  "mdm": mdmCount}
+    var emCodes = {
+      initial: initialBool,
+      cc: ccCount,
+      hpi: hpiCount,
+      ros: rosCount,
+      pfsh: pfshCount,
+      exam: examCount,
+      mdm: mdmCount,
+    };
 
-    this.props.setEMCodes(emCodes)
+    this.props.setEMCodes(emCodes);
 
+    // console.log(emCodes)
+    console.log(this.state);
     // Start with blank note
-    var fullNoteText = ""
-   
+    var fullNoteText = "";
+
     // Add in Chief Complain
-    fullNoteText += "\nChief Complaint: ";
+    fullNoteText += "\n Chief Complaint: ";
     fullNoteText += this.chiefComplaintRef.current.value;
 
     // Add in HPI:
-    fullNoteText += "\n\nHistory of Present Illness (HPI): ";
+    fullNoteText += "\n\n History of Present Illness (HPI): ";
     fullNoteText += this.HPI1Ref.current.value;
 
     // Add in ROS
-    fullNoteText += "\n\nReview of Systems: \n";
+    fullNoteText += "\n\n Review of Systems: \n";
 
     // Add text from each relevant checkbox
-    elems.forEach( item => {
-      if(item.name.substring(0,3) === "ros") {
+    elems.forEach((item) => {
+      if (item.name.substring(0, 3) === "ros") {
         fullNoteText += noteDictionary[item.name];
       }
-    }); 
+    });
 
-    fullNoteText += "\n\nAdditional ROS Notes: ";
+    fullNoteText += "\n\n Additional ROS Notes: ";
     fullNoteText += "\n" + this.rosAdditionalRef.current.value;
 
     // Add in PFSH
-    fullNoteText += "\n\nPast Medical Family and Social History (PFSH): ";
+    fullNoteText += "\n\n Past Medical Family and Social History (PFSH): ";
     fullNoteText += "\n " + this.medicalRef.current.value;
     fullNoteText += "\n " + this.socialRef.current.value;
     fullNoteText += "\n " + this.familyRef.current.value;
 
     // Add in Exam
-    fullNoteText += "\n\nExamination: ";
-    allItems.forEach( item => {
-      if(item.name.substring(0,4) === "exam") {
-        if(item.value) {
-          fullNoteText += "\n " + item.name.substring(4) + ": "+ item.value;
-        }
-      }
-    }); 
+    fullNoteText += "\n\n Examination: ";
+    fullNoteText += "\n " + this.exam1Ref.current.value;
 
     // Add in Treatment Options
-    fullNoteText += "\n\nTreatment Options: ";
+    fullNoteText += "\n\n Treatment Options: ";
     fullNoteText += "\n " + this.treatmentNotesRef.current.value;
     fullNoteText += "\n " + this.treatment1Ref.current.value;
     fullNoteText += "\n " + this.treatment2Ref.current.value;
@@ -396,188 +344,741 @@ class AddNoteForm extends React.Component {
     fullNoteText += "\n " + this.treatment4Ref.current.value;
     fullNoteText += "\n " + this.treatment5Ref.current.value;
     fullNoteText += "\n " + this.treatment6Ref.current.value;
-    
+
     // Add in Additional Text
-    fullNoteText += "\n\nAdditional Notes: ";
+    fullNoteText += "\n\n Additional Notes: ";
     fullNoteText += "\n" + this.additionalNotesRef.current.value;
 
+    // console.log(fullNoteText)
     this.fullNoteRef.current.value = fullNoteText;
+  };
 
+  submitForm = () => {
+    var x = document.getElementsByName("noteForm");
+    x[0].submit();
   };
 
   render() {
     return (
       <>
-      <button onClick={this.loadSampleNote}>
-        Load Sample Note
-      </button>
+        <div id="container">
+          <Button className="sampleNote-button" variant="success" onClick={this.loadSampleNote}>Load Sample Note</Button>
+        </div>
 
-      <form className="note-edit" onSubmit={this.getCodes}>
-        Initial Intake:
-        <input name="initial" ref={this.initialRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>
-        {/* Spacer */}
-        <input rows="0"/> 
+        <form
+          className="note-edit"
+          onSubmit={this.getCodes}
+          method="get"
+          name="noteForm"
+        >
+          <input
+            name="initial"
+            ref={this.initialRef}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h3>Initial Intake</h3>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
 
-        Chief Complaint: { this.props.emcode["cc"] ? "" : "Need Chief Complaint"}
-        <textarea rows="2" name="chiefComplaint" ref={this.chiefComplaintRef} placeholder="Chief Complaint" onChange={this.handleChange}/>
-        
-        History of Present Illness: { this.props.emcode["hpi"] ? "" : "Need History of Present Illness [HPI]"}
-        <textarea rows="10" name="HPI1" ref={this.HPI1Ref} placeholder="HPI" onChange={this.handleChange}/>
-        
-        Review of Systems: { this.props.emcode["ros"] }
-        {/* Spacer */}
-        <input rows="0"/> 
+          <h4>Chief Complaint:</h4>
+          <textarea
+            rows="2"
+            name="chiefComplaint"
+            ref={this.chiefComplaintRef}
+            placeholder="Chief Complaint"
+            onChange={this.handleChange}
+          />
 
-        General: 
-        {/* Spacer */}
-        <input rows="0"/> 
-        
-        <input name="rosGeneral1" ref={this.rosGeneral1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Lack of energy
-        <input name="rosGeneral2" ref={this.rosGeneral2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Unexplained weight gain/loss
-        <input name="rosGeneral3" ref={this.rosGeneral3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Loss of appetite
-        <input name="rosGeneral4" ref={this.rosGeneral4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Fever
-        <input name="rosGeneral5" ref={this.rosGeneral5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Night sweats
-        <input name="rosGeneral6" ref={this.rosGeneral6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Pain in jaw when eating
-        <input name="rosGeneral7" ref={this.rosGeneral7Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Scalp tenderness
-        <input name="rosGeneral8" ref={this.rosGeneral8Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Prior Cancer
+          <h4>History of Present Illness:</h4>
+          <textarea
+            rows="10"
+            name="HPI1"
+            ref={this.HPI1Ref}
+            placeholder="HPI"
+            onChange={this.handleChange}
+          />
 
-        {/* Spacer */}
-        <input rows="0"/> 
-        Respiratory:
-        {/* Spacer */}
-        <input rows="0"/> 
+          <h2>Review of Systems:</h2>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
 
-        <input name="rosRespiratory1" ref={this.rosRespiratory1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Shortness of breath
-        <input name="rosRespiratory2" ref={this.rosRespiratory2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Prolonged cough
-        <input name="rosRespiratory3" ref={this.rosRespiratory3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Wheezing
-        <input name="rosRespiratory4" ref={this.rosRespiratory4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Sputum production
-        <input name="rosRespiratory5" ref={this.rosRespiratory5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Prior tuberculosis
-        <input name="rosRespiratory6" ref={this.rosRespiratory6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Pleurisy
-        <input name="rosRespiratory7" ref={this.rosRespiratory7Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Oxygen use
-        <input name="rosRespiratory8" ref={this.rosRespiratory8Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Coughing up blood
-        <input name="rosRespiratory9" ref={this.rosRespiratory9Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Abnormal chest x-ray
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Cardiovascular:
-        {/* Spacer */}
-        <input rows="0"/> 
-        
-        <input name="rosCardiovascular1" ref={this.rosCardiovascular1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Irregular heartbeat
-        <input name="rosCardiovascular2" ref={this.rosCardiovascular2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Racing heart
-        <input name="rosCardiovascular3" ref={this.rosCardiovascular3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Chest pains
-        <input name="rosCardiovascular4" ref={this.rosCardiovascular4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Swelling of feet or legs
-        <input name="rosCardiovascular5" ref={this.rosCardiovascular5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Pain in legs when walking
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Muscularskeletal:
-        {/* Spacer */}
-        <input rows="0"/>         
-        
-        <input name="rosMuscularskeletal1" ref={this.rosMuscularskeletal1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Joint pain
-        <input name="rosMuscularskeletal2" ref={this.rosMuscularskeletal2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Aching muscles
-        <input name="rosMuscularskeletal3" ref={this.rosMuscularskeletal3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Shoulder pain
-        <input name="rosMuscularskeletal4" ref={this.rosMuscularskeletal4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Swelling of joints
-        <input name="rosMuscularskeletal5" ref={this.rosMuscularskeletal5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Joint deformities
-        <input name="rosMuscularskeletal6" ref={this.rosMuscularskeletal6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Back pain
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Gastrointestinal:
-        {/* Spacer */}
-        <input rows="0"/> 
+          <h3>General: </h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
+          <div className="columnsClass">
+            <h4>
+              <input
+                name="rosGeneral1"
+                ref={this.rosGeneral1Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Lack of energy
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral2"
+                ref={this.rosGeneral2Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Unexplained weight gain/loss
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral3"
+                ref={this.rosGeneral3Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Loss of appetite
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral4"
+                ref={this.rosGeneral4Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Fever
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral5"
+                ref={this.rosGeneral5Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Night sweats
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral6"
+                ref={this.rosGeneral6Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Pain in jaw when eating
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral7"
+                ref={this.rosGeneral7Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Scalp tenderness
+            </h4>
+            <h4>
+              <input
+                name="rosGeneral8"
+                ref={this.rosGeneral8Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Prior Cancer
+            </h4>
+          </div>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Respiratory:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
+          <div className="columnsClass">
+            <h4>
+              <input
+                name="rosRespiratory1"
+                ref={this.rosRespiratory1Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Shortness of breath
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory2"
+                ref={this.rosRespiratory2Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Prolonged cough
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory3"
+                ref={this.rosRespiratory3Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Wheezing
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory4"
+                ref={this.rosRespiratory4Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Sputum production
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory5"
+                ref={this.rosRespiratory5Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Prior tuberculosis
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory6"
+                ref={this.rosRespiratory6Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Pleurisy
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory7"
+                ref={this.rosRespiratory7Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Oxygen use
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory8"
+                ref={this.rosRespiratory8Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Coughing up blood
+            </h4>
+            <h4>
+              <input
+                name="rosRespiratory9"
+                ref={this.rosRespiratory9Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Abnormal chest x-ray
+            </h4>
+          </div>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Cardiovascular:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
 
-        <input name="rosGastrointestinal1" ref={this.rosGastrointestinal1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Heartburn
-        <input name="rosGastrointestinal2" ref={this.rosGastrointestinal2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Constipation
-        <input name="rosGastrointestinal3" ref={this.rosGastrointestinal3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Intolerance to certain foods
-        <input name="rosGastrointestinal4" ref={this.rosGastrointestinal4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Diarrhea
-        <input name="rosGastrointestinal5" ref={this.rosGastrointestinal5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Abdominal pains
-        <input name="rosGastrointestinal6" ref={this.rosGastrointestinal6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Difficulty swallowing
-        <input name="rosGastrointestinal7" ref={this.rosGastrointestinal7Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Nausea
-        <input name="rosGastrointestinal8" ref={this.rosGastrointestinal8Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Vomiting
-        <input name="rosGastrointestinal9" ref={this.rosGastrointestinal9Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Blood in stools
-        <input name="rosGastrointestinal10" ref={this.rosGastrointestinal10Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Incontinence
-        <input name="rosGastrointestinal11" ref={this.rosGastrointestinal11Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Unexplained change in bowel habits
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Neurological:
-        {/* Spacer */}
-        <input rows="0"/> 
+          <input
+            name="rosCardiovascular1"
+            ref={this.rosCardiovascular1Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Irregular heartbeat</h4>
+          <input
+            name="rosCardiovascular2"
+            ref={this.rosCardiovascular2Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Racing heart</h4>
+          <input
+            name="rosCardiovascular3"
+            ref={this.rosCardiovascular3Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Chest pains</h4>
+          <input
+            name="rosCardiovascular4"
+            ref={this.rosCardiovascular4Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Swelling of feet or legs</h4>
+          <input
+            name="rosCardiovascular5"
+            ref={this.rosCardiovascular5Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Pain in legs when walking</h4>
 
-        <input name="rosNeurological1" ref={this.rosNeurological1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Frequent headaches
-        <input name="rosNeurological2" ref={this.rosNeurological2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Double vision
-        <input name="rosNeurological3" ref={this.rosNeurological3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Weakness
-        <input name="rosNeurological4" ref={this.rosNeurological4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Change in sensation
-        <input name="rosNeurological5" ref={this.rosNeurological5Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Problems with walking/balance
-        <input name="rosNeurological6" ref={this.rosNeurological6Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Dizziness
-        <input name="rosNeurological7" ref={this.rosNeurological7Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Tremor
-        <input name="rosNeurological8" ref={this.rosNeurological8Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Loss of consciousness
-        <input name="rosNeurological9" ref={this.rosNeurological9Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Uncontrolled motions
-        <input name="rosNeurological10" ref={this.rosNeurological10Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Episodes of visual loss
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Endocrinologic:
-        {/* Spacer */}
-        <input rows="0"/> 
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Muscularskeletal:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>          */}
 
-        <input name="rosEndocrinologic1" ref={this.rosEndocrinologic1Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Intolerance to heat/cold
-        <input name="rosEndocrinologic2" ref={this.rosEndocrinologic2Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Menstraul irregularities
-        <input name="rosEndocrinologic3" ref={this.rosEndocrinologic3Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Frequent hunger/urination/thirst
-        <input name="rosEndocrinologic4" ref={this.rosEndocrinologic4Ref} type="checkbox" placeholder="False" onChange={this.handleChange}/>Changes in sex drive
-        
-        {/* Spacer */}
-        <input rows="0"/> 
-        Additional ROS:
+          <input
+            name="rosMuscularskeletal1"
+            ref={this.rosMuscularskeletal1Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Joint pain</h4>
+          <input
+            name="rosMuscularskeletal2"
+            ref={this.rosMuscularskeletal2Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Aching muscles</h4>
+          <input
+            name="rosMuscularskeletal3"
+            ref={this.rosMuscularskeletal3Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Shoulder pain</h4>
+          <input
+            name="rosMuscularskeletal4"
+            ref={this.rosMuscularskeletal4Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Swelling of joints</h4>
+          <input
+            name="rosMuscularskeletal5"
+            ref={this.rosMuscularskeletal5Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Joint deformities</h4>
+          <input
+            name="rosMuscularskeletal6"
+            ref={this.rosMuscularskeletal6Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Back pain</h4>
 
-        <textarea rows="3" name="rosAdditional" ref={this.rosAdditionalRef} placeholder="Additional ROS" onChange={this.handleChange}/>
-        {/* Checkbox top offset is wrong */}
-        <input name="rosOthersNegative" ref={this.rosOthersNegativeRef} type="checkbox" placeholder="False" onChange={this.handleChange}/>All Others Negative 
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Gastrointestinal:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
+          <div className="columnsClass">
+            <h4>
+              <input
+                name="rosGastrointestinal1"
+                ref={this.rosGastrointestinal1Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Heartburn
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal2"
+                ref={this.rosGastrointestinal2Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Constipation
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal3"
+                ref={this.rosGastrointestinal3Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Intolerance to certain foods
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal4"
+                ref={this.rosGastrointestinal4Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Diarrhea
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal5"
+                ref={this.rosGastrointestinal5Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Abdominal pains
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal6"
+                ref={this.rosGastrointestinal6Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Difficulty swallowing
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal7"
+                ref={this.rosGastrointestinal7Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Nausea
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal8"
+                ref={this.rosGastrointestinal8Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Vomiting
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal9"
+                ref={this.rosGastrointestinal9Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Blood in stools
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal10"
+                ref={this.rosGastrointestinal10Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Incontinence
+            </h4>
+            <h4>
+              <input
+                name="rosGastrointestinal11"
+                ref={this.rosGastrointestinal11Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Unexplained change in bowel habits
+            </h4>
+          </div>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Neurological:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
+          <div className="columnsClass">
+            <h4>
+              <input
+                name="rosNeurological1"
+                ref={this.rosNeurological1Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Frequent headaches
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological2"
+                ref={this.rosNeurological2Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Double vision
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological3"
+                ref={this.rosNeurological3Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Weakness
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological4"
+                ref={this.rosNeurological4Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Change in sensation
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological5"
+                ref={this.rosNeurological5Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Problems with walking/balance
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological6"
+                ref={this.rosNeurological6Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Dizziness
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological7"
+                ref={this.rosNeurological7Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Tremor
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological8"
+                ref={this.rosNeurological8Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Loss of consciousness
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological9"
+                ref={this.rosNeurological9Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Uncontrolled motions
+            </h4>
+            <h4>
+              <input
+                name="rosNeurological10"
+                ref={this.rosNeurological10Ref}
+                type="checkbox"
+                placeholder="False"
+                onChange={this.handleChange}
+              />
+              Episodes of visual loss
+            </h4>
+          </div>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Endocrinologic:</h3>
+          {/* Spacer */}
+          {/* <input  rows="0" disabled="true"  className="deadArea"/>  */}
 
-        {/* Spacer */}
-        <input rows="0"/> 
+          <input
+            name="rosEndocrinologic1"
+            ref={this.rosEndocrinologic1Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Intolerance to heat/cold</h4>
+          <input
+            name="rosEndocrinologic2"
+            ref={this.rosEndocrinologic2Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Menstraul irregularities</h4>
+          <input
+            name="rosEndocrinologic3"
+            ref={this.rosEndocrinologic3Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Frequent hunger/urination/thirst</h4>
+          <input
+            name="rosEndocrinologic4"
+            ref={this.rosEndocrinologic4Ref}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>Changes in sex drive</h4>
 
-        Past Medical Family and Social History (PFSH): { this.props.emcode["pfsh"]}
-        <textarea name="medical" rows="10" ref={this.medicalRef} placeholder="Medical History" onChange={this.handleChange}/>
-        <textarea name="family" rows="10" ref={this.familyRef} placeholder="Family History" onChange={this.handleChange}/>
-        <textarea name="social" rows="10" ref={this.socialRef} placeholder="Social History" onChange={this.handleChange}/>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
+          <h3>Additional ROS:</h3>
 
-        Examination: { this.props.emcode["exam"]}
-        <textarea name="examGeneral" rows="2" ref={this.examGeneralRef} placeholder="General" onChange={this.handleChange}/>
-        <textarea name="examAppearance" rows="2" ref={this.examAppearanceRef} placeholder="Appearance and Behavior" onChange={this.handleChange}/>
-        <textarea name="examMood" rows="2" ref={this.examMoodRef} placeholder="Mood and Affect" onChange={this.handleChange}/>
-        <textarea name="examSpeech" rows="2" ref={this.examSpeechRef} placeholder="Speech" onChange={this.handleChange}/>
-        <textarea name="examThoughtContent" rows="2" ref={this.examThoughtContentRef} placeholder="Thought Content" onChange={this.handleChange}/>
-        <textarea name="examThoughtProcess" rows="2" ref={this.examThoughtProcessRef} placeholder="Thought Content" onChange={this.handleChange}/>
-        <textarea name="examPerception" rows="2" ref={this.examPerceptionRef} placeholder="Perception" onChange={this.handleChange}/>
-        <textarea name="examOrientation" rows="2" ref={this.examOrientationRef} placeholder="Orientation" onChange={this.handleChange}/>
-        <textarea name="examAttention" rows="2" ref={this.examAttentionRef} placeholder="Attention and Concentration" onChange={this.handleChange}/>
-        <textarea name="examMemory" rows="2" ref={this.examMemoryRef} placeholder="Recent and Remote Memory" onChange={this.handleChange}/>
-        <textarea name="examLanguage" rows="2" ref={this.examLanguageRef} placeholder="Language" onChange={this.handleChange}/>
-        <textarea name="examKnowledge" rows="2" ref={this.examKnowledgeRef} placeholder="Fund of Knowledge/Intelligence Estimate" onChange={this.handleChange}/>
-        <textarea name="examInsight" rows="2" ref={this.examInsightRef} placeholder="Insight/Judgment" onChange={this.handleChange}/>
-        <textarea name="examGait" rows="2" ref={this.examGaitRef} placeholder="Gait and Station" onChange={this.handleChange}/>
-        <textarea name="examStrength" rows="2" ref={this.examStrengthRef} placeholder="Muscle Strength and Tone" onChange={this.handleChange}/>
-   
-        Treatment Options: { this.props.emcode["mdm"]}
-        <textarea name="treatmentNotes" rows="3" ref={this.treatmentNotesRef} placeholder="Treatment Notes" onChange={this.handleChange}/>
-        <input name="treatment1" ref={this.treatment1Ref} placeholder="Treatment 1" onChange={this.handleChange}/>
-        <input name="treatment2" ref={this.treatment2Ref} placeholder="Treatment 2" onChange={this.handleChange}/>
-        <input name="treatment3" ref={this.treatment3Ref} placeholder="Treatment 3" onChange={this.handleChange}/>
-        <input name="treatment4" ref={this.treatment4Ref} placeholder="Treatment 4" onChange={this.handleChange}/>
-        <input name="treatment5" ref={this.treatment5Ref} placeholder="Treatment 5" onChange={this.handleChange}/>
-        <input name="treatment6" ref={this.treatment6Ref} placeholder="Treatment 6" onChange={this.handleChange}/>
+          <textarea
+            rows="3"
+            name="rosAdditional"
+            ref={this.rosAdditionalRef}
+            placeholder="Additional ROS"
+            onChange={this.handleChange}
+          />
+          {/* Checkbox top offset is wrong */}
+          <input
+            name="rosOthersNegative"
+            ref={this.rosOthersNegativeRef}
+            type="checkbox"
+            placeholder="False"
+            onChange={this.handleChange}
+          />
+          <h4>All Others Negative </h4>
 
-        Additional Notes:
-        <textarea name="additionalNotes" rows="20" ref={this.additionalNotesRef} placeholder="Additional Notes" onChange={this.handleChange}/>
+          {/* Spacer */}
+          <input rows="0" disabled="true" className="deadArea" />
 
-        Full Note:
-        <textarea name="fullNote" rows="100" ref={this.fullNoteRef}/>
+          <h3>Past Medical Family and Social History (PFSH):</h3>
+          <textarea
+            name="medical"
+            rows="10"
+            ref={this.medicalRef}
+            placeholder="Medical History"
+            onChange={this.handleChange}
+          />
+          <textarea
+            name="family"
+            rows="10"
+            ref={this.familyRef}
+            placeholder="Family History"
+            onChange={this.handleChange}
+          />
+          <textarea
+            name="social"
+            rows="10"
+            ref={this.socialRef}
+            placeholder="Social History"
+            onChange={this.handleChange}
+          />
 
-        <button type="submit">Get ICD Codes</button>
-      </form>
+          <h3>Examination:</h3>
+          <textarea
+            name="exam1"
+            rows="20"
+            ref={this.exam1Ref}
+            placeholder="Examination"
+            onChange={this.handleChange}
+          />
+
+          <h3>Treatment Options:</h3>
+          <textarea
+            name="treatmentNotes"
+            rows="3"
+            ref={this.treatmentNotesRef}
+            placeholder="Treatment Notes"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment1"
+            ref={this.treatment1Ref}
+            placeholder="Treatment 1"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment2"
+            ref={this.treatment2Ref}
+            placeholder="Treatment 2"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment3"
+            ref={this.treatment3Ref}
+            placeholder="Treatment 3"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment4"
+            ref={this.treatment4Ref}
+            placeholder="Treatment 4"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment5"
+            ref={this.treatment5Ref}
+            placeholder="Treatment 5"
+            onChange={this.handleChange}
+          />
+          <input
+            name="treatment6"
+            ref={this.treatment6Ref}
+            placeholder="Treatment 6"
+            onChange={this.handleChange}
+          />
+
+          <h3>Additional Notes:</h3>
+          <textarea
+            name="additionalNotes"
+            rows="20"
+            ref={this.additionalNotesRef}
+            placeholder="Additional Notes"
+            onChange={this.handleChange}
+          />
+
+          <h3>Full Note:</h3>
+          <textarea name="fullNote" rows="40" ref={this.fullNoteRef} readOnly />
+        </form>
+
+        {this.props.codes ? (
+          <div>
+            <br />
+            <br />
+            {console.log(this.props.codes)}
+
+            <h2>EM Code</h2>
+            <EMCode details={this.props.emcode} />
+            
+          </div>
+        ) : (
+          this.props.codes
+        )}
+        <PredictionOutput getSubmissionText={this.getSubmissionText}/>
       </>
     );
   }

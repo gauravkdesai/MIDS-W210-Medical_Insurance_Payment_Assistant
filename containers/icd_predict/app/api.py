@@ -62,8 +62,8 @@ def index():
     return f'ICD Flask Server Up and Running! : {time()}'
 
 @app.route('/test')
-def sample_text():
-
+def ():
+sample_text
     start          = time()
     pred = icd_predict(app).predict(text='Test.')
     end            = time()

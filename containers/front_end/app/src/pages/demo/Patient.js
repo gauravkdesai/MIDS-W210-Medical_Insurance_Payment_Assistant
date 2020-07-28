@@ -6,10 +6,10 @@ class Patient extends React.Component {
     details: PropTypes.shape({
       name: PropTypes.string,
       desc: PropTypes.string,
-      dob: PropTypes.string
+      dob: PropTypes.string,
     }),
     selectPatient: PropTypes.func,
-    index: PropTypes.string
+    index: PropTypes.string,
   };
   render() {
     const { name, dob } = this.props.details;
@@ -17,11 +17,9 @@ class Patient extends React.Component {
       <li className="menu-patient">
         <h4 className="patient-name">
           Name: {name} DOB: {dob}
-          <button
-            onClick={() => this.props.selectPatient(this.props.index)}
-          >
+          <button onClick={() => this.props.selectPatient(this.props.index)}>
             {"Select Patient"}
-          </button>        
+          </button>
         </h4>
       </li>
     );

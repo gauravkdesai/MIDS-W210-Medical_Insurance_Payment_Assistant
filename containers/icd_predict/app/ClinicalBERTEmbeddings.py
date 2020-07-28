@@ -13,9 +13,9 @@ tokenizer = AutoTokenizer.from_pretrained("emilyalsentzer/Bio_Discharge_Summary_
 model = AutoModel.from_pretrained("emilyalsentzer/Bio_Discharge_Summary_BERT")
 
 # Set parameters for BERT Embedding
-max_token = 128
-max_sentence = 30
-combined_sent_max_len = 64
+max_token = 256
+max_sentence = 20
+combined_sent_max_len = 150
 
 def combine_sent(x):
     combined_sent = ''
@@ -109,8 +109,8 @@ def ClinicalBERTEmbeddings(x):
 	embeddings = np.array(model(tokens,attention_mask=atten_mask)[0].data)
 	padding = max_sentence - len(embeddings)
 	if padding > 0:
-		padding_shape = (padding, 128, 768)
-		pad = np.zeros(padding*128*768).reshape(padding_shape)
+		padding_shape = (padding, 256, 768)
+		pad = np.zeros(padding*256*768).reshape(padding_shape)
 		return np.append(embeddings, pad, axis = 0).astype('float16')
 	else:
 		return embeddings
