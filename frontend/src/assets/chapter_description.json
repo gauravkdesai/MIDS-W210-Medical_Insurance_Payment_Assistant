@@ -1,0 +1,19 @@
+{
+    "Adverse" : "Adverse effect diseases",
+    "001_139" : "Infectious and parasitic diseases",
+    "140_239" : "Neoplasms",
+    "240_279" : "Endocrine, nutritional and metabolic diseases, and immunity disorders",
+    "280_289" : "Diseases of the blood and blood-forming organs",
+    "290_319" : "Mental disorders",
+    "320_389" : "Diseases of the nervous system and sense organs",
+    "390_459" : "Diseases of the circulatory system",
+    "460_519" : "Diseases of the respiratory system",
+    "520_579" : "Diseases of the digestive system",
+    "580_629" : "Diseases of the genitourinary system",
+    "630_679__740_759__760_779" : "Complications of pregnancy, childbirth, and the puerperium; congenital anomalies; certain conditions originating in the perinatal period",
+    "680_709" : "Diseases of the skin and subcutaneous tissue",
+    "710_739" : "Diseases of the musculoskeletal system and connective tissue",
+    "780_799" : "Symptoms, signs, and ill-defined conditions",
+    "800_999" : "Injury and poisoning",
+    "E_V" : "External causes of injury and supplemental classification"
+}

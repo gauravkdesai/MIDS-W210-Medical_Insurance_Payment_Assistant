@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import API from "@aws-amplify/api";
 import Amplify from "aws-amplify";
 import awsAPIconfig from "./demo/AmplifyConfig";
-import ICDCode from "./demo/ICDCode";
-import D3JS2 from "./D3JS2";
 import CollapsibleTable from "./CollapsibleTable";
 import RingLoader from "react-spinners/RingLoader";
 import { css } from "@emotion/core";
@@ -19,6 +17,8 @@ const override = css`
   margin: 0 auto;
   border-color: rgb(246, 248, 244);;
 `;
+
+const labelDescrtiion = require("../assets/chapter_description.json");
 
 class PredictionOutput extends Component {
   constructor(props) {
@@ -147,11 +147,9 @@ class PredictionOutput extends Component {
 
   render() {
     console.log("loading=",this.state.loading);
+    console.log("labelDescrtiion=",labelDescrtiion);
     return (
       <div>
-        
-
-        
         <div id="container" className="text-center">
         <Button outline color="success" onClick={this.getCodes.bind(this)} size="lg">Get Codes</Button>
         </div>
@@ -164,11 +162,12 @@ class PredictionOutput extends Component {
             loading={this.state.loading}
           />
         </div>
+
         {<br/>}
         {this.state.codesHierarchyData ? 
         <div>
           <h1>Chapter Prediction</h1>
-          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData}/>
+          <CollapsibleTable codesHierarchyData={this.state.codesHierarchyData} labelDescrtiion={labelDescrtiion}/>
         </div>
           
           : (

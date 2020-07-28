@@ -41,7 +41,7 @@ function createData(name, desc, prob, diseasesArray) {
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row, labelDescrtiion } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -56,7 +56,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell>{row.desc}</TableCell>
+        <TableCell>{labelDescrtiion[row.name]}</TableCell>
         <TableCell align="right">{row.value}</TableCell>
       </TableRow>
       <TableRow>
@@ -112,8 +112,9 @@ Row.propTypes = {
   }).isRequired,
 };
 
-export default function CollapsibleTable({codesHierarchyData}) {
+export default function CollapsibleTable({codesHierarchyData,labelDescrtiion}) {
     console.log("codesHierarchyData=",codesHierarchyData);
+    console.log('labelDescrtiion=',labelDescrtiion['630_679__740_759__760_779']);
     const rows = codesHierarchyData["children"];    
     console.log("rows=",rows);
 
@@ -133,7 +134,7 @@ export default function CollapsibleTable({codesHierarchyData}) {
                 </TableHead>
                 <TableBody>
                 {rows.map((row) => (
-                    <Row key={row.name} row={row} />
+                    <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} />
                 ))}
                 </TableBody>
             </Table>
