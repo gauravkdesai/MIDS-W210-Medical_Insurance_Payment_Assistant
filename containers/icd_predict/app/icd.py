@@ -31,8 +31,7 @@ class ICD:
         loaded_model_json = json_file.read()
         json_file.close()
         self.adverse_model = model_from_json(loaded_model_json)
-        self.adverse_model.load_weights(PATH + "models/models/adverse/adverse_model.hdr")
-        self.adverse_model.compile()    
+        self.adverse_model.load_weights(PATH + "models/models/adverse/adverse_model.h5")
         self.adverse_labels = pd.read_csv(PATH + 'models/models/adverse/adverse_effect_labels.csv').columns[1:]
 
         # Chapter Model
@@ -40,8 +39,7 @@ class ICD:
         loaded_model_json = json_file.read()
         json_file.close()
         self.chapter_model = model_from_json(loaded_model_json)
-        self.chapter_model.load_weights(PATH + "models/models/chapter/chapter_model.hdr")
-        self.chapter_model.compile()
+        self.chapter_model.load_weights(PATH + "models/models/chapter/chapter_model.h5")
         self.chapter_labels = pd.read_csv(PATH + 'models/models/chapter/chapter_label.csv').columns[1:]
         
         # Disease Models
@@ -54,8 +52,7 @@ class ICD:
             loaded_model_json = json_file.read()
             json_file.close()
             self.model_dict[baseName] = model_from_json(loaded_model_json)
-            self.model_dict[baseName].load_weights(file[:-5]+"_4_embeddings1.hdr")
-            self.model_dict[baseName].compile()
+            self.model_dict[baseName].load_weights(file[:-5]+".h5")
             labels = pd.read_csv(PATH + 'models/models/disease/chapter_labels/'+baseName).columns[1:]
             self.label_dict[baseName] = labels
 
@@ -81,7 +78,7 @@ class ICD:
         # Prepare Embeddings for Model
         embeddings_padded = []
         for j in data:
-            pad_len = 3840 - len(j)
+            pad_len = 5120 - len(j)
             if pad_len:
                 embeddings_padded.append(np.append(j, np.zeros(pad_len*768, dtype=np.float16).reshape(pad_len, 768), axis=0))
             else:
@@ -106,7 +103,7 @@ class ICD:
         self.disease_dict = defaultdict(dict)
 
         # Only predict top 10 Chapters:
-        selected_models = nlargest(10, self.chapter_dict, key = self.chapter_dict.get)
+        selected_models = nlargest(16, self.chapter_dict, key = self.chapter_dict.get)
         print("selected models:", selected_models)
         self.disease_dict['680_709'] = {}
 

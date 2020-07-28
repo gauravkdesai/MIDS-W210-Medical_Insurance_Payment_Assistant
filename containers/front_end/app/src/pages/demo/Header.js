@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Header = props => (
+const Header = (props) => (
   <header className="top">
     <h3 className="tagline">
       <span>{"Note Writing Virtual Assistant"}</span>
@@ -10,7 +10,7 @@ const Header = props => (
 );
 
 Header.propTypes = {
-  tagline: PropTypes.string.isRequired
+  tagline: PropTypes.string.isRequired,
 };
 
 export default Header;

@@ -24,9 +24,9 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip
 
 RUN pip install torch
 
-RUN pip install keras
+RUN pip install keras==2.3.1
 
-RUN pip install tensorflow
+RUN pip install tensorflow==2.0.2
 
 RUN pip install transformers
 

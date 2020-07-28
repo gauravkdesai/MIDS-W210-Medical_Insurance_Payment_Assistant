@@ -29,5 +29,7 @@ RUN npm install
 
 # Entry Point
 EXPOSE 8080
+EXPOSE 3000
+
 # ENTRYPOINT ["node"]
 # CMD [ "server.js" ]

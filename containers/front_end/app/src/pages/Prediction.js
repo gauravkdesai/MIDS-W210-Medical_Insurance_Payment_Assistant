@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { Component } from "react";
+import {PredictionOutput} from "./PredictionOutput";
+import "../css/prediction.css";
 
-export const Prediction = () => (
-  <div>
-    <h2>Please paste patient's notes in below textbox</h2>
-    <p>Text box to copy notes and get codes out</p>
-  </div>
-)
+class Prediction extends Component {
+
+  getSubmissionText = () => {
+    return document.getElementById("medicalNotes").value;
+  }
+
+  render() {
+    return (
+      <div>
+        <textarea
+          name="medicalNotes"
+          id="medicalNotes"
+          placeholder="Paste your medical notes here"
+        />
+        <PredictionOutput getSubmissionText={this.getSubmissionText}/>
+        </div>
+        
+    );
+  }
+}
+
+export { Prediction };
