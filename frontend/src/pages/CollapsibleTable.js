@@ -1,36 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { createMuiTheme } from '@material-ui/core/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useRowStyles = makeStyles({
   root: {
-    '& > *': {
-      borderBottom: 'unset',
+    "& > *": {
+      borderBottom: "unset",
     },
   },
 });
 
 const tableTheme = createMuiTheme({
-    typography: {
-      fontSize: 20,
-    },
-  });
-
-
+  typography: {
+    fontSize: 20,
+  },
+});
 
 function Row(props) {
   const { row, labelDescrtiion } = props;
@@ -41,7 +39,11 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -96,7 +98,7 @@ Row.propTypes = {
         value: PropTypes.number.isRequired,
         icd9: PropTypes.string,
         icd10: PropTypes.string,
-      }),
+      })
     ).isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
@@ -104,33 +106,46 @@ Row.propTypes = {
   }).isRequired,
 };
 
-export default function CollapsibleTable({codesHierarchyData,labelDescrtiion}) {
-    console.log("codesHierarchyData=",codesHierarchyData);
-    console.log('labelDescrtiion=',labelDescrtiion['630_679__740_759__760_779']);
-    const rows = codesHierarchyData["children"];    
-    console.log("rows=",rows);
+export default function CollapsibleTable({
+  codesHierarchyData,
+  labelDescrtiion,
+}) {
+  console.log("codesHierarchyData=", codesHierarchyData);
+  console.log("labelDescrtiion=", labelDescrtiion["630_679__740_759__760_779"]);
+  const rows = codesHierarchyData["children"];
+  console.log("rows=", rows);
 
   return (
     <ThemeProvider theme={tableTheme}>
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead >
-                    <TableRow>
-                    
-                        <TableCell />
-                        <TableCell><Typography variant="h6" gutterBottom >Chapter</Typography></TableCell>
-                        <TableCell><Typography variant="h6" gutterBottom>Description</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6" gutterBottom>Probability</Typography></TableCell>
-                    
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                {rows.map((row) => (
-                    <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} />
-                ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>
+                <Typography variant="h6" gutterBottom>
+                  Chapter
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h6" gutterBottom>
+                  Description
+                </Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography variant="h6" gutterBottom>
+                  Probability
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </ThemeProvider>
   );
 }
