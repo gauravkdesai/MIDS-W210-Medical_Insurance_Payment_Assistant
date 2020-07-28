@@ -14,7 +14,7 @@ const Styles = styled.div`
   a,
   .navbar-brand,
   .navbar-nav .nav-link {
-    color: #556B2F;
+    color: #556b2f;
 
     $:hover {
       color: black;
