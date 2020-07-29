@@ -16,3 +16,18 @@ h2 {
   margin: 20px;
   padding-top: 20px;
 }
+
+.probthreshold{
+  position: relative;
+  margin-right: 0rem;
+  font-size: 12px;
+}
+
+.probthreshold input{
+  width: 50px;
+}
+
+.probthreshold label{
+  padding-right: 1rem;;
+}
+

@@ -15,6 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import NumericInput from 'react-numeric-input';
 
 const useRowStyles = makeStyles({
   root: {
@@ -109,6 +110,9 @@ Row.propTypes = {
 export default function CollapsibleTable({
   codesHierarchyData,
   labelDescrtiion,
+  threshold,
+  setThreshold,
+  predictionOutputThis
 }) {
   console.log("codesHierarchyData=", codesHierarchyData);
   console.log("labelDescrtiion=", labelDescrtiion["630_679__740_759__760_779"]);
@@ -136,6 +140,10 @@ export default function CollapsibleTable({
                 <Typography variant="h6" gutterBottom>
                   Probability
                 </Typography>
+                <div className="probthreshold">
+                  <label>> </label>
+                  <NumericInput min={0} max={1} step={0.05} value={threshold} onChange={newThreshold => predictionOutputThis.setThreshold(newThreshold)}/>
+                </div>
               </TableCell>
             </TableRow>
           </TableHead>
