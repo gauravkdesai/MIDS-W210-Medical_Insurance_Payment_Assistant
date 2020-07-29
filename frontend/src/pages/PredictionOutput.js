@@ -22,6 +22,8 @@ const override = css`
 const labelDescrtiion = require("../assets/chapter_description.json");
 const labelToicd10Mapping = require("../assets/chapter_icd9to10.json");
 const labelDisplayName = require("../assets/chapter_icd9_displayname.json");
+const diseaseICDMapping = require("../assets/disease_icd_mapping.json");
+
 
 
 class PredictionOutput extends Component {
@@ -215,12 +217,13 @@ class PredictionOutput extends Component {
         {<br />}
         {this.state.codesHierarchyData ? (
           <div>
-            <h1>Chapter Prediction</h1>
+            <h1>ICD Code Prediction</h1>
             <CollapsibleTable
               codesHierarchyData={this.state.codesHierarchyData}
               labelDescrtiion={labelDescrtiion}
               labelToicd10Mapping={labelToicd10Mapping}
               labelDisplayName={labelDisplayName}
+              diseaseICDMapping={diseaseICDMapping}
               threshold={this.state.threshold}
               predictionOutputThis={this}
             />

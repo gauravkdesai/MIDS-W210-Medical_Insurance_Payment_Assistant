@@ -32,7 +32,7 @@ const tableTheme = createMuiTheme({
 });
 
 function Row(props) {
-  const { row, labelDescrtiion, labelToicd10Mapping, labelDisplayName } = props;
+  const { row, labelDescrtiion, labelToicd10Mapping, labelDisplayName, diseaseICDMapping } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -66,8 +66,8 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>Name</TableCell>
-                    <TableCell>ICD 9 Codes</TableCell>
-                    <TableCell>ICD 10 Codes</TableCell>
+                    <TableCell>ICD 9 Code</TableCell>
+                    <TableCell>ICD 10 Code</TableCell>
                     <TableCell align="right">Probability</TableCell>
                   </TableRow>
                 </TableHead>
@@ -77,8 +77,8 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {diseasesRow.name}
                       </TableCell>
-                      <TableCell>{diseasesRow.icd9}</TableCell>
-                      <TableCell>{diseasesRow.icd10}</TableCell>
+                      <TableCell>{typeof diseaseICDMapping[diseasesRow.name] !== "undefined" ? diseaseICDMapping[diseasesRow.name][0]:""}</TableCell>
+                      <TableCell>{typeof diseaseICDMapping[diseasesRow.name] !== "undefined" ? diseaseICDMapping[diseasesRow.name][1]:""}</TableCell>
                       <TableCell align="right">{diseasesRow.value}</TableCell>
                     </TableRow>
                   ))}
@@ -113,11 +113,11 @@ export default function CollapsibleTable({
   labelDescrtiion,
   labelToicd10Mapping,
   labelDisplayName,
+  diseaseICDMapping,
   threshold,
   predictionOutputThis
 }) {
   console.log("codesHierarchyData=", codesHierarchyData);
-  console.log("labelDescrtiion=", labelDescrtiion["630_679__740_759__760_779"]);
   const rows = codesHierarchyData["children"];
   console.log("rows=", rows);
 
@@ -156,7 +156,7 @@ export default function CollapsibleTable({
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} labelToicd10Mapping={labelToicd10Mapping} labelDisplayName={labelDisplayName}/>
+              <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} labelToicd10Mapping={labelToicd10Mapping} labelDisplayName={labelDisplayName} diseaseICDMapping={diseaseICDMapping}/>
             ))}
           </TableBody>
         </Table>
