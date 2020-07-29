@@ -20,6 +20,9 @@ const override = css`
 `;
 
 const labelDescrtiion = require("../assets/chapter_description.json");
+const labelToicd10Mapping = require("../assets/chapter_icd9to10.json");
+const labelDisplayName = require("../assets/chapter_icd9_displayname.json");
+
 
 class PredictionOutput extends Component {
   constructor(props) {
@@ -185,8 +188,10 @@ class PredictionOutput extends Component {
   render() {
     console.log("loading=", this.state.loading);
     console.log("labelDescrtiion=", labelDescrtiion);
+    console.log("labelToicd10Mapping=",labelToicd10Mapping);
     return (
       <div>
+        <br/>
         <div id="container" className="text-center">
           <Button
             outline
@@ -214,8 +219,9 @@ class PredictionOutput extends Component {
             <CollapsibleTable
               codesHierarchyData={this.state.codesHierarchyData}
               labelDescrtiion={labelDescrtiion}
+              labelToicd10Mapping={labelToicd10Mapping}
+              labelDisplayName={labelDisplayName}
               threshold={this.state.threshold}
-              setThreshold={this.setThreshold}
               predictionOutputThis={this}
             />
             <br />

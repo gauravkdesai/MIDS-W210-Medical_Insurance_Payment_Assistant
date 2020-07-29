@@ -32,7 +32,7 @@ const tableTheme = createMuiTheme({
 });
 
 function Row(props) {
-  const { row, labelDescrtiion } = props;
+  const { row, labelDescrtiion, labelToicd10Mapping, labelDisplayName } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -49,13 +49,14 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {labelDisplayName[row.name]}
         </TableCell>
+        <TableCell>{labelToicd10Mapping[row.name]}</TableCell>
         <TableCell>{labelDescrtiion[row.name]}</TableCell>
         <TableCell align="right">{row.value}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -110,8 +111,9 @@ Row.propTypes = {
 export default function CollapsibleTable({
   codesHierarchyData,
   labelDescrtiion,
+  labelToicd10Mapping,
+  labelDisplayName,
   threshold,
-  setThreshold,
   predictionOutputThis
 }) {
   console.log("codesHierarchyData=", codesHierarchyData);
@@ -128,7 +130,12 @@ export default function CollapsibleTable({
               <TableCell />
               <TableCell>
                 <Typography variant="h6" gutterBottom>
-                  Chapter
+                  ICD 9 Chapter/s
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h6" gutterBottom>
+                  ICD 10 Chapter/s
                 </Typography>
               </TableCell>
               <TableCell>
@@ -149,7 +156,7 @@ export default function CollapsibleTable({
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} />
+              <Row key={row.name} row={row} labelDescrtiion={labelDescrtiion} labelToicd10Mapping={labelToicd10Mapping} labelDisplayName={labelDisplayName}/>
             ))}
           </TableBody>
         </Table>
