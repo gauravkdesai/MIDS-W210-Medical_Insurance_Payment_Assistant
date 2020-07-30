@@ -42,6 +42,7 @@ class PredictionOutput extends Component {
 
   sortAndFilterData(threshold, data) {
     data = data.replace(/\'/g, '"');
+    data = data.replace(/\\n/g, '');
     data = JSON.parse(data);
     const probLowerLimit = threshold;
     console.log("After parsing to JSON", typeof data);
