@@ -78,7 +78,7 @@ def sample_text():
 @cli.command()
 def main():
 
-    print(f'\ICD Predict : RESTful Application Programming Interface\n')
+    print(f'ICD Predict : RESTful Application Programming Interface\n')
 
     icd_predict(app)
 
