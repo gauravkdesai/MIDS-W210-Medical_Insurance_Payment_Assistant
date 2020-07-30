@@ -61,16 +61,19 @@ class PredictionOutput extends Component {
             childArray.push(childMap);
           }
         });
-        childArray.sort((a, b) => b["value"] - a["value"]);
-        console.log(childArray);
-        adverseData = {
-          name: row["name"],
-          value: row["value"],
-          children: childArray,
-        };
+        if (childArray.length > 0) {
+          childArray.sort((a, b) => b["value"] - a["value"]);
+          console.log(childArray);
+          adverseData = {
+            name: row["name"],
+            value: row["value"],
+            children: childArray,
+          };
+          console.log("adverseData=", adverseData);
+        }
       }
     });
-    console.log("adverseData=", adverseData);
+    
 
     // Chapters
     var chaptersDataArray = [];
@@ -107,11 +110,17 @@ class PredictionOutput extends Component {
         });
       }
     });
-    chaptersDataArray.sort((a, b) => b["value"] - a["value"]);
-    console.log("chaptersDataArray=", chaptersDataArray);
+
+
+
 
     var rootChildren = Array.from(chaptersDataArray);
-    rootChildren.unshift(adverseData);
+    if(adverseData != null){
+      rootChildren.unshift(adverseData);
+    }
+
+    rootChildren.sort((a, b) => b["value"] - a["value"]);
+    console.log("rootChildren=", rootChildren);
 
     var newData = {};
     newData["name"] = "Root";
