@@ -1,0 +1,23 @@
+/* .container {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100%;
+}    */
+
+.columnDiv{
+    float: left;
+    width: 25%;
+    font-size: 75%;
+    padding-right: 1rem;
+    margin-top: 20px;
+}
+
+.face{
+    widows: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    border:1px solid black;
+}

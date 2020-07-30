@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutUsMarkdown from "./AboutUs.md";
+import "../css/AboutUs.css";
 
 class AboutUs extends Component {
   constructor() {
