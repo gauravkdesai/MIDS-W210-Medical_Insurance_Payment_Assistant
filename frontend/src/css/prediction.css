@@ -5,6 +5,7 @@ textarea {
   padding: 5px;
   background: white;
   z-index: -1;
+  white-space: pre-wrap;
 }
 
 textarea:focus {

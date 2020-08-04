@@ -372,7 +372,7 @@ class AddNoteForm extends React.Component {
         <form
           className="note-edit"
           onSubmit={this.getCodes}
-          method="get"
+          method="post"
           name="noteForm"
         >
           <input

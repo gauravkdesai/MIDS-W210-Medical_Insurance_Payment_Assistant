@@ -20,6 +20,18 @@ const Styles = styled.div`
       color: black;
     }
   }
+
+  .logoText{
+    font-size:24px;
+    display:inline-block;
+  }
+
+  .d-inline-block{
+
+    image-rendering: crisp-edges;
+
+  }
+
 `;
 
 export const NavigationBar = () => (
@@ -28,12 +40,12 @@ export const NavigationBar = () => (
       <Navbar.Brand href="/">
         <img
           src={LogoURL}
-          width="40"
+          width="67"
           height="50"
           className="d-inline-block"
           alt="MBVA logo"
         />{" "}
-        MBVA
+        <div className="logoText">MBVA</div>
       </Navbar.Brand>
       <NavbarToggle aria-controls="basic-navbar-nav" />
       <NavbarCollapse id="basic-navbar-nav">
