@@ -23,6 +23,19 @@ const useRowStyles = makeStyles({
       borderBottom: "unset",
     },
   },
+  header:{
+    font:"170% bold",
+    background:"#007700",
+    color:"white",
+  },
+  diseaseheader:{
+    font:"125% bold",
+    background:"#BBFFBB",
+  },
+  diseaseText:{
+    font:"150% bold",
+  }
+  
 });
 
 const tableTheme = createMuiTheme({
@@ -40,6 +53,7 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
+          
           <IconButton
             aria-label="expand row"
             size="small"
@@ -59,16 +73,16 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography className={classes.diseaseText}>
                 Diseases
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>ICD 9 Code</TableCell>
-                    <TableCell>ICD 10 Code</TableCell>
-                    <TableCell align="right">Probability</TableCell>
+                  <TableRow className={classes.diseaseheader}>
+                    <TableCell><Typography className={classes.diseaseheader}>Name</Typography></TableCell>
+                    <TableCell><Typography className={classes.diseaseheader}>ICD 9 Code</Typography></TableCell>
+                    <TableCell><Typography className={classes.diseaseheader}>ICD 10 Code</Typography></TableCell>
+                    <TableCell align="right"><Typography className={classes.diseaseheader}>Probability</Typography></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -120,37 +134,40 @@ export default function CollapsibleTable({
   console.log("codesHierarchyData=", codesHierarchyData);
   const rows = codesHierarchyData["children"];
   console.log("rows=", rows);
+  const classes = useRowStyles();
 
   return (
+    
     <ThemeProvider theme={tableTheme}>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.header}>
               <TableCell />
               <TableCell>
-                <Typography variant="h6" gutterBottom>
+                <Typography className={classes.header}>
                   ICD 9 Chapter/s
                 </Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6" gutterBottom>
+                <Typography className={classes.header}>
                   ICD 10 Chapter/s
                 </Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6" gutterBottom>
+                <Typography className={classes.header}>
                   Description
                 </Typography>
               </TableCell>
               <TableCell align="right">
-                <Typography variant="h6" gutterBottom>
+                <Typography className={classes.header}>
                   Probability
+                
+                  <div className="probthreshold">
+                    <label>> </label>
+                    <NumericInput min={0} max={1} step={0.05} value={threshold} onChange={newThreshold => predictionOutputThis.setThreshold(newThreshold)}/>
+                  </div>
                 </Typography>
-                <div className="probthreshold">
-                  <label>> </label>
-                  <NumericInput min={0} max={1} step={0.05} value={threshold} onChange={newThreshold => predictionOutputThis.setThreshold(newThreshold)}/>
-                </div>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -162,5 +179,6 @@ export default function CollapsibleTable({
         </Table>
       </TableContainer>
     </ThemeProvider>
+    
   );
 }
