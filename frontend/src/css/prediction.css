@@ -32,3 +32,17 @@ h2 {
   padding-right: 1rem;;
 }
 
+.submitButtonText{
+  font:200% bold;
+  
+}
+
+.text-center{
+  width: 50%;
+  margin: auto;
+  
+}
+
+.submitButton{
+  border-radius: 30px;
+}

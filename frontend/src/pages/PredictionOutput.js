@@ -220,9 +220,11 @@ class PredictionOutput extends Component {
             onClick={this.getCodes.bind(this)}
             size="lg"
             block
-            
+            className="submitButton"
           >
-            Get Codes
+            <div className="submitButtonText">
+              Get Codes
+            </div>
           </Button>
         </div>
         {<br />}
