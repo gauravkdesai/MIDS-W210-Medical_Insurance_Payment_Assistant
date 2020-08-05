@@ -33,7 +33,10 @@ const useRowStyles = makeStyles({
     background:"#BBFFBB",
   },
   diseaseText:{
-    font:"150% bold",
+    font:"125% bold",
+  },
+  diseaseBody:{
+    background:"#EEFFEE",
   }
   
 });
@@ -85,7 +88,7 @@ function Row(props) {
                     <TableCell align="right"><Typography className={classes.diseaseheader}>Probability</Typography></TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody className={classes.diseaseBody}>
                   {row.children.map((diseasesRow) => (
                     <TableRow key={diseasesRow.name}>
                       <TableCell component="th" scope="row">
