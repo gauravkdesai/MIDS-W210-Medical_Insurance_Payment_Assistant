@@ -78,7 +78,7 @@ class PredictionOutput extends Component {
     // Chapters
     var chaptersDataArray = [];
     data["children"].forEach((row) => {
-      if (row["name"] === "Chapter") {
+      if (row["name"] ===  "Chapter") {
         row["children"].forEach((chapterRow) => {
           var chapterName = chapterRow["name"];
           var chapterProb = this.convertProbability(chapterRow["value"]);
@@ -95,9 +95,11 @@ class PredictionOutput extends Component {
                 childArray.push(childMap);
               }
             });
-          }
-          if (childArray.length > 0) {
-            childArray.sort((a, b) => b["value"] - a["value"]);
+          
+
+            if (childArray.length > 0) {
+              childArray.sort((a, b) => b["value"] - a["value"]);
+            }
             // console.log(childArray)
             var chapterData = {
               name: chapterName,
@@ -107,6 +109,7 @@ class PredictionOutput extends Component {
             // console.log('chapterData=',chapterData);
             chaptersDataArray.push(chapterData);
           }
+          
         });
       }
     });
