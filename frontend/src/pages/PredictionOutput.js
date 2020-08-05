@@ -114,11 +114,12 @@ class PredictionOutput extends Component {
 
 
 
-
+    console.log("chaptersDataArray=",chaptersDataArray);
     var rootChildren = Array.from(chaptersDataArray);
-    if(adverseData != null){
-      rootChildren.unshift(adverseData);
-    }
+    // Commented below code temporarily as adverse models always giving chanpter probability=1
+    // if(adverseData != null){
+    //   rootChildren.unshift(adverseData);
+    // }
 
     rootChildren.sort((a, b) => b["value"] - a["value"]);
     console.log("rootChildren=", rootChildren);
