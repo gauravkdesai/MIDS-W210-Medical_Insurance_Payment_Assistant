@@ -25,8 +25,6 @@ const diseaseICDMapping = require("../assets/disease_icd_mapping.json");
 const top50DiseasesMap = require("../assets/top50diseases.json");
 const top50DiseasesArray = top50DiseasesMap["top50"];
 
-
-
 class PredictionOutput extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +42,7 @@ class PredictionOutput extends Component {
 
   sortAndFilterData(threshold, data) {
     data = data.replace(/'/g, '"');
-    data = data.replace(/\\n/g, '');
+    data = data.replace(/\\n/g, "");
     data = JSON.parse(data);
     const probLowerLimit = threshold;
     console.log("After parsing to JSON", typeof data);
@@ -56,7 +54,10 @@ class PredictionOutput extends Component {
         var childArray = [];
         row["children"].forEach((childRow) => {
           console.log("childRow=", childRow);
-          if (childRow["value"] > probLowerLimit & top50DiseasesArray.includes(childRow["name"])) {
+          if (
+            (childRow["value"] > probLowerLimit) &
+            top50DiseasesArray.includes(childRow["name"])
+          ) {
             var childMap = {
               name: childRow["name"],
               value: this.convertProbability(childRow["value"]),
@@ -76,12 +77,11 @@ class PredictionOutput extends Component {
         }
       }
     });
-    
 
     // Chapters
     var chaptersDataArray = [];
     data["children"].forEach((row) => {
-      if (row["name"] ===  "Chapter") {
+      if (row["name"] === "Chapter") {
         row["children"].forEach((chapterRow) => {
           var chapterName = chapterRow["name"];
           var chapterProb = this.convertProbability(chapterRow["value"]);
@@ -90,7 +90,10 @@ class PredictionOutput extends Component {
           if (chapterProb > probLowerLimit) {
             chapterRow["children"].forEach((childRow) => {
               //console.log('childRow=',childRow);
-              if (childRow["value"] > probLowerLimit & top50DiseasesArray.includes(childRow["name"])) {
+              if (
+                (childRow["value"] > probLowerLimit) &
+                top50DiseasesArray.includes(childRow["name"])
+              ) {
                 var childMap = {
                   name: childRow["name"],
                   value: this.convertProbability(childRow["value"]),
@@ -98,7 +101,6 @@ class PredictionOutput extends Component {
                 childArray.push(childMap);
               }
             });
-          
 
             if (childArray.length > 0) {
               childArray.sort((a, b) => b["value"] - a["value"]);
@@ -112,12 +114,9 @@ class PredictionOutput extends Component {
             // console.log('chapterData=',chapterData);
             chaptersDataArray.push(chapterData);
           }
-          
         });
       }
     });
-
-
 
     // console.log("chaptersDataArray=",chaptersDataArray);
     var rootChildren = Array.from(chaptersDataArray);
@@ -139,12 +138,10 @@ class PredictionOutput extends Component {
     return newData;
   }
 
-
   getCodes(event) {
-
     var submissionText = this.props.getSubmissionText();
     console.log("Text to be submitted to model:" + submissionText);
-    if(submissionText){
+    if (submissionText) {
       this.setState({ loading: true });
       console.log(
         "After setting loading to true what we see loading=",
@@ -171,7 +168,7 @@ class PredictionOutput extends Component {
           console.log("datatype=" + typeof data);
           this.setState({ rawData: data });
           this.processRawData(this.state.threshold, data);
-          
+
           this.setState({ loading: false });
           console.log(
             "After setting loading to false what we see loading=",
@@ -189,7 +186,7 @@ class PredictionOutput extends Component {
     }
   }
 
-  processRawData(threshold, rawData){
+  processRawData(threshold, rawData) {
     var data = this.sortAndFilterData(threshold, rawData);
     console.log("datatype after sortAndFilterData=" + typeof data);
     var codesHierarchyData = data;
@@ -198,33 +195,30 @@ class PredictionOutput extends Component {
     console.log(this.state.codes);
   }
 
-  setThreshold(newThreshold){
-    console.log("New threshold=",newThreshold);
+  setThreshold(newThreshold) {
+    console.log("New threshold=", newThreshold);
     this.setState({ threshold: newThreshold });
-    console.log("rawData=",this.state.rawData);
+    console.log("rawData=", this.state.rawData);
     this.processRawData(newThreshold, this.state.rawData);
   }
-  
 
   render() {
     console.log("loading=", this.state.loading);
     console.log("labelDescrtiion=", labelDescrtiion);
-    console.log("labelToicd10Mapping=",labelToicd10Mapping);
+    console.log("labelToicd10Mapping=", labelToicd10Mapping);
     return (
       <div>
-        <br/>
+        <br />
         <div id="container" className="text-center">
           <Button
-            disabled={!this.state.hasTextToSubmit}            
+            disabled={!this.state.hasTextToSubmit}
             color="success"
             onClick={this.getCodes.bind(this)}
             size="lg"
             block
             className="submitButton"
           >
-            <div className="submitButtonText">
-              Get Codes
-            </div>
+            <div className="submitButtonText">Get Codes</div>
           </Button>
         </div>
         {<br />}
@@ -252,7 +246,7 @@ class PredictionOutput extends Component {
             />
             <br />
             <br />
-          </div> 
+          </div>
         ) : (
           <br />
         )}
