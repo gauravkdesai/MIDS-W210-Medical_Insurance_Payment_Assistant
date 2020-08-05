@@ -22,6 +22,8 @@ const labelDescrtiion = require("../assets/chapter_description.json");
 const labelToicd10Mapping = require("../assets/chapter_icd9to10.json");
 const labelDisplayName = require("../assets/chapter_icd9_displayname.json");
 const diseaseICDMapping = require("../assets/disease_icd_mapping.json");
+const top50DiseasesMap = require("../assets/top50diseases.json");
+const top50DiseasesArray = top50DiseasesMap["top50"];
 
 
 
@@ -54,7 +56,7 @@ class PredictionOutput extends Component {
         var childArray = [];
         row["children"].forEach((childRow) => {
           console.log("childRow=", childRow);
-          if (childRow["value"] > probLowerLimit) {
+          if (childRow["value"] > probLowerLimit & top50DiseasesArray.includes(childRow["name"])) {
             var childMap = {
               name: childRow["name"],
               value: this.convertProbability(childRow["value"]),
@@ -88,7 +90,7 @@ class PredictionOutput extends Component {
           if (chapterProb > probLowerLimit) {
             chapterRow["children"].forEach((childRow) => {
               //console.log('childRow=',childRow);
-              if (childRow["value"] > probLowerLimit) {
+              if (childRow["value"] > probLowerLimit & top50DiseasesArray.includes(childRow["name"])) {
                 var childMap = {
                   name: childRow["name"],
                   value: this.convertProbability(childRow["value"]),
