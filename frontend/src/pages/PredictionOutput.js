@@ -209,10 +209,10 @@ class PredictionOutput extends Component {
         <br/>
         <div id="container" className="text-center">
           <Button
-            outline
             color="success"
             onClick={this.getCodes.bind(this)}
             size="lg"
+            block
           >
             Get Codes
           </Button>
