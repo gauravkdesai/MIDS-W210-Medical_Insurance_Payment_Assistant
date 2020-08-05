@@ -7,7 +7,6 @@ import RingLoader from "react-spinners/RingLoader";
 import { css } from "@emotion/core";
 import { Button } from "reactstrap";
 import "../css/prediction.css";
-import NumericInput from 'react-numeric-input';
 
 Amplify.configure(awsAPIconfig);
 
@@ -41,7 +40,7 @@ class PredictionOutput extends Component {
   }
 
   sortAndFilterData(threshold, data) {
-    data = data.replace(/\'/g, '"');
+    data = data.replace(/'/g, '"');
     data = data.replace(/\\n/g, '');
     data = JSON.parse(data);
     const probLowerLimit = threshold;
@@ -50,7 +49,7 @@ class PredictionOutput extends Component {
     // Adverse
     var adverseData;
     data["children"].forEach((row) => {
-      if (row["name"] == "Adverse") {
+      if (row["name"] === "Adverse") {
         var childArray = [];
         row["children"].forEach((childRow) => {
           console.log("childRow=", childRow);
@@ -79,7 +78,7 @@ class PredictionOutput extends Component {
     // Chapters
     var chaptersDataArray = [];
     data["children"].forEach((row) => {
-      if (row["name"] == "Chapter") {
+      if (row["name"] === "Chapter") {
         row["children"].forEach((chapterRow) => {
           var chapterName = chapterRow["name"];
           var chapterProb = this.convertProbability(chapterRow["value"]);
@@ -114,7 +113,7 @@ class PredictionOutput extends Component {
 
 
 
-    console.log("chaptersDataArray=",chaptersDataArray);
+    // console.log("chaptersDataArray=",chaptersDataArray);
     var rootChildren = Array.from(chaptersDataArray);
     // Commented below code temporarily as adverse models always giving chanpter probability=1
     // if(adverseData != null){
