@@ -26,7 +26,7 @@ const top50DiseasesMap = require("../assets/top50diseases.json");
 const top50DiseasesArray = top50DiseasesMap["top50"];
 
 // Start with an initial value of 20 seconds
-const TIME_LIMIT = 15;
+const TIME_LIMIT = 20;
 
 // Initially, no time has passed, but this will count up
 // and subtract from the TIME_LIMIT
