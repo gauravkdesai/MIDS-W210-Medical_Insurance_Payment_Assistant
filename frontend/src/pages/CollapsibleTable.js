@@ -22,21 +22,26 @@ const useRowStyles = makeStyles({
     "& > *": {
       borderBottom: "unset",
     },
+    fontFamily: "sans-serif",
   },
   header: {
     font: "170% bold",
     background: "#007700",
     color: "white",
+    fontFamily: "sans-serif",
   },
   diseaseheader: {
     font: "125% bold",
     background: "#BBFFBB",
+    fontFamily: "sans-serif",
   },
   diseaseText: {
     font: "125% bold",
+    fontFamily: "sans-serif",
   },
   diseaseBody: {
     background: "#EEFFEE",
+    fontFamily: "sans-serif",
   },
 });
 

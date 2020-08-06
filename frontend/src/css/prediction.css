@@ -34,13 +34,12 @@ h2 {
 
 .submitButtonText{
   font:200% bold;
-  
+  font-family: sans-serif;
 }
 
 .text-center{
   width: 50%;
   margin: auto;
-  
 }
 
 .submitButton{
