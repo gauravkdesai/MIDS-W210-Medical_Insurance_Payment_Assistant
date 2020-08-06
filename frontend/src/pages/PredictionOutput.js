@@ -25,6 +25,16 @@ const diseaseICDMapping = require("../assets/disease_icd_mapping.json");
 const top50DiseasesMap = require("../assets/top50diseases.json");
 const top50DiseasesArray = top50DiseasesMap["top50"];
 
+// Start with an initial value of 20 seconds
+const TIME_LIMIT = 15;
+
+// Initially, no time has passed, but this will count up
+// and subtract from the TIME_LIMIT
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+
+let timerInterval = null;
+
 class PredictionOutput extends Component {
   constructor(props) {
     super(props);
@@ -143,6 +153,8 @@ class PredictionOutput extends Component {
     console.log("Text to be submitted to model:" + submissionText);
     if (submissionText) {
       this.setState({ loading: true });
+      this.startTimer();
+      this.showWheel(true);
       console.log(
         "After setting loading to true what we see loading=",
         this.state.loading
@@ -170,6 +182,7 @@ class PredictionOutput extends Component {
           this.processRawData(this.state.threshold, data);
 
           this.setState({ loading: false });
+          this.showWheel(false);
           console.log(
             "After setting loading to false what we see loading=",
             this.state.loading
@@ -178,6 +191,7 @@ class PredictionOutput extends Component {
         .catch((error) => {
           console.log(error);
           this.setState({ loading: false });
+          this.showWheel(false);
           console.log(
             "After setting loading to false what we see loading=",
             this.state.loading
@@ -202,6 +216,56 @@ class PredictionOutput extends Component {
     this.processRawData(newThreshold, this.state.rawData);
   }
 
+  formatTimeLeft(time) {
+    // The largest round integer less than or equal to the result of time divided being by 60.
+    // const minutes = Math.floor(time / 60);
+    
+    // Seconds are the remainder of the time divided by 60 (modulus operator)
+    let seconds = time % 60;
+    
+    // If the value of seconds is less than 10, then display seconds with a leading zero
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+
+    // The output in MM:SS format
+    // return `${minutes}:${seconds}`;
+    return `${seconds}`;
+  }
+
+  
+
+  startTimer() {
+    timePassed = 0;
+    timerInterval = setInterval(() => {
+      
+      // The amount of time passed increments by one
+      timePassed = timePassed += 1;
+      if(timePassed >= TIME_LIMIT){
+        timeLeft = 0;
+      }
+      else{
+        timeLeft = TIME_LIMIT - timePassed;
+      }
+      
+      // The time left label is updated
+      document.getElementById("base-timer-label").innerHTML = this.formatTimeLeft(timeLeft);
+    }, 1000);
+  }
+
+  showWheel(show) {
+      var div = document.getElementById("base-timer");
+      if (show) {
+        div.style.display = "block";
+      } else {
+        div.style.display = "none";
+        if(timerInterval){
+          clearInterval(timerInterval);
+        }
+        document.getElementById("base-timer-label").innerHTML = this.formatTimeLeft(TIME_LIMIT);
+      }
+  }
+
   render() {
     console.log("loading=", this.state.loading);
     console.log("labelDescrtiion=", labelDescrtiion);
@@ -222,13 +286,26 @@ class PredictionOutput extends Component {
           </Button>
         </div>
         {<br />}
-        <div className="sweet-loading">
-          <RingLoader
-            css={override}
-            size={50}
-            color={"green"}
-            loading={this.state.loading}
-          />
+        <div class="waitingArea">
+          <div className="sweet-loading">
+            <RingLoader
+              css={override}
+              size={50}
+              color={"green"}
+              loading={this.state.loading}
+            />
+          </div>
+          <div class="base-timer" id="base-timer">
+              <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="base-timer__circle">
+                  <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45" />
+                </g>
+              </svg>
+              <span id="base-timer-label" class="base-timer__label">
+              {this.formatTimeLeft(timeLeft)}
+              </span>
+          </div>
+        
         </div>
 
         {<br />}
