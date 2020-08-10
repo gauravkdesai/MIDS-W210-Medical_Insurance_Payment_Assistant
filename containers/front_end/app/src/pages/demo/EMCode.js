@@ -42,11 +42,7 @@ class EMCode extends React.Component {
       }
     }
 
-    return (
-    
-        <h4 className="code-name">EM Code: {calculatedCode}</h4>
-      
-    );
+    return <h4 className="code-name">EM Code: {calculatedCode}</h4>;
   }
 }
 

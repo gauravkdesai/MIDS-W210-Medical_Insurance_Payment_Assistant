@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import AddNoteForm from "./AddNoteForm";
 
-
 class NoteView extends React.Component {
   static propTypes = {
     notes: PropTypes.object,
@@ -41,8 +40,6 @@ class NoteView extends React.Component {
           setEMCodes={this.props.setEMCodes}
           emcode={this.emcode}
         />
-
-
       </div>
     );
   }

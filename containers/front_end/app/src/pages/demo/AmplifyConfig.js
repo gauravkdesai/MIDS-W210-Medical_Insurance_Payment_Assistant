@@ -9,7 +9,8 @@ const awsAPIconfig = Amplify.configure({
       },
       {
         name: "MBVAModelAPIProxy",
-        endpoint: "https://leob8b1g7b.execute-api.ap-south-1.amazonaws.com/prod",
+        endpoint:
+          "https://leob8b1g7b.execute-api.ap-south-1.amazonaws.com/prod",
       },
     ],
   },

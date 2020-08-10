@@ -1,12 +1,11 @@
 import React from "react";
-import { Button } from 'reactstrap';
+import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 import { noteDictionary } from "./noteDictionary";
 
 import { sampleNote } from "./sampleNote";
 import EMCode from "./EMCode";
-import {PredictionOutput} from "../PredictionOutput";
-
+import { PredictionOutput } from "../PredictionOutput";
 
 class AddNoteForm extends React.Component {
   initialRef = React.createRef();
@@ -205,10 +204,9 @@ class AddNoteForm extends React.Component {
     event.currentTarget.reset();
   };
 
-  loadSampleNote = event => {
+  loadSampleNote = (event) => {
     for (var key of Object.keys(sampleNote)) {
-      if(this[key])
-        this[key].current.value = sampleNote[key];
+      if (this[key]) this[key].current.value = sampleNote[key];
     }
 
     this.handleChange(event);
@@ -216,7 +214,7 @@ class AddNoteForm extends React.Component {
 
   getSubmissionText = () => {
     return this.fullNoteRef.current.value;
-  }
+  };
 
   handleChange = (event) => {
     // Counts of items for EM Code
@@ -362,13 +360,19 @@ class AddNoteForm extends React.Component {
     return (
       <>
         <div id="container">
-          <Button className="sampleNote-button" variant="success" onClick={this.loadSampleNote}>Load Sample Note</Button>
+          <Button
+            className="sampleNote-button"
+            variant="success"
+            onClick={this.loadSampleNote}
+          >
+            Load Sample Note
+          </Button>
         </div>
 
         <form
           className="note-edit"
           onSubmit={this.getCodes}
-          method="get"
+          method="post"
           name="noteForm"
         >
           <input
@@ -1073,12 +1077,11 @@ class AddNoteForm extends React.Component {
 
             <h2>EM Code</h2>
             <EMCode details={this.props.emcode} />
-            
           </div>
         ) : (
           this.props.codes
         )}
-        <PredictionOutput getSubmissionText={this.getSubmissionText}/>
+        <PredictionOutput getSubmissionText={this.getSubmissionText} />
       </>
     );
   }

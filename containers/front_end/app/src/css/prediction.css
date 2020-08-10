@@ -1,10 +1,11 @@
 textarea {
   width: 100%;
-  height: 600px;
+  height: 300px;
   border: 3px solid #cccccc;
   padding: 5px;
   background: white;
   z-index: -1;
+  white-space: pre-wrap;
 }
 
 textarea:focus {
@@ -15,4 +16,86 @@ h2 {
   font-size: 30px;
   margin: 20px;
   padding-top: 20px;
+}
+
+.probthreshold{
+  position: relative;
+  margin-right: 0rem;
+  font-size: 12px;
+}
+
+.probthreshold input{
+  width: 50px;
+}
+
+.probthreshold label{
+  padding-right: 1rem;;
+}
+
+.submitButtonText{
+  font:200% bold;
+  font-family: sans-serif;
+}
+
+.text-center{
+  width: 50%;
+  margin: auto;
+}
+
+.submitButton{
+  border-radius: 30px;
+}
+
+.waitingArea{
+  position: relative;
+  width: 0%;
+  height: 50px;
+  margin: auto;
+} 
+
+.sweet-loading{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.base-timer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  display: none;
+}
+
+/* Removes SVG styling that would hide the time label */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* The SVG path that displays the timer's progress */
+.base-timer__path-elapsed {
+  stroke-width: 0px;
+  stroke: grey;
+}
+
+.base-timer__label {
+  position: absolute;
+  
+  /* Size should match the parent container */
+  width: 50px;
+  height: 50px;
+  
+  /* Keep the label aligned to the top */
+  top: 0;
+  
+  /* Create a flexible box that centers content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sort of an arbitrary number; adjust to your liking */
+  font-size: 16px;
+  font-family: sans-serif;
 }
