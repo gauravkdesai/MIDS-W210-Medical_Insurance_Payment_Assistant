@@ -5,9 +5,9 @@ Medical Billing Virtual Assistant or MBVA is a machine learning package that hel
 # Quick Start
 
 Navigate to containers sub-folder
-'''
+```
 docker-compose up -d
-'''
+```
 
 # UI
 
